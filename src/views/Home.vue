@@ -1,7 +1,9 @@
 <script>
+import Jumbo from '../components/Jumbo.vue';
 export default{
     name: 'Home',
     components : {
+        Jumbo,
     },
     data(){
         return{
@@ -15,7 +17,8 @@ export default{
 </script>
 
 <template>
-    <h1>SONO LA HOMEEE</h1>
+    <Jumbo/>
+    <h2>sono home</h2>
 </template>
 
 <style lang="scss" scoped>
