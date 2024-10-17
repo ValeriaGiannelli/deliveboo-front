@@ -2,12 +2,14 @@
 import { store } from './store';
 import Home from './views/Home.vue';
 import Header from './components/Header.vue';
+import Jumbo from './components/Jumbo.vue';
 
 export default{
   name : 'App',
   components : {
     Home,
     Header,
+    Jumbo,
   },
   data(){
     return{
@@ -22,6 +24,7 @@ export default{
 
 <template>
   <Header/>
+  <Jumbo/>
   <router-view></router-view>
 </template>
 
