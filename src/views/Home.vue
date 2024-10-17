@@ -24,8 +24,9 @@ export default{
         <div class="bottoni">
             <button>Italiano</button>
             <button>Cinese</button>
-            <button>Japponese</button>
+            <button>Giapponese</button>
             <button>Indiano</button>
+            <button>Kebab</button>
         </div>
         <DishCard/>
     </div>
@@ -40,25 +41,35 @@ export default{
 .container-card{
     margin: 1rem auto;
     width: 80%;
-    background-color: $yellow;
-   
-}
-.bottoni{
-    padding: 1rem;
+    border: 1px solid black;
+    
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+   
+    .bottoni{
+        padding: 1rem;
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+
         button{
-        min-width: 100px;
-        min-height: 30px;
-        color: white ;
-        background-color: #f0a8a2;
-        border-radius: 5%;
-        border: none;
-            &:hover{
-                background-color:$red; 
+            font-size: 20px;
+            padding: 7px 16px;
+            color: $background_color;
+            background-color: $yellow;
+            border: none;
+            border-radius: 15px;
+            transition: 500ms;
+
+                &:hover{
+                    background-color:$red;
+                    scale: 1.05;
+                }
             }
     }
 }
+
 
 
 </style>
