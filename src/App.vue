@@ -2,12 +2,14 @@
 import { store } from './store';
 import Home from './views/Home.vue';
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default{
   name : 'App',
   components : {
     Home,
     Header,
+    Footer,
   },
   data(){
     return{
@@ -23,6 +25,7 @@ export default{
 <template>
   <Header/>
   <router-view></router-view>
+  <Footer/>
 </template>
 
 <style lang="scss" scoped>
