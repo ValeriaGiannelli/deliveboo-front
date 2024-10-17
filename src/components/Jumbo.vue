@@ -33,6 +33,7 @@ export default{
     background-color: $yellow;
     min-height: 100px;
     position: relative;
+    overflow: hidden;
 
     display: flex;
     justify-content: center;
