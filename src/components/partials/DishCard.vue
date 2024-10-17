@@ -5,14 +5,49 @@ export default {
 </script>
 
 <template>
-    <div class="card">
+    <div class="container-piatti">
+        <div class="card">
         <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
         <div class="card-content">
             <h2 class="card-title">Spaghetti Carbonara</h2>
             <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
             <span class="card-price">12€</span>
         </div>
+        </div>
+        <div class="card">
+            <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
+            <div class="card-content">
+                <h2 class="card-title">Spaghetti Carbonara</h2>
+                <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
+                <span class="card-price">12€</span>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
+            <div class="card-content">
+                <h2 class="card-title">Spaghetti Carbonara</h2>
+                <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
+                <span class="card-price">12€</span>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
+            <div class="card-content">
+                <h2 class="card-title">Spaghetti Carbonara</h2>
+                <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
+                <span class="card-price">12€</span>
+            </div>
+        </div> 
+        <div class="card">
+            <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
+            <div class="card-content">
+                <h2 class="card-title">Spaghetti Carbonara</h2>
+                <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
+                <span class="card-price">12€</span>
+            </div>
+        </div> 
     </div>
+    
 </template>
 
 <style lang="scss" scoped>
@@ -20,6 +55,10 @@ export default {
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
 
+.container-piatti{
+    display: flex;
+    flex-wrap: wrap;
+}
 .card {
     background: white;
     border-radius: 8px;

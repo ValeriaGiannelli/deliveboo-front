@@ -42,10 +42,10 @@ export default{
     margin: 1rem auto;
     width: 80%;
     border: 1px solid black;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
+    
    
     .bottoni{
         padding: 1rem;
