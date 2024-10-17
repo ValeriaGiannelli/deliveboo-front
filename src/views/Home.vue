@@ -18,12 +18,21 @@ export default{
 
 <template>
     <Jumbo/>
-    <h2>sono home</h2>
+    <div class="container-card">
+xzxfzfzfz
+    </div>
+
 </template>
 
 <style lang="scss" scoped>
 @use '../styles/general.scss' as *;
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
+
+.container-card{
+    margin: 1rem auto;
+    width: 80%;
+    background-color: $yellow;
+}
 
 </style>
