@@ -1,9 +1,11 @@
 <script>
 import Jumbo from '../components/Jumbo.vue';
+import DishCard from '../components/partials/DishCard.vue'
 export default{
     name: 'Home',
     components : {
         Jumbo,
+        DishCard,
     },
     data(){
         return{
@@ -19,7 +21,13 @@ export default{
 <template>
     <Jumbo/>
     <div class="container-card">
-xzxfzfzfz
+        <div class="bottoni">
+            <button>Italiano</button>
+            <button>Cinese</button>
+            <button>Japponese</button>
+            <button>Indiano</button>
+        </div>
+        <DishCard/>
     </div>
 
 </template>
@@ -33,6 +41,24 @@ xzxfzfzfz
     margin: 1rem auto;
     width: 80%;
     background-color: $yellow;
+   
 }
+.bottoni{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+        button{
+        min-width: 100px;
+        min-height: 30px;
+        color: white ;
+        background-color: #f0a8a2;
+        border-radius: 5%;
+        border: none;
+            &:hover{
+                background-color:$red; 
+            }
+    }
+}
+
 
 </style>
