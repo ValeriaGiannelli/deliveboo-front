@@ -47,7 +47,7 @@ export default{
         position: absolute;
         transform: translate(-50%, -50%);
         top: 10%;
-        animation: slide 15s linear infinite;
+        animation: slide 10s linear infinite;
         color: white;
 
         @keyframes slide {
@@ -66,7 +66,7 @@ export default{
         position: absolute;
         transform: translate(-50%, -50%);
         bottom: 10%;
-        animation: slideback 15s linear infinite;
+        animation: slideback 10s linear infinite;
         color: white;
 
         @keyframes slideback {

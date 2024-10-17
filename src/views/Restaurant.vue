@@ -1,7 +1,9 @@
 <script>
+import DishCard from '../components/partials/DishCard.vue';
 export default{
     name: 'Restaurant',
     components : {
+        DishCard,
     },
     data(){
         return{
@@ -15,7 +17,8 @@ export default{
 </script>
 
 <template>
-    <div class="container">
+    <!-- jumbo ristorante -->
+    <div class="container top">
         <div class="image">
             <img src="../../public/ristorante.jpg" alt="">
         </div>
@@ -24,6 +27,9 @@ export default{
             <h3><i class="fa-solid fa-location-dot"></i>  Viale Armando diaz 123</h3>
         </div>
     </div>
+    <!-- visualizzazione piatti -->
+     <div class="container food">
+     </div>
 </template>
 
 <style lang="scss" scoped>
@@ -31,7 +37,8 @@ export default{
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
 
-.container{
+.container.top{
+    @include no-select;
     min-height: 300px;
     background-color: $yellow;
     padding: 20px;
@@ -42,7 +49,6 @@ export default{
     .image{
         max-height: 300px;
         width: 30%;
-        background-color: red;
         overflow: hidden;
     }
     .text{
@@ -60,5 +66,14 @@ export default{
             padding-left: 10px;
         }
     }
+}
+
+.container.food{
+    background-color: red;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 </style>
