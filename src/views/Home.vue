@@ -7,12 +7,15 @@ export default{
         return{
 
         }
+    },
+    methods:{
+
     }
 }
 </script>
 
 <template>
-    mario
+    PD
 </template>
 
 <style lang="scss" scoped>
