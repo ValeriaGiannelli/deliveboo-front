@@ -43,12 +43,11 @@ export default {
         .band {
             position: absolute;
             top: 80%; /* posizione iniziale */
-            left: 20px;
+            left: 1%;
+            right: 1%;
             transition: top 1s, opacity 1s;
-            h2, p{
-            color:white;
-   
-    }
+            
+
             .addres-restaurant, .description-restaurant {
                 display: none; /* inizialmente nascosto */
             }
@@ -69,10 +68,9 @@ export default {
             }
         }
     }
-    h2 {
+    h2,p {
             color: black; 
             background-color: rgba(255, 255, 255, 0.66); 
-            border-radius: 5px; 
     }
 }
 </style>
