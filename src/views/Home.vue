@@ -1,9 +1,11 @@
 <script>
 import Jumbo from '../components/Jumbo.vue';
+import RestaurantCard from '../components/partials/RestaurantCard.vue';
 export default{
     name: 'Home',
     components : {
         Jumbo,
+        RestaurantCard,
     },
     data(){
         return{
@@ -26,6 +28,8 @@ export default{
             <button>Indiano</button>
             <button>Kebab</button>
         </div>
+        <RestaurantCard/>
+  
     </div>
 
 </template>
@@ -38,7 +42,6 @@ export default{
 .container-card{
     margin: 1rem auto;
     width: 90%;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
