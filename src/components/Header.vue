@@ -15,7 +15,11 @@ export default{
 </script>
 
 <template>
-    PD sono l'header
+   <div class="conatainer">
+    <div class="row">
+        <img src="" alt="">
+    </div>
+   </div>
 </template>
 
 <style lang="scss" scoped>
