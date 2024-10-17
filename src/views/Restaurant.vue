@@ -27,9 +27,33 @@ export default{
             <h3><i class="fa-solid fa-location-dot"></i>  Viale Armando diaz 123</h3>
         </div>
     </div>
+    <!-- titolo menù -->
+    <div class="menu-title">
+        Menù:
+    </div>
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
-        <div class="food-list">lsit</div>
+        <div class="food-list">
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+            <DishCard/>
+        </div>
 
         <!-- carrello -->
         <div class="cart">
@@ -88,17 +112,27 @@ export default{
         }
     }
 }
+.menu-title{
+    font-size: 30px;
+    font-weight: 700;
+    padding: 20px 0 0;
+    padding-left: 50px;
+}
 
 .container.food{
     width: 100%;
     margin: 0 auto;
-    flex-wrap: wrap;
 
+    flex-wrap: wrap;
     display: flex;
 
     .food-list{
         width: 70%;
-        height: 200vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 100px;
     }
     .cart{
         width: 30%;

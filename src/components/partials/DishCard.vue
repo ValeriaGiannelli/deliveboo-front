@@ -8,7 +8,10 @@ export default {
         <div class="card">
             <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
             <div class="card-content">
-                <h2 class="card-title">Spaghetti Carbonara</h2>
+                <div class="title-add">
+                    <h2 class="card-title">Spaghetti Carbonara</h2>
+                    <a href=""><i class="fa-solid fa-circle-plus"></i></a>
+                </div>
                 <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
                 <span class="card-price">12€</span>
             </div>
@@ -22,12 +25,14 @@ export default {
 
 
 .card {
-    background: white;
+    background:  #F7F5E8;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 20%;
     margin: 20px;
     overflow: hidden;
+
+    
 
     .card-image {
         width: 100%;
@@ -35,14 +40,30 @@ export default {
     }
 
     .card-content {
-        padding: 10px;
+        padding: 0 10px 10px;
 
-        .card-title {
-            font-size: 1.5em;
-            margin: 10px 0;
+        .title-add{
+            display: flex;
+            align-items: center;
+            .card-title {
+                font-size: 1.5em;
+                margin: 10px 0;
+            }
+
+            i{
+                font-size: 30px;
+                color: $yellow;
+                transition: 500ms;
+                &:hover{
+                    color: $red;
+                    scale: 1.1;
+                }
+            }
         }
 
+
         .card-description {
+            transition: 800ms;
             font-size: 1em;
             margin: 10px 0;
             color: #555;
@@ -50,8 +71,9 @@ export default {
 
         .card-price {
             font-size: 1.2em;
-            color: #e74c3c;
+            color: $red;
             margin: 10px 0;
+            font-weight: 700;
         }
     }
 }
