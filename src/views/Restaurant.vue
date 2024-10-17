@@ -27,8 +27,30 @@ export default{
             <h3><i class="fa-solid fa-location-dot"></i>  Viale Armando diaz 123</h3>
         </div>
     </div>
-    <!-- visualizzazione piatti -->
+    <!-- visualizzazione piatti + carrello-->
      <div class="container food">
+        <div class="food-list">lsit</div>
+
+        <!-- carrello -->
+        <div class="cart">
+
+            <div class="top-cart">
+                <h3>Il tuo ordine</h3>
+                <a href=""><h3><i class="fa-solid fa-trash-can"></i></h3></a>
+            </div>
+
+            <div class="products">
+                <div class="empty-cart">
+                    <img src="../../public/LOGO.svg" alt="">
+                    <h2>Il carrello è vuoto</h2>
+                </div>
+            </div>
+
+            <div class="buy">
+                <div class="buy-button">Vai al pagamento</div>
+            </div>
+            
+        </div>
      </div>
 </template>
 
@@ -39,7 +61,6 @@ export default{
 
 .container.top{
     @include no-select;
-    min-height: 300px;
     background-color: $yellow;
     padding: 20px;
 
@@ -69,11 +90,83 @@ export default{
 }
 
 .container.food{
-    background-color: red;
     width: 100%;
     margin: 0 auto;
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+
+    display: flex;
+
+    .food-list{
+        width: 70%;
+        height: 200vh;
+    }
+    .cart{
+        width: 30%;
+        height: 100vh;
+        position: sticky;
+        top:0;
+        padding: 0 20px;
+
+        .top-cart{
+            color:  $yellow;
+            height: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+
+            a>h3>i{
+                color: $text_color;
+                transition: 500ms;
+                &:hover{
+                    color: $red;
+                    scale: 1.05;
+                }
+            }
+        }
+
+        .products{
+            height: 75%;
+            display: flex;
+
+            .empty-cart{
+                background-color: rgba($color: #000000, $alpha: 0.015);
+                border-radius: 25px;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 20px;
+                img{
+                    height: 70px
+                }
+            }
+        }
+
+        .buy{
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .buy-button{
+                padding: 10px 30px;
+                font-size: 20px;
+                background-color: $yellow;
+                border-radius: 10px;
+                transition: 500ms;
+                &:hover{
+                    background-color:$red;
+                    scale: 1.05;
+                }
+            }
+        }
+
+    }
+
+
+
 }
 </style>
