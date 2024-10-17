@@ -17,8 +17,11 @@ export default{
 
 <template>
    <div class="container">
-        <div class="logo"><img src="../../public/FULL_LOGO.svg" alt=""></div>
-        <i class="fa-solid fa-cart-shopping icona" title="Carrello"></i>
+        <div class="logo"><a href=""><img src="../../public/FULL_LOGO.svg" alt=""></a></div>
+        <div class="buttons">    
+            <a href="">Collabora con noi</a>
+            <a href=""><i class="fa-solid fa-cart-shopping icon" title="Carrello"></i></a>
+        </div>
     </div>
    
 </template>
@@ -33,18 +36,34 @@ export default{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
     .logo{
         width: 200px;
-            img{
-                width: 100%;
-            }
-         
     }
 
-    .icona{
-        font-size: 20px;
-        padding: 1rem;
-        color: $red;  
+    .buttons{
+
+        a{
+            font-weight: 600;
+            color: $yellow;
+            padding-right: 10px;
+            transition: 500ms;
+            &:hover{
+                font-weight: 700;
+                color: $red;
+            }
+        }
+        a>.icon{
+            font-size: 20px;
+            padding: 1rem;
+            color: $yellow; 
+            transition: 500ms;
+                &:hover{
+                    color: $red;
+                    scale: 1.1;
+                }
+        }
+
     }
 }
 
