@@ -37,6 +37,7 @@ export default{
 
     display: flex;
     justify-content: center;
+    @include no-select;
 
     img.burger{
         padding: 30px 0;

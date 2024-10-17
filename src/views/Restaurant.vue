@@ -21,7 +21,7 @@ export default{
         </div>
         <div class="text">
             <h1>Trattoria Sapuri</h1>
-            <h3>Viale Armando diaz 123</h3>
+            <h3><i class="fa-solid fa-location-dot"></i>  Viale Armando diaz 123</h3>
         </div>
     </div>
 </template>
@@ -47,6 +47,18 @@ export default{
     }
     .text{
         width: 65%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        h1{
+            font-size: 50px;
+        }
+        h3{
+            padding-left: 10px;
+        }
     }
 }
 </style>
