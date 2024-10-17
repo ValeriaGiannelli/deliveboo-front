@@ -1,11 +1,9 @@
 <script>
 import Jumbo from '../components/Jumbo.vue';
-import DishCard from '../components/partials/DishCard.vue'
 export default{
     name: 'Home',
     components : {
         Jumbo,
-        DishCard,
     },
     data(){
         return{
@@ -28,7 +26,6 @@ export default{
             <button>Indiano</button>
             <button>Kebab</button>
         </div>
-        <DishCard/>
     </div>
 
 </template>
@@ -40,7 +37,7 @@ export default{
 
 .container-card{
     margin: 1rem auto;
-    width: 80%;
+    width: 90%;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
