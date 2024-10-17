@@ -20,6 +20,7 @@ export default{
 
         <!-- animazione -->
          <img class="slider s1" src="../../public/slider_deliveboo.svg" alt="">
+         <img class="slider s2" src="../../public/slider_deliveboo.svg" alt="">
          <img class="slider s3" src="../../public/slider_deliveboo.svg" alt="">
     </div>
 </template>
@@ -47,7 +48,7 @@ export default{
         position: absolute;
         transform: translate(-50%, -50%);
         top: 10%;
-        animation: slide 10s linear infinite;
+        animation: slide 12.5s linear infinite;
         color: white;
 
         @keyframes slide {
@@ -62,11 +63,12 @@ export default{
             }
         }
     }
-    img.slider.s3{
+    
+    img.slider.s2{
         position: absolute;
         transform: translate(-50%, -50%);
-        bottom: 10%;
-        animation: slideback 10s linear infinite;
+        bottom: 40%;
+        animation: slideback 5s linear infinite;
         color: white;
 
         @keyframes slideback {
@@ -81,6 +83,28 @@ export default{
             }
         }
     }
+
+    img.slider.s3{
+        position: absolute;
+        transform: translate(-50%, -50%);
+        bottom: 10%;
+        animation: slide 8s linear infinite;
+        color: white;
+
+        @keyframes slide {
+            0% {
+                transform: translateX(200%);
+            }
+            50% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-200%);
+            }
+        }
+    }
 }
+
+
 
 </style>

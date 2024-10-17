@@ -40,7 +40,6 @@ export default{
 @use '../styles/partials/mixins' as *;
 
 .container-card{
-    margin: 1rem auto;
     width: 90%;
     display: flex;
     flex-direction: column;
