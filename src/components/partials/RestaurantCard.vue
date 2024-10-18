@@ -12,11 +12,11 @@ export default {
 <template>
     <div class="restaurant-card" v-for="(restaurant, i) in restaurants" :key="i">
         <div class="image-container">
-            <img src="../../../public/ristorante.jpg" alt="Restaurant Image" class="restaurant-image" />
+            <img :src="restaurant.img" alt="Restaurant Image" class="restaurant-image" />
             <div class="band">
                 <h2 class="band-text">{{restaurant.restaurant_name}}</h2>
-                <p class="addres-restaurant"><strong>Viale Armando diaz 123</strong></p>
-                <p class="description-restaurant">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quas sint natus non, beatae pariatur! </p>
+                <p class="addres-restaurant"><strong>{{restaurant.address}}</strong></p>
+                <p class="description-restaurant">{{ restaurant.description }} </p>
                 <br>
                 <br>
                 <button class="bottoni"><a :href="'/restaurant/' + restaurant.id">Vai al ristorante</a></button>
