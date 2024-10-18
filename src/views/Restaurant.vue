@@ -54,7 +54,7 @@ export default{
     <!-- jumbo ristorante -->
     <div class="container top">
         <div class="image">
-            <img src="../../public/ristorante.jpg" alt="">
+            <img :src="restaurant.img" alt="">
         </div>
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>

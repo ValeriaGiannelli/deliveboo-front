@@ -12,7 +12,7 @@ export default {
 
 <template>
         <div class="card" v-for="(product, i) in products" :key="i" >
-            <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
+            <img :src="product.img" alt="Spaghetti Carbonara" class="card-image" />
             <div class="card-content">
                 <div class="title-add">
                     <h2 class="card-title">{{product.name}}</h2>
