@@ -54,7 +54,7 @@ export default{
     <!-- jumbo ristorante -->
     <div class="container top">
         <div class="image">
-            <img src="../../public/ristorante.jpg" alt="">
+            <img :src="restaurant.img" alt="">
         </div>
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>
@@ -83,6 +83,16 @@ export default{
 
                 <div class="full-cart">
                     <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <div class="spacer-cart"></div>
 
                     <div class="price-bar">
                         <div class="spacer">
@@ -122,8 +132,12 @@ export default{
 
     .image{
         max-height: 300px;
-        width: 30%;
         overflow: hidden;
+        width: 30%;
+        
+        img{
+            border-radius: 25px
+        }
     }
     .text{
         width: 65%;
@@ -195,11 +209,11 @@ export default{
             display: flex;
             background-color: $shadow;
             border-radius: 25px;
+            position: relative;
 
             .full-cart {
                 height: 100%;
                 width: 100%;
-                position: relative;
                 overflow-y: auto;
                 
                 /* Nascondere la barra di scorrimento */
@@ -209,12 +223,17 @@ export default{
                 -ms-overflow-style: none;
                 scrollbar-width: none;
 
+                .spacer-cart{
+                    height: 120px;
+                    background-color: red;
+                }
+
                 .price-bar{
                     height: 100px;
                     width: 100%;
                     background-color: $background_color;
-                    position: sticky;
-                    bottom: 0;
+                    position: absolute;
+                    bottom:0;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;

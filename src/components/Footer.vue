@@ -62,16 +62,12 @@ export default{
             </div>
             <div class="box">
                 <ul>
-                    <li><h4>Scopri Deliveboo</h4></li>
-                    <li>Investitori</li>
-                    <li>Chi siamo</li>
-                    <li>Ristoranti</li>
-                    <li>Altro</li>
-                    <li>Pressroom</li>
-                    <li>Programmazione</li>
-                    <li>Design</li>
-                    <li>Lavora con noi</li>
-                    <li>Diventa nostro partner</li>
+                    <li><h4>Sviluppato da</h4></li>
+                    <li>Valeria Giannelli</li>
+                    <li>Samuele Cozzubbo</li>
+                    <li>Elona Hoxhaj</li>
+                    <li>Michele Lafronza</li>
+                    <li>Francesco Cuboni</li>
                 </ul>
             </div>
         </div>
@@ -110,7 +106,6 @@ export default{
     .box-container{
         width: 100%;
         justify-content: center;
-        align-items: center;
 
         display: flex;
         gap: 30px;
@@ -119,7 +114,9 @@ export default{
             background-color: $yellow;
             width: calc(60% / 4 - 20px);
             padding: 20px 15px 30px;
-            border-radius: 5px
+            border-radius: 5px;
+            flex-grow: 0 1;
+
         }
     }
     .box-social{
