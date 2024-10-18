@@ -11,7 +11,9 @@ export default {
                 <h2 class="band-text">Trattoria dei Sapori Visibile</h2>
                 <p class="addres-restaurant"><strong>Viale Armando diaz 123</strong></p>
                 <p class="description-restaurant">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quas sint natus non, beatae pariatur! </p>
-                <button class="bottoni"><a href="/restaurant">Vai al ristorante</a></button>
+                <br>
+                <br>
+                <button class="bottoni"><a href="#">Vai al ristorante</a></button>
             </div>
         </div>
     </div>
@@ -45,8 +47,8 @@ export default {
         .band {
             position: absolute;
             top: 78%; 
-            left: 1%;
-            right: 1%;
+            left: 0%;
+            right: 0%;
             transition: top 1s, opacity 1s;
             border-radius: 10px;
 
@@ -64,9 +66,9 @@ export default {
             }
 
             .band {
-                top: 2%; 
+                top: 0%; 
                 opacity: 1; 
-                height: 100%; 
+                height:100%; 
                 border-radius: 10px;
 
                 /*l'indirizzo e descrizione visibile*/
@@ -83,16 +85,17 @@ export default {
             padding: 0.5rem;
     }
     button{
-            align-content: center;
-            font-size: 15px;
-            padding: 7px 16px;
-            color: $background_color;
-            background-color: $yellow;
-            border: none;
-            border-radius: 15px;
-            transition: 500ms;
-            display: block;
-            margin: auto;
+        align-content: center;
+        font-size: 15px;
+        padding: 7px 16px;
+        color: $background_color;
+        background-color: $yellow;
+        border: none;
+        border-radius: 15px;
+        transition: background-color 500ms;
+        display: block;
+        margin: auto;
+
 
             .bottoni{
                 padding: 1rem;
@@ -105,6 +108,7 @@ export default {
                     scale: 1.05;
                 }
             }
+       
   
 }
 </style>
