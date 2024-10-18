@@ -17,7 +17,7 @@ export default{
 
 <template>
    <div class="container">
-        <div class="logo"><a href=""><img src="../../public/FULL_LOGO.svg" alt=""></a></div>
+        <div class="logo"><a href="/"><img src="../../public/FULL_LOGO.svg" alt=""></a></div>
         <div class="buttons">    
             <a href="">Collabora con noi</a>
             <a href=""><i class="fa-solid fa-cart-shopping icon" title="Carrello"></i></a>
