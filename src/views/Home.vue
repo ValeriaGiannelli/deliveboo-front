@@ -54,7 +54,7 @@ export default{
             <button v-for="type in types">{{type.name}}</button>
         </div>
         <div class="container-restaurants">
-            <RestaurantCard v-for="restaurant in restaurants" />
+            <RestaurantCard :restaurants="restaurants" />
         </div>
   
     </div>
