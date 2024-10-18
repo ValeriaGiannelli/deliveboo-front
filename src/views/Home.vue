@@ -13,6 +13,9 @@ export default{
         return{
             types :[],
             restaurants :[],
+            typeString : [],
+            typesFilter : []
+            
         }
     },
     methods:{
@@ -22,6 +25,13 @@ export default{
                 this.types = res.data; // A BUON FINE
                 // console.log('TYPES DATA:', res.data);
                 // console.log('types',this.types);
+                this.types.forEach(type => {
+                    this.typesFilter.push({
+                        'name' : type.name.toLowerCase() + ',',
+                        'active' : false,
+                    })
+                });
+                console.log('filtro nomi dei tipi', this.typesFilter);
             })
             .catch(err => {
                 console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
@@ -39,6 +49,16 @@ export default{
             });
         },
 
+        filterRestaurant(name){
+            
+            axios.get(store.apiURL + 'restaurants?types=' + this.typesFilter)
+                .then(res => {
+                    this.restaurants = res.data;
+                    console.log('RESTAURANTS DATA:', res.data); // LOG
+                    console.log('restaurants',this.restaurants);
+                })
+        }
+
     },
     mounted(){
         this.getRestaurantTypes();
@@ -51,7 +71,7 @@ export default{
     <Jumbo/>
     <div class="container-card">
         <div class="bottoni">
-            <button v-for="type in types">{{type.name}}</button>
+            <button v-for="type in types" @click="filterRestaurant(type.name)">{{type.name}}</button>
         </div>
         <div class="container-restaurants">
             <RestaurantCard :restaurants="restaurants" />
