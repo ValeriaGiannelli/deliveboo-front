@@ -12,7 +12,8 @@ export default {
 <template>
     <div class="restaurant-card" v-for="(restaurant, i) in restaurants" :key="i">
         <div class="image-container">
-            <img :src="restaurant.img" :alt="restaurant.restaurant_name" class="restaurant-image" />
+            <img v-if="restaurant.img !== 'http://127.0.0.1:8000/storage/0'" :src="restaurant.img" :alt="restaurant.restaurant_name" class="restaurant-image" />
+            <img v-else src="../../../public/ristorante.jpg" :alt="restaurant.restaurant_name" class="restaurant-image" />
             <div class="band">
                 <h2 class="band-text">{{restaurant.restaurant_name}}</h2>
                 <p class="addres-restaurant"><strong>{{restaurant.address}}</strong></p>
