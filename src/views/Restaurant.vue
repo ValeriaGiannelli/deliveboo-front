@@ -1,9 +1,11 @@
 <script>
 import DishCard from '../components/partials/DishCard.vue';
+import CartDishCard from '../components/partials/CartDishCard.vue';
 export default{
     name: 'Restaurant',
     components : {
         DishCard,
+        CartDishCard,
     },
     data(){
         return{
@@ -64,10 +66,38 @@ export default{
             </div>
 
             <div class="products">
-                <div class="empty-cart">
+
+                <div class="full-cart">
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+                    <CartDishCard/>
+
+                    <div class="price-bar">
+                        <div class="spacer">
+                            <img src="../../public/LOGO.svg" alt="">
+                        </div>
+                        <div class="text">Totale:</div>
+                        <div class="total-price">3456$</div>
+                    </div>
+                </div>
+            
+                <!-- <div class="empty-cart">
                     <img src="../../public/LOGO.svg" alt="">
                     <h2>Il carrello è vuoto</h2>
-                </div>
+                </div> -->
             </div>
 
             <div class="buy">
@@ -117,6 +147,7 @@ export default{
     font-weight: 700;
     padding: 20px 0 0;
     padding-left: 50px;
+    @include no-select;
 }
 
 .container.food{
@@ -125,6 +156,7 @@ export default{
 
     flex-wrap: wrap;
     display: flex;
+    @include no-select;
 
     .food-list{
         width: 70%;
@@ -162,10 +194,57 @@ export default{
         .products{
             height: 75%;
             display: flex;
+            background-color: rgba($color: #000000, $alpha: 0.02);
+            border-radius: 25px;
+
+            .full-cart {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                overflow-y: auto;
+                
+                /* Nascondere la barra di scorrimento */
+                ::-webkit-scrollbar {
+                    display: none;
+                }
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                .price-bar{
+                    height: 100px;
+                    width: 100%;
+                    background-color: $background_color;
+                    position: sticky;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .spacer{
+                        width: 10%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 30px;
+                    }
+
+                    .text{
+                        padding-left: 10px;
+                        width: 75%;
+                        font-size: 20px;
+                        font-weight: 700;
+                    }
+                    .total-price{
+                        font-weight: 700;
+                        width: 15%;
+                        font-size: 20px;
+                        color: $red;
+                    }
+
+                }
+            }
 
             .empty-cart{
-                background-color: rgba($color: #000000, $alpha: 0.015);
-                border-radius: 25px;
                 height: 100%;
                 width: 100%;
                 display: flex;
