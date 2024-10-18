@@ -53,8 +53,9 @@ export default{
         <div class="bottoni">
             <button v-for="type in types">{{type.name}}</button>
         </div>
-        <div v-for="restaurant in restaurants">{{ restaurant.restaurant_name }}</div>
-        <RestaurantCard/>
+        <div class="container-restaurants">
+            <RestaurantCard v-for="restaurant in restaurants" />
+        </div>
   
     </div>
 
@@ -66,10 +67,12 @@ export default{
 @use '../styles/partials/mixins' as *;
 
 .container-card{
+    margin: 0 auto;
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     
    
     .bottoni{
@@ -92,6 +95,14 @@ export default{
                     scale: 1.05;
                 }
             }
+    }
+
+    .container-restaurants{
+        width: 80%;
+        justify-content: space-between;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
