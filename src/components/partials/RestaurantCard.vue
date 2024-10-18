@@ -11,7 +11,7 @@ export default {
                 <h2 class="band-text">Trattoria dei Sapori Visibile</h2>
                 <p class="addres-restaurant"><strong>Viale Armando diaz 123</strong></p>
                 <p class="description-restaurant">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quas sint natus non, beatae pariatur! </p>
-                <button class="bottoni"><a href="#">Vai al ristorante</a></button>
+                <button class="bottoni"><a href="/restaurant">Vai al ristorante</a></button>
             </div>
         </div>
     </div>
