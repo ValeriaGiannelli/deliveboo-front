@@ -13,7 +13,7 @@ export default{
         return{
             types :[],
             restaurants :[],
-            typeString : [],
+            selectedTypes : [],
             typesFilter : []
             
         }
@@ -49,14 +49,17 @@ export default{
             });
         },
 
-        filterRestaurant(name){
+        filterRestaurant(){
             
-            axios.get(store.apiURL + 'restaurants?types=' + this.typesFilter)
+            const query = this.selectedTypes.join(',');
+
+            axios.get(store.apiURL + 'restaurants?types=' + query)
                 .then(res => {
                     this.restaurants = res.data;
-                    console.log('RESTAURANTS DATA:', res.data); // LOG
-                    console.log('restaurants',this.restaurants);
                 })
+                .catch(error => {
+                    console.error("Errore durante la chiamata API:", error);
+                });
         }
 
     },
@@ -71,7 +74,11 @@ export default{
     <Jumbo/>
     <div class="container-card">
         <div class="bottoni">
-            <button v-for="type in types" @click="filterRestaurant(type.name)">{{type.name}}</button>
+            <label for="" v-for="type in types">
+                <input type="checkbox" @change="filterRestaurant()" v-model="selectedTypes" :value="type.name">
+                {{type.name}}
+            </label>
+            <!-- <button v-for="type in types" @click="filterRestaurant(type.name)" >{{type.name}}</button> -->
         </div>
         <div class="container-restaurants">
             <RestaurantCard :restaurants="restaurants" />
