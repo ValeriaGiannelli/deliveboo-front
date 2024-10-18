@@ -32,7 +32,7 @@ export default{
             .then(res => {
                 this.restaurants = res.data; // A BUON FINE
                 console.log('RESTAURANTS DATA:', res.data); // LOG
-                console.log('restaurants',this.types);
+                console.log('restaurants',this.restaurants);
             })
             .catch(err => {
                 console.log('Errore nel recupero dei dati:', err); // LOG ERRORE

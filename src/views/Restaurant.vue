@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+import { store } from '../store';
 import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
 export default{
@@ -9,12 +11,42 @@ export default{
     },
     data(){
         return{
-
+            restaurant :[],
+            products :[],
         }
     },
     methods:{
+        getRestaurant(id){
+        axios.get(store.apiURL + 'restaurant/' + id ) // URL API
+            .then(res => {
+                this.restaurant = res.data; // A BUON FINE
+                console.log('RESTAURANT DATA:', res.data); // LOG
+                console.log('restaurant',this.restaurant);
+            })
+            .catch(err => {
+                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
+            });
+        },
 
-    }
+        getProducts(id){
+        axios.get(store.apiURL + 'restaurants/' + id + '/products') // URL API
+            .then(res => {
+                this.products = res.data; // A BUON FINE
+                console.log('PRODUCTS DATA:', res.data); // LOG
+                console.log('products',this.products);
+            })
+            .catch(err => {
+                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
+            });
+        },
+
+    },
+    mounted(){
+        const id= this.$route.params.id;
+        console.log(id);
+        this.getProducts(id);
+        this.getRestaurant(id);
+    },
 }
 </script>
 
@@ -25,8 +57,8 @@ export default{
             <img src="../../public/ristorante.jpg" alt="">
         </div>
         <div class="text">
-            <h1>Trattoria Sapuri</h1>
-            <h3><i class="fa-solid fa-location-dot"></i>  Viale Armando diaz 123</h3>
+            <h1>{{restaurant.restaurant_name}}</h1>
+            <h3><i class="fa-solid fa-location-dot"></i>  {{restaurant.address}}</h3>
         </div>
     </div>
     <!-- titolo menù -->
@@ -36,25 +68,7 @@ export default{
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
         <div class="food-list">
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
-            <DishCard/>
+            <DishCard :products="products"/>
         </div>
 
         <!-- carrello -->
@@ -68,21 +82,6 @@ export default{
             <div class="products">
 
                 <div class="full-cart">
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
                     <CartDishCard/>
 
                     <div class="price-bar">

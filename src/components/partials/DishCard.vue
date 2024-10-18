@@ -1,19 +1,25 @@
 <script>
 export default {
     name: 'DishCard',
+    props:{
+        products:{
+            type : Array,
+            required : true,
+        }
+    }
 }
 </script>
 
 <template>
-        <div class="card">
+        <div class="card" v-for="(product, i) in products" :key="i" >
             <img src="../../../public/ristorante.jpg" alt="Spaghetti Carbonara" class="card-image" />
             <div class="card-content">
                 <div class="title-add">
-                    <h2 class="card-title">Spaghetti Carbonara</h2>
+                    <h2 class="card-title">{{product.name}}</h2>
                     <a href=""><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
-                <p class="card-description">Deliziosi spaghetti con pancetta, uova e pecorino.</p>
-                <span class="card-price">12€</span>
+                <p class="card-description">{{product.ingredients_descriptions}}</p>
+                <span class="card-price">{{product.price}}€</span>
             </div>
         </div>
 </template>
