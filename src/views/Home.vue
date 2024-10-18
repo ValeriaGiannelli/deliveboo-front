@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+import { store } from '../store';
 import Jumbo from '../components/Jumbo.vue';
 import RestaurantCard from '../components/partials/RestaurantCard.vue';
 export default{
@@ -9,12 +11,39 @@ export default{
     },
     data(){
         return{
-
+            types :[],
+            restaurants :[],
         }
     },
     methods:{
+        getRestaurantTypes(){
+        axios.get(store.apiURL + 'types') // URL API
+            .then(res => {
+                this.types = res.data; // A BUON FINE
+                // console.log('TYPES DATA:', res.data);
+                // console.log('types',this.types);
+            })
+            .catch(err => {
+                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
+            });
+        },
+        getRestaurants(){
+        axios.get(store.apiURL + 'restaurants') // URL API
+            .then(res => {
+                this.restaurants = res.data; // A BUON FINE
+                console.log('RESTAURANTS DATA:', res.data); // LOG
+                console.log('restaurants',this.types);
+            })
+            .catch(err => {
+                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
+            });
+        },
 
-    }
+    },
+    mounted(){
+        this.getRestaurantTypes();
+        this.getRestaurants();
+    },
 }
 </script>
 
@@ -22,12 +51,9 @@ export default{
     <Jumbo/>
     <div class="container-card">
         <div class="bottoni">
-            <button>Italiano</button>
-            <button>Cinese</button>
-            <button>Giapponese</button>
-            <button>Indiano</button>
-            <button>Kebab</button>
+            <button v-for="type in types">{{type.name}}</button>
         </div>
+        <div v-for="restaurant in restaurants">{{ restaurant.restaurant_name }}</div>
         <RestaurantCard/>
   
     </div>

@@ -1,0 +1,28 @@
+// sulla home ci servono tutte le tipologie
+Route::get('/types', [ApiController::class, 'types']);
+
+query per le tipologie
+
+http://127.0.0.1:8000/api/types
+
+
+
+// tutti i ristoranti filtrati o no, da mandare sulla home in ordine alfabetico, per filtrarli aggiunge la query types=1,2,3...
+Route::get('/restaurants', [ApiController::class, 'restaurants']);
+
+mi da tutti i ristoranti || se aggiungo la query ?types=1,2 (id dei types) filtra per tipologie
+se non ci sono corrispondenze messaggio di errore
+
+http://127.0.0.1:8000/api/restaurants
+
+http://127.0.0.1:8000/api/restaurants?types=3,5
+
+
+// tutti i prodotti del ristorante selezionato
+Route::get('/restaurants/{restaurant}/products', [ApiController::class, 'restaurantProducts']);
+
+da tutti i prodotti di un ristorante {restaurant}
+se il ristorante non esiste 404
+
+
+http://127.0.0.1:8000/api/

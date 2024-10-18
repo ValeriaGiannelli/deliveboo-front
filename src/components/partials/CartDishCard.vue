@@ -29,7 +29,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $background_color;
+        background:  #F7F5E8;
         font-weight: 600;
     }
 
@@ -37,7 +37,7 @@ export default {
         width: 10%;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-        border-right: 3px solid rgba($color: #000000, $alpha: 0.02);
+        border-right: 3px solid $shadow;
 
     }
     .name{

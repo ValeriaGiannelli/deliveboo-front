@@ -194,7 +194,7 @@ export default{
         .products{
             height: 75%;
             display: flex;
-            background-color: rgba($color: #000000, $alpha: 0.02);
+            background-color: $shadow;
             border-radius: 25px;
 
             .full-cart {
