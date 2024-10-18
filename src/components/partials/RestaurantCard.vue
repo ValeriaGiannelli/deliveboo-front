@@ -9,8 +9,9 @@ export default {
             <img src="../../../public/ristorante.jpg" alt="Restaurant Image" class="restaurant-image" />
             <div class="band">
                 <h2 class="band-text">Trattoria dei Sapori Visibile</h2>
-                <p class="addres-restaurant">Viale Armando diaz 123</p>
+                <p class="addres-restaurant"><strong>Viale Armando diaz 123</strong></p>
                 <p class="description-restaurant">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quas sint natus non, beatae pariatur! </p>
+                <button class="bottoni"><a href="#">Vai al ristorante</a></button>
             </div>
         </div>
     </div>
@@ -40,37 +41,70 @@ export default {
             border-radius: 10px;
         }
 
+        /* posizione iniziale della banda con i testi */
         .band {
             position: absolute;
-            top: 80%; /* posizione iniziale */
+            top: 78%; 
             left: 1%;
             right: 1%;
             transition: top 1s, opacity 1s;
-            
+            border-radius: 10px;
 
-            .addres-restaurant, .description-restaurant {
-                display: none; /* inizialmente nascosto */
+            /*l'indirizzo e descrizione inizialmente nascosti */
+            .addres-restaurant, .description-restaurant, button {
+                display: none; 
             }
         }
 
+        /* cambiamenti all'hover sull'immagine */
         &:hover {
+            /* sbiadimento dell'immagine */
             .restaurant-image {
-                filter: brightness(0.5); /* sbiadisce l'immagine */
+                filter: brightness(0.5); 
             }
 
             .band {
-                top: 5%; 
+                top: 2%; 
                 opacity: 1; 
-                
-                .addres-restaurant, .description-restaurant {
-                    display: block; /*l'indirizzo */
+                height: 100%; 
+                border-radius: 10px;
+
+                /*l'indirizzo e descrizione visibile*/
+                .addres-restaurant, .description-restaurant, button {
+                    display: block; 
                 }
             }
         }
     }
-    h2,p {
+
+    .band{
             color: black; 
-            background-color: rgba(255, 255, 255, 0.66); 
+            background-color: rgba(255, 255, 255, 0.66);
+            padding: 0.5rem;
     }
+    button{
+            align-content: center;
+            font-size: 15px;
+            padding: 7px 16px;
+            color: $background_color;
+            background-color: $yellow;
+            border: none;
+            border-radius: 15px;
+            transition: 500ms;
+            display: block;
+            margin: auto;
+
+            .bottoni{
+                padding: 1rem;
+                display: flex;
+                width: 50%;
+                justify-content: space-between;               
+            }
+                &:hover{
+                    background-color:$red;
+                    scale: 1.05;
+                }
+            }
+  
 }
 </style>
