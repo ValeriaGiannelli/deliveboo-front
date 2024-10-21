@@ -6,6 +6,16 @@ export default {
             type : Array,
             required : true,
         }
+    },
+    data(){
+        return{
+        }
+    },
+    emits: ['add-to-cart'],
+    methods:{
+        addCart(product){
+            this.$emit('add-to-cart',product);
+        }
     }
 }
 </script>
@@ -16,7 +26,7 @@ export default {
             <div class="card-content">
                 <div class="title-add">
                     <h2 class="card-title">{{product.name}}</h2>
-                    <a href=""><i class="fa-solid fa-circle-plus"></i></a>
+                    <a @click="addCart(product)" ><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
                 <p class="card-description">{{product.ingredients_descriptions}}</p>
                 <span class="card-price">{{product.price}}€</span>

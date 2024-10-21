@@ -14,6 +14,7 @@ export default{
             restaurant :[],
             products :[],
             cartproduct : [],
+            totalPrice : 0,
         }
     },
     methods:{
@@ -41,15 +42,22 @@ export default{
             });
         },
 
-        addCart(){
-            this.cartproduct.push('element');
+        updateCart(product){
+            this.cartproduct.push(product);
+            console.log(this.cartproduct);
         },
 
-        deleteCart(){
-            this.cartproduct=[];
+        deleteCart() {
+            this.cartproduct = []; // Svuota il carrello
+            this.totalPrice = 0;   // Reset del totale
         },
 
-    },
+        updateCart(product) {
+            this.cartproduct.push(product); // Aggiungi il prodotto al carrello
+            this.totalPrice += parseFloat(product.price); // Aggiungi il prezzo del nuovo prodotto al totale
+        },
+    }, 
+
     mounted(){
         const id= this.$route.params.id;
         console.log(id);
@@ -80,7 +88,7 @@ export default{
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
         <div class="food-list">
-            <DishCard :products="products"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
         </div>
 
         <!-- carrello -->
@@ -102,7 +110,7 @@ export default{
                             <img src="../../public/LOGO.svg" alt="">
                         </div>
                         <div class="text">Totale:</div>
-                        <div class="total-price">3456$</div>
+                        <div class="total-price">{{this.totalPrice}}€</div>
                     </div>
                 </div>
             
