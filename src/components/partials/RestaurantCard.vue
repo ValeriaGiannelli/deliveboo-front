@@ -29,7 +29,7 @@ export default {
                 </div>
             </div>
 
-        <!-- nome ristorante -->
+            <!-- nome ristorante -->
             <h2>
                 {{restaurant.restaurant_name}}
             </h2>
@@ -51,17 +51,16 @@ export default {
 a.restaurant-card{
     margin-bottom: 50px;
     display: block;
+    background:  #F7F5E8;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 
     .image-container{
         height: 220px;
         width: 350px;
-        border-radius: 10px;
         position: relative;
         overflow: hidden;
-
-        &:hover>img{
-            scale: 1.05;
-        }
 
         img{
             height: 100%;
@@ -90,9 +89,13 @@ a.restaurant-card{
 
     h2{
         font-size: 22px;
-        padding: 10px 0 0;
+        padding: 10px;
         font-weight: 500;
     }
+
+    &:hover>div>img{
+            scale: 1.05;
+        }
 }
 
 </style>
