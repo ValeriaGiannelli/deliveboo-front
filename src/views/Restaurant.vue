@@ -77,6 +77,7 @@ export default{
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>
             <h3><i class="fa-solid fa-location-dot"></i> {{restaurant.address}}</h3>
+            <p>{{ restaurant.description }}</p>
         </div>
         <div class="tags">
             <h3 @click="addCart()" >Italiano</h3>
@@ -161,9 +162,6 @@ export default{
 
         h1{
             font-size: 50px;
-        }
-        h3{
-            padding-left: 10px;
         }
     }
 

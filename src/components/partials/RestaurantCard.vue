@@ -95,6 +95,7 @@ a.restaurant-card{
 
     &:hover>div>img{
             scale: 1.05;
+            filter: brightness(70%);
         }
 }
 
