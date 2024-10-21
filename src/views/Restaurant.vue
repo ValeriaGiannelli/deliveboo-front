@@ -13,6 +13,8 @@ export default{
         return{
             restaurant :[],
             products :[],
+            cartproduct : [],
+            totalPrice : 0,
         }
     },
     methods:{
@@ -40,7 +42,22 @@ export default{
             });
         },
 
-    },
+        updateCart(product){
+            this.cartproduct.push(product);
+            console.log(this.cartproduct);
+        },
+
+        deleteCart() {
+            this.cartproduct = []; // Svuota il carrello
+            this.totalPrice = 0;   // Reset del totale
+        },
+
+        updateCart(product) {
+            this.cartproduct.push(product); // Aggiungi il prodotto al carrello
+            this.totalPrice += parseFloat(product.price); // Aggiungi il prezzo del nuovo prodotto al totale
+        },
+    }, 
+
     mounted(){
         const id= this.$route.params.id;
         console.log(id);
@@ -58,7 +75,10 @@ export default{
         </div>
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>
-            <h3><i class="fa-solid fa-location-dot"></i>  {{restaurant.address}}</h3>
+            <h3><i class="fa-solid fa-location-dot"></i> {{restaurant.address}}</h3>
+        </div>
+        <div class="tags">
+            <h3 @click="addCart()" >Italiano</h3>
         </div>
     </div>
     <!-- titolo menù -->
@@ -68,7 +88,17 @@ export default{
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
         <div class="food-list">
-            <DishCard :products="products"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
         </div>
 
         <!-- carrello -->
@@ -76,22 +106,13 @@ export default{
 
             <div class="top-cart">
                 <h3>Il tuo ordine</h3>
-                <a href=""><h3><i class="fa-solid fa-trash-can"></i></h3></a>
+                <a @click="deleteCart()"><h3><i class="fa-solid fa-trash-can"></i></h3></a>
             </div>
 
             <div class="products">
 
-                <div class="full-cart">
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
+                <div v-if="cartproduct.length > 0" class="full-cart">
+                    <CartDishCard :cartproduct="cartproduct"/>
                     <div class="spacer-cart"></div>
 
                     <div class="price-bar">
@@ -99,14 +120,14 @@ export default{
                             <img src="../../public/LOGO.svg" alt="">
                         </div>
                         <div class="text">Totale:</div>
-                        <div class="total-price">3456$</div>
+                        <div class="total-price">{{this.totalPrice}}€</div>
                     </div>
                 </div>
             
-                <!-- <div class="empty-cart">
+                <div v-else class="empty-cart">
                     <img src="../../public/LOGO.svg" alt="">
                     <h2>Il carrello è vuoto</h2>
-                </div> -->
+                </div>
             </div>
 
             <div class="buy">
@@ -140,7 +161,7 @@ export default{
         }
     }
     .text{
-        width: 65%;
+        width: 55%;
 
         display: flex;
         flex-direction: column;
@@ -152,6 +173,26 @@ export default{
         }
         h3{
             padding-left: 10px;
+        }
+    }
+
+    .tags{
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h3{
+            border: 2px solid $text_color;
+            padding: 5px 20px;
+            border-radius: 25px;
+            margin-bottom: 10px;
+            transition: 500ms;
+
+            &:hover{
+                scale: 1.1;
+            }
         }
     }
 }
@@ -175,16 +216,16 @@ export default{
         width: 70%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         align-items: center;
+        justify-content: space-between;
         padding-bottom: 100px;
+        padding:0 20px;
     }
     .cart{
         width: 30%;
         height: 100vh;
         position: sticky;
         top:0;
-        padding: 0 20px;
 
         .top-cart{
             color:  $yellow;
@@ -216,7 +257,7 @@ export default{
                 width: 100%;
                 overflow-y: auto;
                 
-                /* Nascondere la barra di scorrimento */
+                // nascondere barra scorrimento
                 ::-webkit-scrollbar {
                     display: none;
                 }
@@ -225,7 +266,6 @@ export default{
 
                 .spacer-cart{
                     height: 120px;
-                    background-color: red;
                 }
 
                 .price-bar{

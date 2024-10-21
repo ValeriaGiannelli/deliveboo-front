@@ -1,14 +1,24 @@
 <script>
 export default {
     name: 'CartDishCard',
+    data(){
+        return{
+        }
+    },
+    props:{
+        cartproduct:{
+            type : Array,
+            required : true,
+        }
+    }
 }
 </script>
 
 <template>
-    <div class="container">
+    <div v-for="(product, i) in cartproduct" :key="i" class="container">
         <div class="amount">1x</div>
-        <div class="name">Mario</div>
-        <div class="price">12$</div>
+        <div class="name">{{product.name}}</div>
+        <div class="price">{{product.price}}</div>
     </div>
 </template>
 
