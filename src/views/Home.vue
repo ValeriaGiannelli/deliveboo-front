@@ -81,7 +81,8 @@ export default{
             <!-- <button v-for="type in types" @click="filterRestaurant(type.name)" >{{type.name}}</button> -->
         </div>
         <div class="container-restaurants">
-            <RestaurantCard :restaurants="restaurants" />
+            <RestaurantCard :restaurants="restaurants" v-if="restaurants.length > 0"/>
+            <div v-else>Non ci sono ristoranti con queste tipologie.</div>
         </div>
   
     </div>
