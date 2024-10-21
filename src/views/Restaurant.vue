@@ -89,6 +89,16 @@ export default{
      <div class="container food">
         <div class="food-list">
             <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart"/>
         </div>
 
         <!-- carrello -->
@@ -206,16 +216,16 @@ export default{
         width: 70%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         align-items: center;
+        justify-content: space-between;
         padding-bottom: 100px;
+        padding:0 20px;
     }
     .cart{
         width: 30%;
         height: 100vh;
         position: sticky;
         top:0;
-        padding: 0 20px;
 
         .top-cart{
             color:  $yellow;
