@@ -19,7 +19,7 @@ export default{
    <div class="container">
         <div class="logo"><a href="/"><img src="../../public/FULL_LOGO.svg" alt=""></a></div>
         <div class="buttons">    
-            <a href="">Collabora con noi</a>
+            <a href="http://127.0.0.1:8000/">Collabora con noi</a>
             <a href=""><i class="fa-solid fa-cart-shopping icon" title="Carrello"></i></a>
         </div>
     </div>
