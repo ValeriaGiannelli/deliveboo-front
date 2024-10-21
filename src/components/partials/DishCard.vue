@@ -26,7 +26,8 @@ export default {
             <div class="card-content">
                 <div class="title-add">
                     <h2 class="card-title">{{product.name}}</h2>
-                    <a @click="addCart(product)" ><i class="fa-solid fa-circle-plus"></i></a>
+                    <!-- <a @click="addCart(product)" ><i class="fa-solid fa-circle-plus"></i></a> -->
+                    <a><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
                 <div class="desc-price">
                     <p class="card-description">{{product.ingredients_descriptions}}</p>
