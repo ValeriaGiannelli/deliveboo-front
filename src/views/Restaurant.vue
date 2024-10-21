@@ -72,7 +72,8 @@ export default{
     <!-- jumbo ristorante -->
     <div class="container top">
         <div class="image">
-            <img :src="restaurant.img" alt="">
+            <img v-if="restaurant.img !== 'http://127.0.0.1:8000/storage/0'" :src="restaurant.img" :alt="restaurant.restaurant_name" />
+            <img v-else src="../../../public/ristorante.jpg" :alt="restaurant.restaurant_name" />
         </div>
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>
