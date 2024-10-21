@@ -58,7 +58,12 @@ export default{
         </div>
         <div class="text">
             <h1>{{restaurant.restaurant_name}}</h1>
-            <h3><i class="fa-solid fa-location-dot"></i>  {{restaurant.address}}</h3>
+            <h3><i class="fa-solid fa-location-dot"></i> {{restaurant.address}}</h3>
+        </div>
+        <div class="tags">
+            <h3>Italiano</h3>
+            <h3>Italiano</h3>
+            <h3>Italiano</h3>
         </div>
     </div>
     <!-- titolo menù -->
@@ -140,7 +145,7 @@ export default{
         }
     }
     .text{
-        width: 65%;
+        width: 55%;
 
         display: flex;
         flex-direction: column;
@@ -152,6 +157,26 @@ export default{
         }
         h3{
             padding-left: 10px;
+        }
+    }
+
+    .tags{
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h3{
+            border: 2px solid $text_color;
+            padding: 5px 20px;
+            border-radius: 25px;
+            margin-bottom: 10px;
+            transition: 500ms;
+
+            &:hover{
+                scale: 1.1;
+            }
         }
     }
 }
@@ -216,7 +241,7 @@ export default{
                 width: 100%;
                 overflow-y: auto;
                 
-                /* Nascondere la barra di scorrimento */
+                // nascondere barra scorrimento
                 ::-webkit-scrollbar {
                     display: none;
                 }
@@ -225,7 +250,6 @@ export default{
 
                 .spacer-cart{
                     height: 120px;
-                    background-color: red;
                 }
 
                 .price-bar{
