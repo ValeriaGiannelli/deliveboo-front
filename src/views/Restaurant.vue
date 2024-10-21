@@ -54,7 +54,8 @@ export default{
 
         updateCart(product) {
             this.cartproduct.push(product); // Aggiungi il prodotto al carrello
-            this.totalPrice += parseFloat(product.price); // Aggiungi il prezzo del nuovo prodotto al totale
+            this.totalPrice += parseFloat(product.price);
+            this.totalPrice = parseFloat(this.totalPrice.toFixed(2)); // Aggiungi il prezzo del nuovo prodotto al totale
         },
     }, 
 
