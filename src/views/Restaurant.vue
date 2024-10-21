@@ -90,16 +90,6 @@ export default{
      <div class="container food">
         <div class="food-list">
             <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
-            <DishCard :products="products" @add-to-cart="updateCart"/>
         </div>
 
         <!-- carrello -->
@@ -200,30 +190,28 @@ export default{
 .menu-title{
     font-size: 30px;
     font-weight: 700;
-    padding: 20px 0 0;
-    padding-left: 50px;
+    padding: 20px;
     @include no-select;
 }
 
 .container.food{
     width: 100%;
     margin: 0 auto;
-
     flex-wrap: wrap;
     display: flex;
     @include no-select;
 
     .food-list{
-        width: 70%;
+        width:66%;
         display: flex;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        gap: 10px;
         padding-bottom: 100px;
         padding:0 20px;
     }
     .cart{
-        width: 30%;
+        width: calc(100% / 3);
         height: 100vh;
         position: sticky;
         top:0;
