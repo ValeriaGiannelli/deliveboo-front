@@ -13,6 +13,7 @@ export default{
         return{
             restaurant :[],
             products :[],
+            cartproduct : [],
         }
     },
     methods:{
@@ -40,6 +41,14 @@ export default{
             });
         },
 
+        addCart(){
+            this.cartproduct.push('element');
+        },
+
+        deleteCart(){
+            this.cartproduct=[];
+        },
+
     },
     mounted(){
         const id= this.$route.params.id;
@@ -61,9 +70,7 @@ export default{
             <h3><i class="fa-solid fa-location-dot"></i> {{restaurant.address}}</h3>
         </div>
         <div class="tags">
-            <h3>Italiano</h3>
-            <h3>Italiano</h3>
-            <h3>Italiano</h3>
+            <h3 @click="addCart()" >Italiano</h3>
         </div>
     </div>
     <!-- titolo menù -->
@@ -81,22 +88,13 @@ export default{
 
             <div class="top-cart">
                 <h3>Il tuo ordine</h3>
-                <a href=""><h3><i class="fa-solid fa-trash-can"></i></h3></a>
+                <a @click="deleteCart()"><h3><i class="fa-solid fa-trash-can"></i></h3></a>
             </div>
 
             <div class="products">
 
-                <div class="full-cart">
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
-                    <CartDishCard/>
+                <div v-if="cartproduct.length > 0" class="full-cart">
+                    <CartDishCard :cartproduct="cartproduct"/>
                     <div class="spacer-cart"></div>
 
                     <div class="price-bar">
@@ -108,10 +106,10 @@ export default{
                     </div>
                 </div>
             
-                <!-- <div class="empty-cart">
+                <div v-else class="empty-cart">
                     <img src="../../public/LOGO.svg" alt="">
                     <h2>Il carrello è vuoto</h2>
-                </div> -->
+                </div>
             </div>
 
             <div class="buy">
