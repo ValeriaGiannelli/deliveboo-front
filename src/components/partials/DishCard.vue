@@ -22,8 +22,10 @@ export default {
 
 <template>
         <div class="card" v-for="(product, i) in products" :key="i" >
-            <img v-if="product.img !== 'http://127.0.0.1:8000/storage/0'" :src="product.img" :alt="product.name" class="card-image" />
-            <img v-else src="../../../public/ristorante.jpg" :alt="product.name" class="card-image" />
+            <div class="card-image">
+                <img v-if="product.img !== 'http://127.0.0.1:8000/storage/0'" :src="product.img" :alt="product.name"/>
+                <img v-else src="../../../public/ristorante.jpg" :alt="product.name"/>
+            </div>
             <div class="card-content">
                 <div class="title-add">
                     <h2 class="card-title">{{product.name}}</h2>
@@ -57,13 +59,27 @@ export default {
     flex-direction: column;
     margin-bottom: 10px;
 
-    
+    &:hover>div>img{
+        scale: 1.05;
+        filter: brightness(80%);
+    }
 
-    .card-image {
+    .card-image{
         width: 100%;
         height: 45%;
+        overflow: hidden;
+        img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
+        transition: 500ms;
+        overflow: hidden;
+        }
     }
+
+    
+
+    
 
     .card-content {
         width: 100%;
