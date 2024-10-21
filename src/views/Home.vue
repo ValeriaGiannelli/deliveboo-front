@@ -73,12 +73,12 @@ export default{
 <template>
     <Jumbo/>
     <div class="container-card">
-        <div class="bottoni">
-            <label for="" v-for="type in types">
-                <input type="checkbox" @change="filterRestaurant()" v-model="selectedTypes" :value="type.name">
-                {{type.name}}
-            </label>
-            <!-- <button v-for="type in types" @click="filterRestaurant(type.name)" >{{type.name}}</button> -->
+        <h2>Cosa ti va di mangiare?</h2>
+        <div class="container-types">
+            <div class="checkbox-btn" v-for="type in types">
+                    <input type="checkbox" @change="filterRestaurant()" v-model="selectedTypes" :value="type.name" :id="type.name">
+                    <label :for="type.name">{{ type.name }}</label>
+            </div>
         </div>
         <div class="container-restaurants">
             <RestaurantCard :restaurants="restaurants" v-if="restaurants.length > 0"/>
@@ -95,35 +95,52 @@ export default{
 @use '../styles/partials/mixins' as *;
 
 .container-card{
-    margin: 0 auto;
+    margin: 20px auto;
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     
-   
-    .bottoni{
-        padding: 1rem;
+    .container-types{
         display: flex;
-        width: 50%;
-        justify-content: space-between;
+        margin:10px 0 20px;
 
-        button{
-            font-size: 20px;
-            padding: 7px 16px;
-            color: $background_color;
-            background-color: $yellow;
-            border: none;
-            border-radius: 15px;
-            transition: 500ms;
+        .checkbox-btn{
+            padding: 1rem;
+            display: inline-block;
+            width: 50%;
+    
+            input[type="checkbox"]{
+                display:none;
 
-                &:hover{
-                    background-color:$red;
-                    scale: 1.05;
+                &:checked + label {
+                    background-color: $yellow;
+                    color: $text-color;
+                    transform: scale(1.1);
                 }
             }
+
+            label{
+                display: inline-block;
+                padding: 10px 20px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+                // background-color: white;
+                color: $text-color;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover{
+                    background-color: #f7c5488f;
+                    transform: scale(1.1);
+                }
+            }
+        }
     }
+
+    
 
     .container-restaurants{
         width: 80%;
