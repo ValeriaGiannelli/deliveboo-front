@@ -58,9 +58,8 @@ export default{
                 this.cartproduct.splice(index, 1); // Rimuove l'elemento dal carrello
             }
                 /* sottrarre al total price il valore di product price  */
-                this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
                 this.totalPrice -= parseFloat(product.price); 
-
+                this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
         },
 
         updateCart(product) {
@@ -130,7 +129,7 @@ export default{
                             <img src="../../public/LOGO.svg" alt="">
                         </div>
                         <div class="text">Totale:</div>
-                        <div class="total-price">{{this.totalPrice}}€</div>
+                        <div class="total-price">{{this.totalPrice.toFixed(2)}}€</div>
                     </div>
                 </div>
             
