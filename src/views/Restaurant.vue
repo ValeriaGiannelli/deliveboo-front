@@ -51,15 +51,24 @@ export default{
         },
 
         deleteCartItem(product){
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            //Se ci sono più cose e clicco meno le toglie tutte
-            this.cartproduct.splice(product);
-            this.totalPrice -= parseFloat(product.price);
-            this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
+            //Abbassare product quantity
+            product.quantity --;
+             if(product.quantity == 0){
+                const index = this.cartproduct.indexOf(product);
+                this.cartproduct.splice(index, 1); // Rimuove l'elemento dal carrello
+            }
+                /* sottrarre al total price il valore di product price  */
+                this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
+                this.totalPrice -= parseFloat(product.price); 
+
         },
 
         updateCart(product) {
-            this.cartproduct.push(product); // Aggiungi il prodotto al carrello
+            if(!this.cartproduct.includes(product)){
+                this.cartproduct.push(product); // Aggiungi il prodotto al carrello
+            }
+            
+            product.quantity ++;
             this.totalPrice += parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2)); // Aggiungi il prezzo del nuovo prodotto al totale
         },
