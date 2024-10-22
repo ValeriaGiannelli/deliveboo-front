@@ -51,6 +51,8 @@ export default{
         },
 
         deleteCartItem(product){
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //Se ci sono più cose e clicco meno le toglie tutte
             this.cartproduct.splice(product);
             this.totalPrice -= parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
@@ -95,7 +97,9 @@ export default{
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
         <div class="food-list">
-            <DishCard :products="products" @add-to-cart="updateCart" @delete-item="deleteCartItem"/>
+            <DishCard :products="products" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
+            <div v-else class="no-products">Ci dispiace, non ci sono piatti in queste ristorante.<i class="fa-solid fa-heart-crack"></i></div>
+
         </div>
 
         <!-- carrello -->
@@ -212,6 +216,21 @@ export default{
         flex-wrap: wrap;
         gap: 10px;
         padding:0 20px;
+
+        .no-products{
+            width: 100%;
+            aspect-ratio: 1 / 0.25;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            font-size: 25px;
+
+
+            i{
+                padding-left: 10px;
+            }
+        }
     }
     .cart{
         width: calc(100% / 3);
