@@ -81,7 +81,7 @@ export default{
             <p>{{ restaurant.description }}</p>
         </div>
         <div class="tags">
-            <h3 @click="addCart()" >Italiano</h3>
+            <h3 >Italiano</h3>
         </div>
     </div>
     <!-- titolo menù -->
