@@ -23,13 +23,14 @@ export default {
             }
         },
         decreaseQuantity(product) {
-            if(product.quantity === 0){
-                product.quantity--;
+            //1 perchè nel momento in cui vedo 1 al click parte il primo if
+            if(product.quantity === 1){
                 this.$emit('delete-item', product);
-            }else{
-                if (typeof product.quantity === 'number' && product.quantity > 0) {
-                    product.quantity--;
-                }
+                product.quantity--;
+            }else if(product.quantity != 1 && product.quantity > 0){
+                product.quantity--;
+            }else if(product.quantity < 0){
+                product.quantity = 0;
             }
         },
         initializeQuantity() {
@@ -46,9 +47,9 @@ export default {
         this.initializeQuantity();
 
         // log perpetuo di products
-        this.interval= setInterval(() => {
+        /* this.interval= setInterval(() => {
             console.log(this.products);
-        }, 2000);
+        }, 2000); */
     },
     watch: {
         // Osserva eventuali cambiamenti nei dati dei prodotti
@@ -87,7 +88,6 @@ export default {
                             <i class="fa-solid fa-circle-plus"></i>
                         </a>
                     </div>
-                    <a @click="addCart(product)" class="container-types" ><button  class="checkbox-btn">Aggiungi</button></a>
                     <!-- prezzo del prodotto -->
                     <span class="card-price">{{product.price}}€</span>
                 </div>

@@ -51,6 +51,8 @@ export default{
         },
 
         deleteCartItem(product){
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //Se ci sono più cose e clicco meno le toglie tutte
             this.cartproduct.splice(product);
             this.totalPrice -= parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
