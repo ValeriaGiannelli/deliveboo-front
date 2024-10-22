@@ -110,7 +110,7 @@ export default{
      <div class="container food">
         <div class="food-list">
             <DishCard :products="products" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
-            <div v-else class="no-products">Ci dispiace, non ci sono piatti in queste ristorante.<i class="fa-solid fa-heart-crack"></i></div>
+            <div v-else class="no-products">Ci dispiace, non ci sono piatti in questo ristorante.<i class="fa-solid fa-heart-crack"></i></div>
 
         </div>
 
