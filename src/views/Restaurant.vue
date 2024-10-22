@@ -48,6 +48,10 @@ export default{
         deleteCart() {
             this.cartproduct = []; // Svuota il carrello
             this.totalPrice = 0;   // Reset del totale
+            for(let i=0; i < this.products.length; i++){
+                this.products[i].quantity = 0;
+            }
+
         },
 
         deleteCartItem(product){
