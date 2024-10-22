@@ -7,14 +7,48 @@ export default {
             required : true,
         }
     },
-    data(){
-        return{
-        }
-    },
     emits: ['add-to-cart'],
     methods:{
         addCart(product){
-            this.$emit('add-to-cart',product);
+            this.$emit('add-to-cart', product);
+        },
+        increaseQuantity(product) {
+            if (typeof product.quantity === 'number') {
+                product.quantity++;
+            }
+        },
+        decreaseQuantity(product) {
+            if (typeof product.quantity === 'number' && product.quantity > 0) {
+                product.quantity--;
+            }
+        },
+        initializeQuantity() {
+            this.products.forEach(product => {
+                if (typeof product.quantity !== 'number') {
+                    // Inizializzo quantity
+                    product.quantity = 0; 
+                }
+            });
+        },
+    },
+    mounted(){
+        // Inizializza la quantità dei prodotti al montaggio del componente
+        this.initializeQuantity();
+
+        // log perpetuo di products
+        this.interval= setInterval(() => {
+            console.log(this.products);
+        }, 2000);
+    },
+    watch: {
+        // Osserva eventuali cambiamenti nei dati dei prodotti
+        products: {
+            handler(newProducts) {
+                // Reinzializza se l'array products cambia
+                this.initializeQuantity(); 
+            },
+             // Osserva i cambiamenti a livello di proprietà annidate
+            deep: true,
         }
     }
 }
@@ -29,11 +63,22 @@ export default {
             <div class="card-content">
                 <div class="title-add">
                     <h2 class="card-title">{{product.name}}</h2>
-                    <a @click="addCart(product)" ><i class="fa-solid fa-circle-plus"></i></a>
-                    <!-- <a><i class="fa-solid fa-circle-plus"></i></a> -->
+                    <p class="card-description">{{product.ingredients_descriptions}}</p>
+                   
                 </div>
                 <div class="desc-price">
-                    <p class="card-description">{{product.ingredients_descriptions}}</p>
+                    <!-- aggiunta rimozione modifica quantità prodotto  -->
+                    <div class="icone-incr-decr">
+                        <a @click="decreaseQuantity(product)">
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+                        <div class="quantity-box">{{ product.quantity }}</div>
+                        <a @click="increaseQuantity(product)">
+                            <i class="fa-solid fa-circle-plus"></i>
+                        </a>
+                    </div>
+                    <a @click="addCart(product)" class="container-types" ><button  class="checkbox-btn">Aggiungi</button></a>
+                    <!-- prezzo del prodotto -->
                     <span class="card-price">{{product.price}}€</span>
                 </div>
             </div>
@@ -50,14 +95,12 @@ export default {
     background:  #F7F5E8;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: calc((100% / 4) - 10px);
-    min-width: 200px;
+    width: 100%;
     overflow: hidden;
-    height: 350px;
+    height: 150px;
     //flex
     display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+    justify-content: space-between;
 
     &:hover>div>img{
         scale: 1.05;
@@ -65,8 +108,8 @@ export default {
     }
 
     .card-image{
-        width: 100%;
-        height: 45%;
+        width: 30%;
+        height: 100%;
         overflow: hidden;
         img {
         width: 100%;
@@ -77,31 +120,48 @@ export default {
         }
     }
 
-    
 
-    
+
 
     .card-content {
         width: 100%;
-        height: 55%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
         padding: 0 5px 0;
 
         .title-add{
-            min-height: 50%;
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .icone-incr-decr{
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 5px;
+            gap: 0.1rem;
 
             .card-title {
                 font-size: 1.3em;
             }
+            .quantity-box {
+                color: $red;
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+                border: 2px solid $yellow;
+                margin: 0 10px;
+                font-size: 16px;
+            }
 
             i{
-                font-size: 30px;
+                font-size: 20px;
                 color: $yellow;
                 transition: 500ms;
                 &:hover{
@@ -112,10 +172,14 @@ export default {
         }
 
         .desc-price{
-            height: 50%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            gap: 0.5rem;
+            
+            
 
             .card-description {
                 transition: 800ms;

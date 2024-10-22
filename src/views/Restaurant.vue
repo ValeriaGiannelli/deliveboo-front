@@ -84,7 +84,7 @@ export default{
             <p>{{ restaurant.description }}</p>
         </div>
         <div class="tags">
-            <h3 @click="addCart()" >Italiano</h3>
+            <h3 >Italiano</h3>
         </div>
     </div>
     <!-- titolo menù -->
@@ -204,12 +204,12 @@ export default{
     @include no-select;
 
     .food-list{
+        margin: auto;
         width:66%;
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
         gap: 10px;
-        padding-bottom: 100px;
         padding:0 20px;
     }
     .cart{

@@ -82,7 +82,7 @@ export default{
         </div>
         <div class="container-restaurants">
             <RestaurantCard :restaurants="restaurants" v-if="restaurants.length > 0"/>
-            <div v-else>Non ci sono ristoranti con queste tipologie.</div>
+            <div v-else class="no-restaurants">Ci dispiace, non sono disponibili ristoranti con queste categorie.<i class="fa-solid fa-heart-crack"></i></div>
         </div>
   
     </div>
@@ -148,6 +148,21 @@ export default{
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
+
+        .no-restaurants{
+            width: 100%;
+            aspect-ratio: 1 / 0.25;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            font-size: 25px;
+
+
+            i{
+                padding-left: 10px;
+            }
+        }
     }
 }
 
