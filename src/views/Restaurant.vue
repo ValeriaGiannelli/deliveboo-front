@@ -42,14 +42,15 @@ export default{
             });
         },
 
-        updateCart(product){
-            this.cartproduct.push(product);
-            console.log(this.cartproduct);
-        },
-
         deleteCart() {
             this.cartproduct = []; // Svuota il carrello
             this.totalPrice = 0;   // Reset del totale
+        },
+
+        deleteCartItem(product){
+            this.cartproduct.splice(product);
+            this.totalPrice -= parseFloat(product.price);
+            this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
         },
 
         updateCart(product) {
@@ -91,7 +92,7 @@ export default{
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
         <div class="food-list">
-            <DishCard :products="products" @add-to-cart="updateCart"/>
+            <DishCard :products="products" @add-to-cart="updateCart" @delete-item="deleteCartItem"/>
         </div>
 
         <!-- carrello -->

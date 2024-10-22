@@ -16,7 +16,7 @@ export default {
 
 <template>
     <div v-for="(product, i) in cartproduct" :key="i" class="container">
-        <div class="amount">1x</div>
+        <div class="amount">{{product.quantity}}x</div>
         <div class="name">{{product.name}}</div>
         <div class="price">{{product.price}}</div>
     </div>

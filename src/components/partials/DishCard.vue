@@ -7,19 +7,29 @@ export default {
             required : true,
         }
     },
-    emits: ['add-to-cart'],
+    emits: [
+        'add-to-cart',
+        'delete-item',
+     ],
     methods:{
-        addCart(product){
-            this.$emit('add-to-cart', product);
-        },
         increaseQuantity(product) {
-            if (typeof product.quantity === 'number') {
+            if(product.quantity === 0){
+                this.$emit('add-to-cart', product);
                 product.quantity++;
+            }else{
+                if (typeof product.quantity === 'number') {
+                    product.quantity++;
+                }
             }
         },
         decreaseQuantity(product) {
-            if (typeof product.quantity === 'number' && product.quantity > 0) {
+            if(product.quantity === 0){
                 product.quantity--;
+                this.$emit('delete-item', product);
+            }else{
+                if (typeof product.quantity === 'number' && product.quantity > 0) {
+                    product.quantity--;
+                }
             }
         },
         initializeQuantity() {
