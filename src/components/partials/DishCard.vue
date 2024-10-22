@@ -99,7 +99,6 @@ export default {
 
 
 
-
     .card-content {
         width: 100%;
         display: flex;
