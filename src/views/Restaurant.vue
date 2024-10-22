@@ -18,24 +18,27 @@ export default{
         }
     },
     methods:{
-        getRestaurant(id){
-        axios.get(store.apiURL + 'restaurant/' + id ) // URL API
+
+        // prende il ristorante per slug
+        getRestaurant(slug){
+        axios.get(store.apiURL + 'restaurant/' + slug ) // URL API
             .then(res => {
                 this.restaurant = res.data; // A BUON FINE
-                console.log('RESTAURANT DATA:', res.data); // LOG
-                console.log('restaurant',this.restaurant);
+                // console.log('RESTAURANT DATA:', res.data); // LOG
+                // console.log('restaurant',this.restaurant);
             })
             .catch(err => {
                 console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
             });
         },
 
-        getProducts(id){
-        axios.get(store.apiURL + 'restaurants/' + id + '/products') // URL API
+        // prende tutti i prodotti del ristorante selezionato
+        getProducts(slug){
+        axios.get(store.apiURL + 'restaurant/' + slug + '/products') // URL API
             .then(res => {
                 this.products = res.data; // A BUON FINE
-                console.log('PRODUCTS DATA:', res.data); // LOG
-                console.log('products',this.products);
+                // console.log('PRODUCTS DATA:', res.data); // LOG
+                // console.log('products',this.products);
             })
             .catch(err => {
                 console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
@@ -61,10 +64,10 @@ export default{
     }, 
 
     mounted(){
-        const id= this.$route.params.id;
-        console.log(id);
-        this.getProducts(id);
-        this.getRestaurant(id);
+        const slug= this.$route.params.slug;
+        // console.log(id);
+        this.getRestaurant(slug);
+        this.getProducts(slug);
     },
 }
 </script>

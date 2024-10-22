@@ -12,11 +12,8 @@ export default {
 <template>
     <div v-for="(restaurant, i) in restaurants" :key="i">
 
-
-
-
-
-        <a :href="'/restaurant/' + restaurant.id" class="restaurant-card">
+        <router-link :to="{name: 'restaurant', params: {slug: restaurant.slug}} " class="restaurant-card">
+         <!-- :href="'/restaurant/' + restaurant.id" class="restaurant-card"> -->
 
             <!-- body della card -->
             <div class="image-container">
@@ -34,7 +31,7 @@ export default {
                 {{restaurant.restaurant_name}}
             </h2>
         
-        </a>
+        </router-link>
 
 
 
