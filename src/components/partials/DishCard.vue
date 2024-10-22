@@ -7,24 +7,48 @@ export default {
             required : true,
         }
     },
-    data() {
-        return {
-            quantity: 0
-        };
-    },
     emits: ['add-to-cart'],
     methods:{
         addCart(product){
-            this.$emit('add-to-cart',product);
+            this.$emit('add-to-cart', product);
         },
-        increaseQuantity() {
-            this.quantity++;
-        },
-        decreaseQuantity() {
-            if (this.quantity > 0) {
-                this.quantity--;
+        increaseQuantity(product) {
+            if (typeof product.quantity === 'number') {
+                product.quantity++;
             }
-        
+        },
+        decreaseQuantity(product) {
+            if (typeof product.quantity === 'number' && product.quantity > 0) {
+                product.quantity--;
+            }
+        },
+        initializeQuantity() {
+            this.products.forEach(product => {
+                if (typeof product.quantity !== 'number') {
+                    // Inizializzo quantity
+                    product.quantity = 0; 
+                }
+            });
+        },
+    },
+    mounted(){
+        // Inizializza la quantità dei prodotti al montaggio del componente
+        this.initializeQuantity();
+
+        // log perpetuo di products
+        this.interval= setInterval(() => {
+            console.log(this.products);
+        }, 2000);
+    },
+    watch: {
+        // Osserva eventuali cambiamenti nei dati dei prodotti
+        products: {
+            handler(newProducts) {
+                // Reinzializza se l'array products cambia
+                this.initializeQuantity(); 
+            },
+             // Osserva i cambiamenti a livello di proprietà annidate
+            deep: true,
         }
     }
 }
@@ -45,11 +69,11 @@ export default {
                 <div class="desc-price">
                     <!-- aggiunta rimozione modifica quantità prodotto  -->
                     <div class="icone-incr-decr">
-                        <a @click="decreaseQuantity">
+                        <a @click="decreaseQuantity(product)">
                             <i class="fa-solid fa-circle-minus"></i>
                         </a>
-                        <div class="quantity-box">{{ quantity }}</div>
-                        <a @click="increaseQuantity">
+                        <div class="quantity-box">{{ product.quantity }}</div>
+                        <a @click="increaseQuantity(product)">
                             <i class="fa-solid fa-circle-plus"></i>
                         </a>
                     </div>
