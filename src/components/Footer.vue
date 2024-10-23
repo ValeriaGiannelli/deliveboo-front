@@ -77,6 +77,13 @@ export default{
                     <i class="fa-brands fa-x-twitter"></i>
                 </a>
             </div>
+            <div class="payments">
+                
+                <img src="https://www.justeat.it/CmsAssets/media/Images/Common/Footer/Verified-Card-Provider-Images/je-payment-logos-visa.svg?bid=2df7c2453404461ebef56573640edeb1" alt="">
+                <img src="https://www.justeat.it/CmsAssets/media/Images/Common/Footer/Verified-Card-Provider-Images/paypal.svg?bid=43072f3b76c1416fb8d9261f53961f3c" alt="">
+                <img src="https://www.justeat.it/CmsAssets/media/Images/Common/Footer/Verified-Card-Provider-Images/je-payment-logos-mastercard.svg?bid=67e82ee2da254d178c3e7635b5000aef" alt="">
+            
+            </div>
             <div class="copyright">
                 <span>© #128-T2 DeliveBoo</span>
             </div>
@@ -99,7 +106,7 @@ export default{
     align-items: center;
     padding-top: 150px;
     .box-container{
-        width: 100%;
+        width: 60%;
         justify-content: center;
 
         display: flex;
@@ -107,7 +114,7 @@ export default{
 
         .box{
             background-color: $yellow;
-            width: calc(60% / 4 - 20px);
+            width: calc(100% / 4 - 20px);
             padding: 20px 15px 30px;
             border-radius: 5px;
             flex-grow: 0 1;
@@ -119,13 +126,14 @@ export default{
         }
     }
     .box-social{
-        min-height: 20px;
+        min-height: 50px;
         width: 60%;
         margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .socials{
+            width: 30%;
             a>i{
                 color: $yellow;
             font-size: 30px;
@@ -133,12 +141,67 @@ export default{
 
             }
         }
+
+        .payments{
+            width: 40%;
+            display: flex;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            img{
+                max-height: 50%;
+            }
+        }
         
-        .copyright>span{
+        .copyright{
+            text-align: right;
+            width: 30%;
+            span{
             color: $yellow;
+            }
         }
     }
 }
 
+// TABLET
+@media screen and (max-width: 1030px){
+    .container{
+        .box-container{
+            flex-wrap: wrap;
+            .box{
+                width: calc(100% / 2 - 20px);
+            }
+        }
+    }
+}
+
+// MOBILE
+@media screen and (max-width: 770px){
+    .container{
+        .box-container{
+            width: 100%;
+            .box{
+                width: calc(100% - 20px);
+            }
+        }
+        .box-social{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+            .socials,
+            .payments,
+            .copyright{
+                text-align: center;
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    }
+}
 
 </style>
