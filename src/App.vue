@@ -3,6 +3,7 @@ import { store } from './store';
 import Home from './views/Home.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import Loading from './components/Loading.vue';
 
 export default{
   name : 'App',
@@ -10,6 +11,7 @@ export default{
     Home,
     Header,
     Footer,
+    Loading,
   },
   data(){
     return{
@@ -23,6 +25,7 @@ export default{
 </script>
 
 <template>
+  <Loading/>
   <Header/>
   <router-view></router-view>
   <Footer/>
