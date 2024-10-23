@@ -141,9 +141,7 @@ export default{
             }
         }
     }
-
     
-
     .container-restaurants{
         width: 80%;
         display: flex;
@@ -174,7 +172,6 @@ export default{
 @media screen and (max-width: 1024px){
 
 .container-card{
-
     .container-types{
         width: 90%;
         flex-wrap: wrap;
@@ -183,25 +180,14 @@ export default{
 
         .checkbox-btn{
             width: calc(100% / 5);
-    
-            input[type="checkbox"]{
-            }
-
-            label{
-            }
         }
-    }
-
-    
-
+    }  
     .container-restaurants{
         width: 90%;
 
         .no-restaurants{
-
-
-            i{
-            }
+            padding: 0 40px;
+            display: inline;
         }
     }
 }
@@ -212,32 +198,15 @@ export default{
 @media screen and (max-width: 576px){
 
     .container-card{
-    
         .container-types{
             width: 100%;
 
             .checkbox-btn{
                 width: calc(100% / 5);
-        
-                input[type="checkbox"]{
-                }
-
-                label{
-                }
             }
         }
-
-        
-
         .container-restaurants{
             width: 100%;
-
-            .no-restaurants{
-
-
-                i{
-                }
-            }
         }
     }
 }
