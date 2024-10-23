@@ -69,17 +69,21 @@ div{
             }
 
             .type-box{
+                width: 100%;
+                gap: 10px;
+                display: flex;
+                justify-content: end;
                 position: absolute;
-                bottom: 10px;
-                right: 0px;
+                right: 0.5rem;
+                bottom: 0.7rem;
 
                 .type-tag{
                     font-weight: 700;
                     font-size: 11px;
-                    background-color: $yellow;;
+                    background-color: $yellow;
                     border-radius: 10px;
                     padding: 0.3rem 0.5rem;
-                    margin-right: 10px;
+                    transition: 500ms;
                 }
             }
 
@@ -95,6 +99,9 @@ div{
         &:hover>div>img{
             scale: 1.05;
             filter: brightness(70%);
+        }
+        &:hover>div>div>.type-tag{
+            scale: 1.05;
         }
     }
 
