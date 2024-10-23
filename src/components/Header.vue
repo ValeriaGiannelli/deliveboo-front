@@ -68,7 +68,7 @@ export default{
     }
 }
 
-@media screen and (max-width: 1030px){
+@media screen and (max-width: 1024px){
     .container{
         .buttons{
             display: flex;
@@ -85,7 +85,7 @@ export default{
 }
 
 // MOBILE
-@media screen and (max-width: 770px){
+@media screen and (max-width:  576px){
 }
 
 

@@ -103,12 +103,16 @@ export default{
     
     .container-types{
         display: flex;
+        width: 80%;
         margin:10px 0 20px;
 
         .checkbox-btn{
+            border: 1px solid black;
             padding: 1rem;
-            display: inline-block;
-            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: calc(100% / 5);
     
             input[type="checkbox"]{
                 display:none;
@@ -160,6 +164,77 @@ export default{
 
             i{
                 padding-left: 10px;
+            }
+        }
+    }
+}
+
+
+// TABLET
+@media screen and (max-width: 1024px){
+
+.container-card{
+
+    .container-types{
+        width: 90%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .checkbox-btn{
+            width: calc(100% / 5);
+    
+            input[type="checkbox"]{
+            }
+
+            label{
+            }
+        }
+    }
+
+    
+
+    .container-restaurants{
+
+        .no-restaurants{
+
+
+            i{
+            }
+        }
+    }
+}
+}
+
+
+// MOBILE
+@media screen and (max-width: 576px){
+
+    .container-card{
+    
+        .container-types{
+            width: 100%;
+
+            .checkbox-btn{
+                width: calc(100% / 5);
+        
+                input[type="checkbox"]{
+                }
+
+                label{
+                }
+            }
+        }
+
+        
+
+        .container-restaurants{
+
+            .no-restaurants{
+
+
+                i{
+                }
             }
         }
     }

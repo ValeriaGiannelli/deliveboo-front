@@ -91,9 +91,40 @@ a.restaurant-card{
     }
 
     &:hover>div>img{
-            scale: 1.05;
-            filter: brightness(70%);
+        scale: 1.05;
+        filter: brightness(70%);
+    }
+}
+
+// TABLET
+@media screen and (max-width: 1024px){
+
+a.restaurant-card{
+
+    .image-container{
+
+        img{
         }
+
+        .type-box{
+
+            .type-tag{
+            }
+        }
+
+
+    }
+
+    h2{
+    }
+}
+
+    
+    
+}
+
+// MOBILE
+@media screen and (max-width:  576px){
 }
 
 </style>

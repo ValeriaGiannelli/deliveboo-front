@@ -165,19 +165,27 @@ export default{
 }
 
 // TABLET
-@media screen and (max-width: 1030px){
+@media screen and (max-width: 1024px){
     .container{
         .box-container{
+            width: 90%;
             flex-wrap: wrap;
             .box{
                 width: calc(100% / 2 - 20px);
             }
         }
+        .box-social{
+            padding: 0 10px;
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 
 // MOBILE
-@media screen and (max-width: 770px){
+@media screen and (max-width:  576px){
     .container{
         .box-container{
             width: 100%;
@@ -187,10 +195,7 @@ export default{
         }
         .box-social{
             width: 100%;
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
 
             .socials,
             .payments,
