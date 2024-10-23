@@ -5,16 +5,19 @@ import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
 import DropIn from '../components/DropIn.vue';
 import { RouterLink } from 'vue-router';
+import Loader from '../components/partials/loader.vue';
 
 export default {
     name: 'Restaurant',
     components: {
         DishCard,
         CartDishCard,
-        DropIn
+        DropIn,
+        Loader,
     },
     data() {
         return {
+            loading: true,
             restaurant: [],
             products: [],
             cartproduct: [],
@@ -36,6 +39,7 @@ export default {
             axios.get(store.apiURL + 'restaurant/' + slug + '/products')
                 .then(res => {
                     this.products = res.data;
+                    this.loading = false;
                 })
                 .catch(err => {
                     console.log('Errore nel recupero dei dati:', err);
@@ -50,21 +54,34 @@ export default {
         },
 
         deleteCartItem(product) {
-            product.quantity--;
-            if (product.quantity <= 0) {
-                const index = this.cartproduct.indexOf(product);
-                this.cartproduct.splice(index, 1);
+            const cartItem = this.cartproduct.find(item => item.id === product.id);
+            if (cartItem) {
+                cartItem.quantity--; // Decrementa la quantità
+                if (cartItem.quantity <= 0) {
+                    const index = this.cartproduct.indexOf(cartItem);
+                    this.cartproduct.splice(index, 1); // Rimuovi il prodotto se la quantità è zero
+                }
             }
+
+            // Aggiorna la quantità del prodotto originale
+            product.quantity = cartItem ? cartItem.quantity : 0;
+
             this.totalPrice -= parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
             this.saveCartToLocalStorage();
         },
 
         updateCart(product) {
-            if (!this.cartproduct.includes(product)) {
-                this.cartproduct.push(product);
+            const existingProduct = this.cartproduct.find(item => item.id === product.id);
+            if (existingProduct) {
+                existingProduct.quantity++; // Incrementa la quantità
+            } else {
+                this.cartproduct.push({ ...product, quantity: 1 }); // Aggiungi il prodotto con quantità iniziale
             }
-            product.quantity++;
+
+            // Incrementa la quantità del prodotto nella lista originale
+            product.quantity = existingProduct ? existingProduct.quantity : 1;
+
             this.totalPrice += parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
             this.saveCartToLocalStorage();
@@ -132,14 +149,28 @@ export default {
             <h3 >Italiano</h3>
         </div>
     </div>
+
     <!-- titolo menù -->
     <div class="menu-title">
         Menù:
     </div>
+
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
-        <div class="food-list">
-            <DishCard :products="products" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
+
+        <div class="food-list loading" v-if="loading">
+            <!-- loading di attesa -->
+            <div class="my-loader" >
+                <Loader />
+            </div>
+        </div>
+        
+        <div class="food-list" v-else>
+
+            <!-- card dei prodotti -->
+            <DishCard :products="products" :cartProducts="cartproduct" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
+            
+            <!-- avviso che non ci sono prodotti -->
             <div v-else class="no-products">Ci dispiace, non ci sono piatti in questo ristorante.<i class="fa-solid fa-heart-crack"></i></div>
 
         </div>
@@ -251,6 +282,12 @@ export default {
     flex-wrap: wrap;
     display: flex;
     @include no-select;
+
+    .food-list.loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .food-list{
         margin: auto;
