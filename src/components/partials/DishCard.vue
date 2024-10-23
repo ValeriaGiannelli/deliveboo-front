@@ -71,7 +71,7 @@ export default {
                         <a @click="decreaseQuantity(product)">
                             <i class="fa-solid fa-circle-minus"></i>
                         </a>
-                        <div class="quantity-box">{{ product.quantity }}</div>
+                        <div class="quantity-box">{{ product.quantity + 'x' }}</div>
                         <a @click="increaseQuantity(product)">
                             <i class="fa-solid fa-circle-plus"></i>
                         </a>
@@ -150,12 +150,15 @@ export default {
                 color: $red;
                 display: inline-block;
                 width: 30px;
-                height: 30px;
-                text-align: center;
-                line-height: 30px;
-                border: 2px solid $yellow;
+                aspect-ratio: 1/1;
+                font-weight: 700;
+                margin: 0px;
+                font-size: 23px;
                 margin: 0 10px;
-                font-size: 16px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             i{
