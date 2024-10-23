@@ -192,7 +192,6 @@ export default{
             justify-content: center;
             align-items: center;
 
-
             .socials,
             .payments,
             .copyright{
