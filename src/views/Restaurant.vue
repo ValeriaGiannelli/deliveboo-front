@@ -64,6 +64,8 @@ export default{
                 /* sottrarre al total price il valore di product price  */
                 this.totalPrice -= parseFloat(product.price); 
                 this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
+                // Salva il carrello nel localStorage
+                this.saveCartToLocalStorage();
         },
 
         updateCart(product) {
@@ -74,15 +76,55 @@ export default{
             product.quantity ++;
             this.totalPrice += parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2)); // Aggiungi il prezzo del nuovo prodotto al totale
+            // Salva il carrello nel localStorage
+            this.saveCartToLocalStorage();
         },
+        saveCartToLocalStorage() {
+            const cartData = {
+                cartproduct: this.cartproduct,
+                totalPrice: this.totalPrice
+            };
+        localStorage.setItem('cart', JSON.stringify(cartData)); // Converte l'oggetto in JSON e lo salva nel localStorage
+        },
+        // Metodo per recuperare il carrello dal localStorage
+        loadCartFromLocalStorage() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                const cartData = JSON.parse(savedCart); // Converte la stringa JSON in oggetto
+                this.cartproduct = cartData.cartproduct;
+                this.totalPrice = cartData.totalPrice;
+            }
+        },
+        // Metodo per svuotare il carrello
+        clearCart() {
+            this.cartproduct = [];
+            this.totalPrice = 0;
+            localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
+        },
+        /* handlePopState(event) {
+            const user_confirmed = window.confirm('Il carrello verrà cancellato, continuare?');
+            if(user_confirmed){
+                // Pulizia di sessionStorage o localStorage
+                localStorage.clear();
+            }else{
+                window.history.pushState(null, null, window.location.href);
+            }
+        } */
+        
     }, 
-
     mounted(){
         const slug= this.$route.params.slug;
         // console.log(id);
         this.getRestaurant(slug);
         this.getProducts(slug);
+        this.loadCartFromLocalStorage();
+        this.deleteCart();
+        /* window.addEventListener('popstate', this.handlePopState); */
     },
+    /* beforeDestroy() {
+        // Rimuovi l'event listener quando il componente viene distrutto
+        window.removeEventListener('popstate', this.handlePopState);
+    }  */
 }
 </script>
 
