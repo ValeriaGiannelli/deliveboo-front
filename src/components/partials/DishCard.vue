@@ -5,7 +5,11 @@ export default {
         products:{
             type : Array,
             required : true,
-        }
+        },
+        cartProducts: {
+        type: Array,
+        required: true,
+    }
     },
     emits: [
         'add-to-cart',
@@ -16,11 +20,10 @@ export default {
            this.$emit('add-to-cart', product);
         },
         decreaseQuantity(product) {
-            //1 perchè nel momento in cui vedo 1 al click parte il primo if
-            if(product.quantity >= 1){
-                this.$emit('delete-item', product);
-            }
-        },
+        if (product.quantity > 0) {
+            this.$emit('delete-item', product);
+        }
+    },
         initializeQuantity() {
             this.products.forEach(product => {
                 if (typeof product.quantity !== 'number') {
@@ -28,6 +31,11 @@ export default {
                     product.quantity = 0; 
                 }
             });
+            this.products.forEach(product => {
+                const cartItem = this.cartProducts.find(item => item.id === product.id);
+                product.quantity = cartItem ? cartItem.quantity : 0; // Imposta la quantità basata sul carrello
+            });
+            
         },
     },
     mounted(){
