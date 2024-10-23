@@ -46,7 +46,7 @@ export default {
 @use '../../styles/partials/mixins' as *;
 
 div{
-    // dimensione di 1/3 del container - il doppio del gap / numero di container per riga
+    // dimensione di 1/ X del container - il gap moltiplicato per X-1 (se X!=1 no gap) / X (container per riga)
     width: calc((100% / 3) - 40px / 3);
     .restaurant-card{
         display: block;
@@ -110,32 +110,57 @@ div{
 // TABLET
 @media screen and (max-width: 1024px){
 
-a.restaurant-card{
+    div{
+    // dimensione di 100%/ X del container - il gap moltiplicato per X-1 (se X!=1 no gap) / X (container per riga)
+    width: calc((100% / 2) - 20px / 2);
+        .restaurant-card{
 
-    .image-container{
+            .image-container{
 
-        img{
-        }
+                img{
+                }
 
-        .type-box{
+                .type-box{
+                    .type-tag{
+                    }
+                }
 
-            .type-tag{
+
+            }
+
+            h2{
             }
         }
 
-
     }
-
-    h2{
-    }
-}
-
-    
-    
 }
 
 // MOBILE
 @media screen and (max-width:  576px){
+
+    div{
+    // dimensione di 100%/ X del container - il gap moltiplicato per X-1 (se X!=1 no gap) / X (container per riga)
+    width: 100%;
+        .restaurant-card{
+
+            .image-container{
+
+                img{
+                }
+
+                .type-box{
+                    .type-tag{
+                    }
+                }
+
+
+            }
+
+            h2{
+            }
+        }
+
+    }
 }
 
 </style>

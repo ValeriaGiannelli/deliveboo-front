@@ -198,6 +198,7 @@ export default{
     
 
     .container-restaurants{
+        width: 90%;
 
         .no-restaurants{
 
@@ -232,6 +233,7 @@ export default{
         
 
         .container-restaurants{
+            width: 100%;
 
             .no-restaurants{
 
