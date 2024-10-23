@@ -61,7 +61,6 @@ export default{
                     console.error("Errore durante la chiamata API:", error);
                 });
         }
-
     },
     mounted(){
         this.getRestaurantTypes();
