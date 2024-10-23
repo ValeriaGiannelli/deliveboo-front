@@ -45,55 +45,59 @@ export default {
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
 
-a.restaurant-card{
-    margin-bottom: 50px;
-    display: block;
-    background:  #F7F5E8;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-
-    .image-container{
-        height: 220px;
-        width: 350px;
-        position: relative;
+div{
+    // dimensione di 1/3 del container - il doppio del gap / numero di container per riga
+    width: calc((100% / 3) - 40px / 3);
+    .restaurant-card{
+        display: block;
+        background:  #F7F5E8;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
         overflow: hidden;
 
-        img{
-            height: 100%;
+        .image-container{
             width: 100%;
-            object-fit: cover;
-            transition: 500ms;
-        }
+            aspect-ratio: 35/22;
+            position: relative;
+            overflow: hidden;
 
-        .type-box{
-            position: absolute;
-            bottom: 10px;
-            right: 0px;
-
-            .type-tag{
-                font-weight: 700;
-                font-size: 11px;
-                background-color: $yellow;;
-                border-radius: 10px;
-                padding: 0.3rem 0.5rem;
-                margin-right: 10px;
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                transition: 500ms;
             }
+
+            .type-box{
+                position: absolute;
+                bottom: 10px;
+                right: 0px;
+
+                .type-tag{
+                    font-weight: 700;
+                    font-size: 11px;
+                    background-color: $yellow;;
+                    border-radius: 10px;
+                    padding: 0.3rem 0.5rem;
+                    margin-right: 10px;
+                }
+            }
+
+
         }
 
+        h2{
+            font-size: 22px;
+            padding: 10px;
+            font-weight: 500;
+        }
 
+        &:hover>div>img{
+            scale: 1.05;
+            filter: brightness(70%);
+        }
     }
 
-    h2{
-        font-size: 22px;
-        padding: 10px;
-        font-weight: 500;
-    }
-
-    &:hover>div>img{
-        scale: 1.05;
-        filter: brightness(70%);
-    }
 }
 
 // TABLET

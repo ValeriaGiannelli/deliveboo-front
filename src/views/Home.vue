@@ -147,10 +147,13 @@ export default{
 
     .container-restaurants{
         width: 80%;
-        justify-content: space-between;
-        margin: 0 auto;
         display: flex;
+        justify-content: start;
+        align-items: start;
         flex-wrap: wrap;
+        gap: 20px;
+
+        border: 1px solid black;
 
         .no-restaurants{
             width: 100%;
