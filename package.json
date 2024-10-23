@@ -11,11 +11,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "axios": "^1.7.7",
+    "braintree-web-drop-in": "^1.43.0",
     "typeface-roboto": "^1.1.13",
     "vue": "^3.5.10",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@types/braintree-web-drop-in": "^1.39.3",
     "@vitejs/plugin-vue": "^5.1.4",
     "sass": "^1.80.1",
     "vite": "^5.4.8"

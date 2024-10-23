@@ -3,12 +3,14 @@ import axios from 'axios';
 import { store } from '../store';
 import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
+import DropIn from '../components/DropIn.vue';
 
 export default {
     name: 'Restaurant',
     components: {
         DishCard,
         CartDishCard,
+        DropIn
     },
     data() {
         return {
@@ -164,9 +166,13 @@ export default {
                 </div>
             </div>
 
+            <DropIn />
+
             <div class="buy">
                 <div class="buy-button">Vai al pagamento</div>
             </div>
+
+            
             
         </div>
      </div>
