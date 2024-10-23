@@ -107,7 +107,6 @@ export default{
         margin:10px 0 20px;
 
         .checkbox-btn{
-            border: 1px solid black;
             padding: 1rem;
             display: flex;
             justify-content: center;
@@ -152,8 +151,6 @@ export default{
         align-items: start;
         flex-wrap: wrap;
         gap: 20px;
-
-        border: 1px solid black;
 
         .no-restaurants{
             width: 100%;
