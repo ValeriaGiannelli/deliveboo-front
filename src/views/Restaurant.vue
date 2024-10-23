@@ -3,15 +3,18 @@ import axios from 'axios';
 import { store } from '../store';
 import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
+import Loader from '../components/partials/loader.vue';
 
 export default {
     name: 'Restaurant',
     components: {
         DishCard,
         CartDishCard,
+        Loader,
     },
     data() {
         return {
+            loading: true,
             restaurant: [],
             products: [],
             cartproduct: [],
@@ -33,6 +36,7 @@ export default {
             axios.get(store.apiURL + 'restaurant/' + slug + '/products')
                 .then(res => {
                     this.products = res.data;
+                    this.loading = false;
                 })
                 .catch(err => {
                     console.log('Errore nel recupero dei dati:', err);
@@ -136,15 +140,28 @@ export default {
             <h3 >Italiano</h3>
         </div>
     </div>
+
     <!-- titolo menù -->
     <div class="menu-title">
         Menù:
     </div>
+
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
-        <div class="food-list">
-            <DishCard :products="products" :cartProducts="cartproduct" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
 
+        <div class="food-list loading" v-if="loading">
+            <!-- loading di attesa -->
+            <div class="my-loader" >
+                <Loader />
+            </div>
+        </div>
+        
+        <div class="food-list" v-else>
+
+            <!-- card dei prodotti -->
+            <DishCard :products="products" :cartProducts="cartproduct" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
+            
+            <!-- avviso che non ci sono prodotti -->
             <div v-else class="no-products">Ci dispiace, non ci sono piatti in questo ristorante.<i class="fa-solid fa-heart-crack"></i></div>
 
         </div>
@@ -254,6 +271,12 @@ export default {
     flex-wrap: wrap;
     display: flex;
     @include no-select;
+
+    .food-list.loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .food-list{
         margin: auto;

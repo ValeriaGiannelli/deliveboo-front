@@ -3,14 +3,17 @@ import axios from 'axios';
 import { store } from '../store';
 import Jumbo from '../components/Jumbo.vue';
 import RestaurantCard from '../components/partials/RestaurantCard.vue';
+import Loader from '../components/partials/loader.vue';
 export default{
     name: 'Home',
     components : {
         Jumbo,
         RestaurantCard,
+        Loader,
     },
     data(){
         return{
+            loading: true,
             types :[],
             restaurants :[],
             selectedTypes : [],
@@ -41,6 +44,8 @@ export default{
         axios.get(store.apiURL + 'restaurants') // URL API
             .then(res => {
                 this.restaurants = res.data; // A BUON FINE
+                // ferma il loading
+                this.loading = false;
                 console.log('RESTAURANTS DATA:', res.data); // LOG
                 console.log('restaurants',this.restaurants);
             })
@@ -50,12 +55,13 @@ export default{
         },
 
         filterRestaurant(){
-            
+            this.loading = true;
             const query = this.selectedTypes.join(',');
 
             axios.get(store.apiURL + 'restaurants?types=' + query)
                 .then(res => {
                     this.restaurants = res.data;
+                    this.loading = false;
                 })
                 .catch(error => {
                     console.error("Errore durante la chiamata API:", error);
@@ -79,7 +85,15 @@ export default{
                     <label :for="type.name">{{ type.name }}</label>
             </div>
         </div>
-        <div class="container-restaurants">
+
+        <div class="container-restaurants loading" v-if="loading">
+            <!-- loading di attesa -->
+            <div class="my-loader" >
+                <Loader />
+            </div>
+        </div>
+
+        <div class="container-restaurants" v-else>
             <RestaurantCard :restaurants="restaurants" v-if="restaurants.length > 0"/>
             <div v-else class="no-restaurants">Ci dispiace, non sono disponibili ristoranti con queste categorie.<i class="fa-solid fa-heart-crack"></i></div>
         </div>
@@ -140,6 +154,12 @@ export default{
                 }
             }
         }
+    }
+
+    .container-restaurants.loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .container-restaurants{
