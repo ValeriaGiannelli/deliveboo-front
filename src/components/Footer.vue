@@ -19,55 +19,49 @@ export default{
     <div class="container">
         <div class="box-container">
             <div class="box">
+                <h3>DeliveBoo</h3>
+                <p>Il tuo cibo preferito consegnato a casa tua in pochi minuti. Scopri i migliori ristoranti della tua città con DeliveBoo.</p>
+            </div>
+            <div class="box">
+                <h3>Link Utili</h3>
                 <ul>
-                    <li><h4>Scopri Deliveboo</h4></li>
-                    <li>Investitori</li>
-                    <li>Chi siamo</li>
-                    <li>Ristoranti</li>
-                    <li>Altro</li>
-                    <li>Pressroom</li>
-                    <li>Programmazione</li>
-                    <li>Design</li>
-                    <li>Lavora con noi</li>
-                    <li>Diventa nostro partner</li>
+                    <li><a href="#">
+                        Chi siamo</a></li>
+                    <li><a href="#">
+                        Termini e condizioni</a></li>
+                    <li><a href="#">
+                        Politica sulla privacy</a></li>
                 </ul>
             </div>
             <div class="box">
+                <h3>Contatti</h3>
                 <ul>
-                    <li><h4>Scopri Deliveboo</h4></li>
-                    <li>Investitori</li>
-                    <li>Chi siamo</li>
-                    <li>Ristoranti</li>
-                    <li>Altro</li>
-                    <li>Pressroom</li>
-                    <li>Programmazione</li>
-                    <li>Design</li>
-                    <li>Lavora con noi</li>
-                    <li>Diventa nostro partner</li>
+                    <li><a href="#">
+                        Assistenza</a></li>
+                    <li><a href="#">
+                        Lavora con noi</a></li>
+                    <li><a href="#">
+                        Contattaci</a></li>
                 </ul>
             </div>
-            <div class="box">
+            <div class="box us">
+                <h3>Sviluppato da</h3>
                 <ul>
-                    <li><h4>Scopri Deliveboo</h4></li>
-                    <li>Investitori</li>
-                    <li>Chi siamo</li>
-                    <li>Ristoranti</li>
-                    <li>Altro</li>
-                    <li>Pressroom</li>
-                    <li>Programmazione</li>
-                    <li>Design</li>
-                    <li>Lavora con noi</li>
-                    <li>Diventa nostro partner</li>
-                </ul>
-            </div>
-            <div class="box">
-                <ul>
-                    <li><h4>Sviluppato da</h4></li>
-                    <li>Valeria Giannelli</li>
-                    <li>Samuele Cozzubbo</li>
-                    <li>Elona Hoxhaj</li>
-                    <li>Michele Lafronza</li>
-                    <li>Francesco Cuboni</li>
+                    <li><a href="https://github.com/ValeriaGiannelli">
+                        <i class="fa-brands fa-github"></i>
+                        Valeria Giannelli</a></li>
+                    <li><a href="https://github.com/MicheleLafronza">
+                        <i class="fa-brands fa-github"></i>
+                        Michele Lafronza</a></li>
+                    <li><a href="https://github.com/samuelecozzubbo">
+                        <i class="fa-brands fa-github"></i>
+                        Samuele Cozzubbo</a></li>
+                    <li><a href="https://github.com/ElonaHoxhaj96">
+                        <i class="fa-brands fa-github"></i>
+                        Elona Hoxhaj</a></li>
+                    <li><a href="https://github.com/FraCuboni">
+                        <i class="fa-brands fa-github"></i>
+                        Francesco Cuboni</a></li>
                 </ul>
             </div>
         </div>
@@ -103,6 +97,7 @@ export default{
     flex-direction: column;
     padding: 30px;
     align-items: center;
+    padding-top: 150px;
     .box-container{
         width: 100%;
         justify-content: center;
@@ -116,6 +111,10 @@ export default{
             padding: 20px 15px 30px;
             border-radius: 5px;
             flex-grow: 0 1;
+            li, p{
+                font-weight: 300;
+                padding-top: 8px;
+            }
 
         }
     }
