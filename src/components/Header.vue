@@ -58,6 +58,7 @@ export default{
             padding: 1rem;
             color: $yellow; 
             transition: 500ms;
+            display: none;
                 &:hover{
                     color: $red;
                     scale: 1.1;
@@ -65,6 +66,26 @@ export default{
         }
 
     }
+}
+
+@media screen and (max-width: 1030px){
+    .container{
+        .buttons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a>.icon{  
+                display: block;
+            }
+
+        }
+
+    }
+    
+}
+
+// MOBILE
+@media screen and (max-width: 770px){
 }
 
 
