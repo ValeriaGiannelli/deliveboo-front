@@ -3,128 +3,107 @@ import axios from 'axios';
 import { store } from '../store';
 import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
-export default{
+
+export default {
     name: 'Restaurant',
-    components : {
+    components: {
         DishCard,
         CartDishCard,
     },
-    data(){
-        return{
-            restaurant :[],
-            products :[],
-            cartproduct : [],
-            totalPrice : 0,
-        }
+    data() {
+        return {
+            restaurant: [],
+            products: [],
+            cartproduct: [],
+            totalPrice: 0,
+        };
     },
-    methods:{
-
-        // prende il ristorante per slug
-        getRestaurant(slug){
-        axios.get(store.apiURL + 'restaurant/' + slug ) // URL API
-            .then(res => {
-                this.restaurant = res.data; // A BUON FINE
-                // console.log('RESTAURANT DATA:', res.data); // LOG
-                // console.log('restaurant',this.restaurant);
-            })
-            .catch(err => {
-                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
-            });
+    methods: {
+        getRestaurant(slug) {
+            axios.get(store.apiURL + 'restaurant/' + slug)
+                .then(res => {
+                    this.restaurant = res.data;
+                })
+                .catch(err => {
+                    console.log('Errore nel recupero dei dati:', err);
+                });
         },
 
-        // prende tutti i prodotti del ristorante selezionato
-        getProducts(slug){
-        axios.get(store.apiURL + 'restaurant/' + slug + '/products') // URL API
-            .then(res => {
-                this.products = res.data; // A BUON FINE
-                // console.log('PRODUCTS DATA:', res.data); // LOG
-                // console.log('products',this.products);
-            })
-            .catch(err => {
-                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
-            });
+        getProducts(slug) {
+            axios.get(store.apiURL + 'restaurant/' + slug + '/products')
+                .then(res => {
+                    this.products = res.data;
+                })
+                .catch(err => {
+                    console.log('Errore nel recupero dei dati:', err);
+                });
         },
 
         deleteCart() {
-            this.cartproduct = []; // Svuota il carrello
-            this.totalPrice = 0;   // Reset del totale
-            for(let i=0; i < this.products.length; i++){
-                this.products[i].quantity = 0;
-            }
-
+            this.cartproduct = [];
+            this.totalPrice = 0;
+            this.products.forEach(product => product.quantity = 0);
+            localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
         },
 
-        deleteCartItem(product){
-            //Abbassare product quantity
-            product.quantity --;
-             if(product.quantity == 0){
+        deleteCartItem(product) {
+            product.quantity--;
+            if (product.quantity <= 0) {
                 const index = this.cartproduct.indexOf(product);
-                this.cartproduct.splice(index, 1); // Rimuove l'elemento dal carrello
+                this.cartproduct.splice(index, 1);
             }
-                /* sottrarre al total price il valore di product price  */
-                this.totalPrice -= parseFloat(product.price); 
-                this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
-                // Salva il carrello nel localStorage
-                this.saveCartToLocalStorage();
+            this.totalPrice -= parseFloat(product.price);
+            this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
+            this.saveCartToLocalStorage();
         },
 
         updateCart(product) {
-            if(!this.cartproduct.includes(product)){
-                this.cartproduct.push(product); // Aggiungi il prodotto al carrello
+            if (!this.cartproduct.includes(product)) {
+                this.cartproduct.push(product);
             }
-            
-            product.quantity ++;
+            product.quantity++;
             this.totalPrice += parseFloat(product.price);
-            this.totalPrice = parseFloat(this.totalPrice.toFixed(2)); // Aggiungi il prezzo del nuovo prodotto al totale
-            // Salva il carrello nel localStorage
+            this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
             this.saveCartToLocalStorage();
         },
+
         saveCartToLocalStorage() {
             const cartData = {
                 cartproduct: this.cartproduct,
                 totalPrice: this.totalPrice
             };
-        localStorage.setItem('cart', JSON.stringify(cartData)); // Converte l'oggetto in JSON e lo salva nel localStorage
+            localStorage.setItem('cart', JSON.stringify(cartData));
         },
-        // Metodo per recuperare il carrello dal localStorage
+
         loadCartFromLocalStorage() {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
-                const cartData = JSON.parse(savedCart); // Converte la stringa JSON in oggetto
-                this.cartproduct = cartData.cartproduct;
-                this.totalPrice = cartData.totalPrice;
+                const cartData = JSON.parse(savedCart);
+                this.cartproduct = cartData.cartproduct || [];
+                this.totalPrice = cartData.totalPrice || 0;
+                this.products.forEach(product => {
+                    const cartItem = this.cartproduct.find(item => item.id === product.id);
+                    product.quantity = cartItem ? cartItem.quantity : 0;
+                });
             }
         },
-        // Metodo per svuotare il carrello
-        clearCart() {
-            this.cartproduct = [];
-            this.totalPrice = 0;
-            localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
-        },
-        /* handlePopState(event) {
-            const user_confirmed = window.confirm('Il carrello verrà cancellato, continuare?');
-            if(user_confirmed){
-                // Pulizia di sessionStorage o localStorage
-                localStorage.clear();
-            }else{
-                window.history.pushState(null, null, window.location.href);
-            }
-        } */
-        
-    }, 
-    mounted(){
-        const slug= this.$route.params.slug;
-        // console.log(id);
+    },
+    mounted() {
+        const slug = this.$route.params.slug;
         this.getRestaurant(slug);
         this.getProducts(slug);
-        this.loadCartFromLocalStorage();
-        this.deleteCart();
-        /* window.addEventListener('popstate', this.handlePopState); */
+        this.loadCartFromLocalStorage(); // Load cart data on mount
     },
-    /* beforeDestroy() {
-        // Rimuovi l'event listener quando il componente viene distrutto
-        window.removeEventListener('popstate', this.handlePopState);
-    }  */
+    beforeRouteLeave(to, from, next) {
+        const confirmLeave = window.confirm('Sei sicuro di voler uscire? Il carrello verrà svuotato.');
+        if (confirmLeave) {
+            this.deleteCart(); // Clear the cart if leaving
+            next(); // Proceed to the new route
+        } else {
+            next(false); // Stay on the current route
+        }
+    },
+
 }
 </script>
 
