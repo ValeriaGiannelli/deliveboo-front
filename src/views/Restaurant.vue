@@ -4,6 +4,7 @@ import { store } from '../store';
 import DishCard from '../components/partials/DishCard.vue';
 import CartDishCard from '../components/partials/CartDishCard.vue';
 import DropIn from '../components/DropIn.vue';
+import { RouterLink } from 'vue-router';
 
 export default {
     name: 'Restaurant',
@@ -97,12 +98,18 @@ export default {
         this.loadCartFromLocalStorage(); // Load cart data on mount
     },
     beforeRouteLeave(to, from, next) {
-        const confirmLeave = window.confirm('Sei sicuro di voler uscire? Il carrello verrà svuotato.');
-        if (confirmLeave) {
-            this.deleteCart(); // Clear the cart if leaving
-            next(); // Proceed to the new route
+        const excludedRoute = 'checkout';
+        if (to.name === excludedRoute) {
+        // Se si sta navigando verso la route esclusa, procedi senza svuotare il carrello
+            next();
         } else {
-            next(false); // Stay on the current route
+            const confirmLeave = window.confirm('Sei sicuro di voler uscire? Il carrello verrà svuotato.');
+            if (confirmLeave) {
+                this.deleteCart(); // Clear the cart if leaving
+                next(); // Proceed to the new route
+            } else {
+                next(false); // Stay on the current route
+            }
         }
     },
 
@@ -166,10 +173,8 @@ export default {
                 </div>
             </div>
 
-            <DropIn />
-
             <div class="buy">
-                <div class="buy-button">Vai al pagamento</div>
+                <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
             </div>
 
             
