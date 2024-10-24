@@ -235,7 +235,7 @@ export default {
             </div>
 
             <div class="mid">
-                <h2>Il carrello verrà eliminato e tutti i prodotti dovranno essere reinseriti. Procedere?</h2>
+                <h2>Il carrello verrà svuotato e tutti i prodotti dovranno essere reinseriti. Procedere?</h2>
             </div>
 
             <div class="bottom-buttons">
