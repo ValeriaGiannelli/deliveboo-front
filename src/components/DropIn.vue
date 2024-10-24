@@ -1,21 +1,62 @@
 <template>
-    <div>
 
-      <h2>Il totale del tuo ordine ammonta a {{ total_price }}</h2>
+  <div class="container-payment" v-if="cart_product.length > 0 && !paid && !initialize">
+    <div v-show="!paid" class="container-text">
+      <h2>Il totale del tuo ordine ammonta a {{ total_price }}&euro;</h2>
 
-      <h3>Inserisci le tue informazioni e procedi al pagamento</h3>
+      <h3>Inserisci le informazioni e procedi al pagamento</h3>
 
-      <div class="container">
-        <input type="text" name="full_name" v-model="full_name" placeholder="Inserisci il tuo nome e cognome">
-        <input type="email" name="email" v-model="email" placeholder="Inserisci la tua mail">
-        <input type="text" name="address" v-model="address" placeholder="Inserisci il tuo indirizzo">
-        <input type="text" name="phone_number" v-model="phone_number" placeholder="Inserisci il tuo indirizzo">
-      </div>
 
-      <div id="dropin-container"></div>
-      <button @click="submitPayment">Paga</button>
+      <input type="text" name="full_name" v-model="full_name" placeholder="Inserisci il tuo nome e cognome">
+      <input type="email" name="email" v-model="email" placeholder="Inserisci la tua mail">
+      <input type="text" name="address" v-model="address" placeholder="Inserisci il tuo indirizzo">
+      <input type="text" name="phone_number" v-model="phone_number" placeholder="Inserisci il tuo numero di telefono">
     </div>
-  </template>
+
+    <div id="dropin-container" v-show="!paid"></div>
+    <p v-if="!paid">Effettua il pagamento</p>
+    <button v-show="!paid" @click="submitPayment" >Paga</button>
+  </div>
+
+  <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
+
+  <p v-else-if="initialize">Pagamento in corso</p>
+
+  <p v-else-if="!initialize">Pagamento effettuato con successo</p>
+
+
+</template>
+<style lang="scss" scoped>
+@use '../styles/general.scss' as *;
+@use '../styles/partials/variables' as *;
+@use '../styles/partials/mixins' as *;
+.container-payment{
+  
+    margin: auto;
+    display: flex; 
+
+    .container-text{
+        max-width: 520px;
+      aspect-ratio: 5/2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      
+
+        input{
+          width: calc((100% / 2) - 4px);
+          font-size: 17px;
+          padding: 10px;
+          margin: 0.1rem auto;
+          border: 0;
+          border-radius: 5px;
+          outline: none;
+        }
+    }
+
+}
+
+</style>
   
   <script>
   import dropin from 'braintree-web-drop-in';
