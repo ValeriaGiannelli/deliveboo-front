@@ -53,6 +53,7 @@ export default {
             this.products.forEach(product => product.quantity = 0);
             localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
             this.showPopupDelete= false;
+            document.body.style.overflow = '';
         },
 
         deleteCartItem(product) {
