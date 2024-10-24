@@ -2,20 +2,30 @@
 
   <div class="container-payment" v-if="cart_product.length > 0 && !paid && !initialize">
     <div v-show="!paid" class="container-text">
-      <h2>Il totale del tuo ordine ammonta a {{ total_price }}&euro;</h2>
 
-      <h3>Inserisci le informazioni e procedi al pagamento</h3>
+      <div class="info">
+        <h2>Il totale del tuo ordine ammonta a: </h2> 
+        <h1>{{ (total_price).toFixed(2) }}€</h1>
+      </div>
+
+      <div class="form">
+        <h4>Inserisci le informazioni e procedi al pagamento</h4>
+        <input type="text" name="full_name" v-model="full_name" placeholder="Inserisci il tuo nome e cognome">
+        <input type="email" name="email" v-model="email" placeholder="Inserisci la tua mail">
+        <input type="text" name="address" v-model="address" placeholder="Inserisci il tuo indirizzo">
+        <input type="text" name="phone_number" v-model="phone_number" placeholder="Inserisci il tuo numero di telefono">
+      </div>
 
 
-      <input type="text" name="full_name" v-model="full_name" placeholder="Inserisci il tuo nome e cognome">
-      <input type="email" name="email" v-model="email" placeholder="Inserisci la tua mail">
-      <input type="text" name="address" v-model="address" placeholder="Inserisci il tuo indirizzo">
-      <input type="text" name="phone_number" v-model="phone_number" placeholder="Inserisci il tuo numero di telefono">
+    </div>
+    <div class="card">
+      <div id="dropin-container" v-show="!paid"></div>
+    </div>
+    <div class="buttons">
+      <p v-if="!paid"></p>
+      <div v-show="!paid" @click="submitPayment" >Effettua il pagamento</div>
     </div>
 
-    <div id="dropin-container" v-show="!paid"></div>
-    <p v-if="!paid">Effettua il pagamento</p>
-    <button v-show="!paid" @click="submitPayment" >Paga</button>
   </div>
 
   <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
@@ -31,28 +41,91 @@
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
 .container-payment{
-  
-    margin: auto;
-    display: flex; 
 
-    .container-text{
-        max-width: 520px;
-      aspect-ratio: 5/2;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      
+  margin: 0 auto;
 
-        input{
-          width: calc((100% / 2) - 4px);
-          font-size: 17px;
-          padding: 5px;
-          margin: 0.1rem auto;
-          border: 0;
-          border-radius: 5px;
-          outline: none;
-        }
+  // flex
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $yellow;
+  width: 80%;
+  padding: 30px;
+
+  border-radius: 10px;
+
+  .container-text{
+    width: 55%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    @include no-select;
+
+    .info{
+      margin:0 5px;
+      h2{
+        display: inline;
+      }
+      h1{
+        display: inline
+      }
     }
+
+    .form{
+      h4{
+        margin: 10px 5px;
+        font-weight: 500;
+
+      }
+      input{
+        width: calc((100% / 2) - 10px);
+        font-size: 17px;
+        padding: 10px;
+        margin: 10px 5px;
+        border: 0;
+        border-radius: 5px;
+        outline: none;
+      }
+    }
+  }
+
+  .card{
+    width: 35%;
+    aspect-ratio: 5/2;
+  }
+
+  .buttons{
+    margin-left: 60%;
+    width: 35%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    @include no-select;
+
+    div{
+      padding: 5px 20px;
+      border-radius: 10px;
+      transition: 500ms;
+      border:none;
+      color: $red;
+      font-weight: 600;
+      font-size: 19px;
+      background-color: white;
+
+      &:hover{
+        background-color: $red;
+        color: $text-color ;
+        scale: 1.1;
+      }
+    }
+
+
+
+  }
 
 }
 
@@ -97,6 +170,7 @@
                 const data = {
                     name: this.full_name,
                     email: this.email,
+                    cart: this.cart_product,
                     message:'Ordine inviato correttamente',
                 }
 
@@ -104,15 +178,15 @@
                 axios.post('http://127.0.0.1:8000/api/send-email', data)
                     .then(res=>{
                       //console.log(res.data);
-                      if(!res.data.success){
-                            this.errors = res.data.errors;
-                        }else{
-                            this.errors = {
-                                name:[],
-                                email:[],
-                                message:[],
-                            }
-                        }
+                      // if(!res.data.success){
+                      //       this.errors = res.data.errors;
+                      //   }else{
+                      //       this.errors = {
+                      //           name:[],
+                      //           email:[],
+                      //           message:[],
+                      //       }
+                      //   }
                     })
                     .catch( er => {
                       console.log(er.message);
