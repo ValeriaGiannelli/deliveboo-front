@@ -114,10 +114,12 @@ export default {
         openPopup(){
             if(this.cartproduct.length > 0){
                 this.showPopupDelete= true;
+                document.body.style.overflow = 'hidden';
             }
         },
         closePopup(){
             this.showPopupDelete= false;
+            document.body.style.overflow = '';
         }
     },
     mounted() {
