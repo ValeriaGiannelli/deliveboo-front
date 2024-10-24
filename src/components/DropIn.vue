@@ -114,6 +114,7 @@
                     "address": this.address,
                     "total_price": this.total_price,
                     "phone_number": this.phone_number,
+                    "products" : this.cart_product
                   }),
                 })
                 .then(response => response.json())
