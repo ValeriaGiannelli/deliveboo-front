@@ -22,6 +22,7 @@ export default {
             products: [],
             cartproduct: [],
             totalPrice: 0,
+            showPopupDelete : false,
         };
     },
     methods: {
@@ -51,6 +52,7 @@ export default {
             this.totalPrice = 0;
             this.products.forEach(product => product.quantity = 0);
             localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
+            this.showPopupDelete= false;
         },
 
         deleteCartItem(product) {
@@ -107,6 +109,16 @@ export default {
                 });
             }
         },
+
+        // POPUP
+        openPopup(){
+            if(this.cartproduct.length > 0){
+                this.showPopupDelete= true;
+            }
+        },
+        closePopup(){
+            this.showPopupDelete= false;
+        }
     },
     mounted() {
         const slug = this.$route.params.slug;
@@ -180,7 +192,7 @@ export default {
 
             <div class="top-cart">
                 <h3>Il tuo ordine</h3>
-                <a @click="deleteCart()"><h3><i class="fa-solid fa-trash-can"></i></h3></a>
+                <a @click="openPopup" ><h3><i class="fa-solid fa-trash-can"></i></h3></a>
             </div>
 
             <div class="products">
@@ -211,7 +223,31 @@ export default {
             
             
         </div>
+    </div>
+
+
+    <!-- popup svuota carrello -->
+     <div v-if="showPopupDelete" class="container-fs">
+        <div class="popup">
+
+            <div class="top-buttons">
+                <button @click="closePopup" >X</button>
+            </div>
+
+            <div class="mid">
+                <h2>Vuoi cancellare orsduahsbdh asdjasdn ?</h2>
+            </div>
+
+            <div class="bottom-buttons">
+                <button @click="closePopup" >annulla</button>
+                <button @click="deleteCart">cancella</button>
+            </div>
+
+        </div>
      </div>
+
+
+
 </template>
 
 <style lang="scss" scoped>
@@ -275,7 +311,6 @@ export default {
     padding: 20px;
     @include no-select;
 }
-
 .container.food{
     width: 100%;
     margin: 0 auto;
@@ -431,5 +466,68 @@ export default {
 
 
 
+}
+
+.container-fs{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    overflow: hidden;
+
+    // flex
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .popup{
+        height: calc(100% / 2.5);
+        aspect-ratio: 35/22;
+        border-radius: 10px;
+        background-color: $background_color;
+
+        // flex
+        display: flex;
+        flex-direction: column;
+
+        .top-buttons,
+        .mid,
+        .bottom-buttons{
+            padding: 10px 20px;
+        }
+
+        .top-buttons{
+            width: 100%;
+            height: 15%;
+
+            // flex
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .mid{
+            width: 100%;
+            height: 70%;
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+            
+            // flex
+            display: flex;
+        }
+
+        .bottom-buttons{
+            width: 100%;
+            height: 15%;
+
+            // flex
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
 }
 </style>
