@@ -18,12 +18,12 @@
 
 
     </div>
-    <div class="card">    
-      <div id="dropin-container" v-if="!paid"></div>
+    <div class="card">
+      <div id="dropin-container" v-show="!paid"></div>
     </div>
     <div class="buttons">
       <p v-if="!paid"></p>
-      <div v-if="!paid" @click="submitPayment" >Effettua il pagamento</div>
+      <div v-show="!paid" @click="submitPayment" >Effettua il pagamento</div>
     </div>
 
   </div>
@@ -41,7 +41,7 @@
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
 .container-payment{
-  
+
   margin: 0 auto;
 
   // flex
@@ -52,7 +52,7 @@
   background-color: $yellow;
   width: 80%;
   padding: 30px;
-  
+
   border-radius: 10px;
 
   .container-text{
@@ -64,7 +64,7 @@
     align-items: start;
     @include no-select;
 
-    .info{    
+    .info{
       margin:0 5px;
       h2{
         display: inline;
