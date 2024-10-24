@@ -19,6 +19,7 @@
   
   <script>
   import dropin from 'braintree-web-drop-in';
+  import axios from 'axios';
   
   export default {
     data() {
@@ -51,6 +52,34 @@
                 console.log('totale prezzo', this.total_price);
             }
           },
+          sendForm(){
+                const data = {
+                    name: this.full_name,
+                    email: this.email,
+                    message:'Ordine inviato correttamente',
+                }
+
+                //chiamo con axios api store
+                axios.post('http://127.0.0.1:8000/api/send-email', data)
+                    .then(res=>{
+                      //console.log(res.data);
+                      if(!res.data.success){
+                            this.errors = res.data.errors;
+                        }else{
+                            this.errors = {
+                                name:[],
+                                email:[],
+                                message:[],
+                            }
+                        }
+                    })
+                    .catch( er => {
+                      console.log(er.message);
+                      this.sent = false;
+                      
+                    })
+              
+            },
         async initializeBraintree() {
   try {
     const response = await fetch("http://127.0.0.1:8000/api/orders/generate"); // Cambia con l'URL corretto del tuo backend
@@ -103,6 +132,7 @@
 
               // se paid è true
               if(this.paid){
+                this.sendForm();
                 fetch("http://127.0.0.1:8000/api/order/create", {
                   method: 'POST',
                   headers: {
@@ -125,6 +155,26 @@
                   console.error("Errore durante la registrazione dell'ordine", error);
                         
                 })
+                //******************************************************* */
+                //Invio dati per la mail
+                /* fetch("http://127.0.0.1:8000/api/send-email",{
+                  method: 'POST',
+                  headers: {
+                    'Content-Type' : 'application/json',
+                  },
+                  body: JSON.stringify({
+                    "name": this.full_name,
+                    "email": this.email,
+                    "message": "Il tuo ordine è stato ricevuto",
+                  }),
+                }) */
+                /* .then(response => response.json())
+                .then(data => {
+                  console.log("Mail inviata", data);
+                })
+                .catch(error => {
+                  console.error("Errore durante invio mail", error);
+                }) */
               }
             })
             .catch(error => {
