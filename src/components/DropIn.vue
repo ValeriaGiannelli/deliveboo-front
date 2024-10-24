@@ -1,7 +1,7 @@
 <template>
-
+  <h3 v-if="failed" class="response">Transazione non eseguita, riprova!</h3>
   <div class="container-payment" v-if="cart_product.length > 0 && !paid && !initialize">
-    <div v-show="!paid" class="container-text">
+    <div v-if="!paid" class="container-text">
 
       <div class="info">
         <h2>Il totale del tuo ordine ammonta a: </h2> 
@@ -19,20 +19,20 @@
 
     </div>
     <div class="card">
-      <div id="dropin-container" v-show="!paid"></div>
+      <div id="dropin-container" v-if="!paid"></div>
     </div>
     <div class="buttons">
       <p v-if="!paid"></p>
-      <div v-show="!paid" @click="submitPayment" >Effettua il pagamento</div>
+      <div v-if="!paid" @click="submitPayment" >Effettua il pagamento</div>
     </div>
 
   </div>
 
-  <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
+  <h2 v-else-if="cart_product.length === 0 && !paid && !initialize" class="response">Non hai ancora riempito il tuo carrello!</h2>
 
-  <p v-else-if="initialize">Pagamento in corso</p>
+  <h2 v-else-if="initialize" class="response">Pagamento in corso</h2>
 
-  <p v-else-if="!initialize">Pagamento effettuato con successo</p>
+  <h2 v-else-if="!initialize" class="response">Pagamento effettuato con successo</h2>
 
 
 </template>
@@ -40,6 +40,11 @@
 @use '../styles/general.scss' as *;
 @use '../styles/partials/variables' as *;
 @use '../styles/partials/mixins' as *;
+
+.response {
+  text-align: center;
+}
+
 .container-payment{
 
   margin: 0 auto;
