@@ -25,7 +25,7 @@ export default{
 </script>
 
 <template>
-  <!-- <Loading/> -->
+  <Loading/>
   <Header/>
   <router-view></router-view>
   <Footer/>

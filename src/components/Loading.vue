@@ -32,7 +32,7 @@ export default{
 
 .container{
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: $background_color;
 
     // flex
