@@ -15,8 +15,8 @@ import DropIn from '../components/DropIn.vue';
                 const cartproduct = cartData.cartproduct || [];
                 const totalPrice = cartData.totalPrice || 0;
 
-                console.log('info prodotti', cartproduct);
-                console.log('totale prezzo', totalPrice);
+                // console.log('info prodotti', cartproduct);
+                // console.log('totale prezzo', totalPrice);
 
             }
           },
