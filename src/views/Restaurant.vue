@@ -161,7 +161,7 @@ export default {
             <p>{{ restaurant.description }}</p>
         </div>
         <div class="tags">
-            <h3 >Italiano</h3>
+            <h3  v-for="(type, i) in restaurant.types" :key="i">{{type.name}}</h3>
         </div>
     </div>
 

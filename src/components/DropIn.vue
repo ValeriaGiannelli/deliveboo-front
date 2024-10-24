@@ -46,7 +46,7 @@
         input{
           width: calc((100% / 2) - 4px);
           font-size: 17px;
-          padding: 10px;
+          padding: 5px;
           margin: 0.1rem auto;
           border: 0;
           border-radius: 5px;
