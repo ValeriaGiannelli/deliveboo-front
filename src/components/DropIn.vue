@@ -145,7 +145,9 @@
         address : '',
         phone_number : '',
         total_price : '',
-        cart_product : []
+        cart_product : [],
+        initialize : false,
+        failed : false
       };
     },
     mounted() {
@@ -227,6 +229,7 @@
             console.error("Errore nella richiesta del metodo di pagamento:", err);
             return;
           } else {
+            this.initialize = true;
             // Invia il `payload.nonce` al server per processare il pagamento
             fetch("http://127.0.0.1:8000/api/orders/make/payment", {
               method: 'POST',
@@ -241,7 +244,10 @@
             .then(response => response.json())
             .then(data => {
               console.log("Risultato del pagamento:", data);
-              this.paid = true;
+              if(data.success){
+                this.paid = true;
+                this.failed = false;
+              }
               console.log('paid', this.paid);
                 
 
@@ -265,6 +271,11 @@
                 .then(response => response.json())
                 .then(data => {
                   console.log("Ordine andato a buon fine", data);
+                  localStorage.clear();
+                  this.cart_product = [];
+                  console.log(this.cart_product);
+                  this.initialize = false;
+                  
                 })
                 .catch(error => {
                   console.error("Errore durante la registrazione dell'ordine", error);
@@ -290,12 +301,19 @@
                 .catch(error => {
                   console.error("Errore durante invio mail", error);
                 }) */
+
+              // PAID FALSE 
+              } else {
+                this.failed = true;
+                this.initialize = false;
               }
+
             })
             .catch(error => {
               console.error("Errore durante la transazione:", error);
               this.paid = false;
             });
+
           }
         });
       },
