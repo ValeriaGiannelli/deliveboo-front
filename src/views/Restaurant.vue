@@ -231,16 +231,16 @@ export default {
         <div class="popup">
 
             <div class="top-buttons">
-                <button @click="closePopup" >X</button>
+                <button @click="closePopup"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <div class="mid">
-                <h2>Vuoi cancellare orsduahsbdh asdjasdn ?</h2>
+                <h2>Il carrello verrà eliminato e tutti i prodotti dovranno essere reinseriti. Procedere?</h2>
             </div>
 
             <div class="bottom-buttons">
-                <button @click="closePopup" >annulla</button>
-                <button @click="deleteCart">cancella</button>
+                <button class="cancel" @click="closePopup" >annulla</button>
+                <button class="delete" @click="deleteCart">svuota</button>
             </div>
 
         </div>
@@ -487,7 +487,7 @@ export default {
         height: calc(100% / 2.5);
         aspect-ratio: 35/22;
         border-radius: 10px;
-        background-color: $background_color;
+        overflow: hidden;
 
         // flex
         display: flex;
@@ -496,7 +496,13 @@ export default {
         .top-buttons,
         .mid,
         .bottom-buttons{
-            padding: 10px 20px;
+            padding: 10px 15px;
+            background-color: $background_color;
+            overflow: hidden;
+
+            button{
+                border: 0;
+            }
         }
 
         .top-buttons{
@@ -507,13 +513,27 @@ export default {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
+            button{
+                font-size: 20px;
+                display: block;
+                color: $red;
+                background-color: $background_color;
+                i{
+                    transition: 500ms;
+
+                    &:hover{
+                        color: $yellow;
+                        scale: 1.2;
+                    }
+
+                }
+            }
         }
 
         .mid{
             width: 100%;
             height: 70%;
-            border-top: 1px solid rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
             
             // flex
             display: flex;
@@ -527,6 +547,35 @@ export default {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
+            button{
+                padding: 7px 12px;
+                margin-left: 15px;
+                border-radius: 10px;
+                font-size: 18px;
+                background-color: $background_color;
+            }
+
+            .cancel{
+                font-weight: 300;
+                transition: 500ms; 
+                &:hover{
+                        background-color: $yellow;
+                        scale: 1.05;
+                    }
+            }
+
+            .delete{
+                color: $red;
+                font-weight: 700;
+                transition: 500ms;
+
+                &:hover{
+                        background-color: $red;
+                        color: $text_color;
+                        scale: 1.05;
+                    }
+            }
         }
     }
 }
