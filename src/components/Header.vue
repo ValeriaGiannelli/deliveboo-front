@@ -27,6 +27,7 @@ export default {
 @use '../styles/partials/mixins' as *;
 
 .container{
+    @include no-select;
     background-color: $background_color;
     display: flex;
     justify-content: space-between;

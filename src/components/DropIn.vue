@@ -22,8 +22,8 @@
       <div id="dropin-container" v-show="!paid"></div>
     </div>
     <div class="buttons">
-      <p v-if="!paid">Effettua il pagamento</p>
-      <div v-show="!paid" @click="submitPayment" >Paga</div>
+      <p v-if="!paid"></p>
+      <div v-show="!paid" @click="submitPayment" >Effettua il pagamento</div>
     </div>
 
   </div>
@@ -51,6 +51,7 @@
   align-items: center;
   background-color: $yellow;
   width: 80%;
+  padding: 30px;
   
   border-radius: 10px;
 
@@ -61,6 +62,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+    @include no-select;
 
     .info{    
       margin:0 5px;
@@ -101,11 +103,8 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 20px;
-
-    p{
-
-    }
+    gap: 10px;
+    @include no-select;
 
     div{
       padding: 5px 20px;
@@ -114,8 +113,8 @@
       border:none;
       color: $red;
       font-weight: 600;
-      font-size: 30px;
-      background-color: $background-color;
+      font-size: 19px;
+      background-color: white;
 
       &:hover{
         background-color: $red;
