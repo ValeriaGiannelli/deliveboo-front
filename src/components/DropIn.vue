@@ -1,6 +1,18 @@
 <template>
     <div>
-      <div id="dropin-container"></div> <!-- Container del widget Braintree -->
+
+      <h2>Il totale del tuo ordine ammonta a {{ total_price }}</h2>
+
+      <h3>Inserisci le tue informazioni e procedi al pagamento</h3>
+
+      <div class="container">
+        <input type="text" name="full_name" v-model="full_name" placeholder="Inserisci il tuo nome e cognome">
+        <input type="email" name="email" v-model="email" placeholder="Inserisci la tua mail">
+        <input type="text" name="address" v-model="address" placeholder="Inserisci il tuo indirizzo">
+        <input type="text" name="phone_number" v-model="phone_number" placeholder="Inserisci il tuo indirizzo">
+      </div>
+
+      <div id="dropin-container"></div>
       <button @click="submitPayment">Paga</button>
     </div>
   </template>
@@ -12,13 +24,33 @@
     data() {
       return {
         instance: null,
-        paid : false
+        paid : false,
+        full_name : '',
+        email : '',
+        address : '',
+        phone_number : '',
+        total_price : '',
+        cart_product : []
       };
     },
     mounted() {
       this.initializeBraintree();
+      this.loadCartFromLocalStorage();
     },
     methods: {
+      loadCartFromLocalStorage() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                const cartData = JSON.parse(savedCart);
+                this.cart_product = cartData.cartproduct || [];
+                this.total_price = cartData.totalPrice || 0;
+
+                
+
+                console.log('info prodotti', this.cart_product);
+                console.log('totale prezzo', this.total_price);
+            }
+          },
         async initializeBraintree() {
   try {
     const response = await fetch("http://127.0.0.1:8000/api/orders/generate"); // Cambia con l'URL corretto del tuo backend
@@ -50,58 +82,56 @@
           if (err) {
             console.error("Errore nella richiesta del metodo di pagamento:", err);
             return;
-          }
-  
-          // Invia il `payload.nonce` al server per processare il pagamento
-          fetch("http://127.0.0.1:8000/api/orders/make/payment", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              paymentMethodNonce: payload.nonce,
-              amount : '15.00',
-            }),
-          })
+          } else {
+            // Invia il `payload.nonce` al server per processare il pagamento
+            fetch("http://127.0.0.1:8000/api/orders/make/payment", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                paymentMethodNonce: payload.nonce,
+                amount : this.total_price,
+              }),
+            })
             .then(response => response.json())
             .then(data => {
               console.log("Risultato del pagamento:", data);
-                this.paid = true;
-                console.log('paid', this.paid);
+              this.paid = true;
+              console.log('paid', this.paid);
                 
 
-                // se paid è true
-                if(this.paid){
-                    fetch("http://127.0.0.1:8000/api/order/create", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type' : 'application/json',
-                        },
-                        body: JSON.stringify({
-                            "full_name": "Pino dei Pini",
-                            "email": "pino@deipini.com",
-                            "address": "via dei pini 11",
-                            "total_price": "11.50",
-                            "phone_number": "3440032234",
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Ordine andato a buon fine", data);
-                    })
-                    .catch(error => {
-                        console.error("Errore durante la registrazione dell'ordine", error);
+              // se paid è true
+              if(this.paid){
+                fetch("http://127.0.0.1:8000/api/order/create", {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type' : 'application/json',
+                  },
+                  body: JSON.stringify({
+                    "full_name": this.full_name,
+                    "email": this.email,
+                    "address": this.address,
+                    "total_price": this.total_price,
+                    "phone_number": this.phone_number,
+                    "products" : this.cart_product
+                  }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                  console.log("Ordine andato a buon fine", data);
+                })
+                .catch(error => {
+                  console.error("Errore durante la registrazione dell'ordine", error);
                         
-                    })
-                }
-
+                })
+              }
             })
             .catch(error => {
               console.error("Errore durante la transazione:", error);
               this.paid = false;
             });
-
-            
+          }
         });
       },
     },
