@@ -287,6 +287,9 @@
       h1{
         display: inline
       }
+      h3{
+        padding-top: 10px;
+      }
 
       table{
         margin-top: 10px;
@@ -361,9 +364,6 @@
         scale: 1.1;
       }
     }
-
-
-
   }
 
 }
