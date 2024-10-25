@@ -310,6 +310,8 @@
 <template>
 
   <div class="container-payment" v-if="cart_product.length > 0 && !paid && !initialize">
+
+
     <div v-show="!paid" class="container-text">
 
       <div class="info">
@@ -329,28 +331,35 @@
 
       <div class="form">
         <h4>Inserisci le informazioni e procedi al pagamento</h4>
-          <!-- Nome e cognome -->
-          <label for="full_name">Nome e Cognome (*)</label>
-          <input type="text" name="full_name" id="full_name" v-model="full_name" required placeholder="Inserisci il tuo nome e cognome">
+
+        <!-- Nome e cognome -->
+        <div class="form-item">
+          <label for="full_name"></label>
+          <input type="text" name="full_name" id="full_name" v-model="full_name" required placeholder="Nome e Cognome (*)">
           <small style="color:red" v-if="!this.validName && this.validName != null">Il nome è obbligatorio e deve avere almeno 2 caratteri</small>
+        </div>
 
-          <!-- Mail -->
-          <label for="email">Email (*)</label>
-          <input type="email" name="email" id="email" v-model="email" required placeholder="Inserisci la tua mail">
+        <!-- Mail -->
+        <div class="form-item">
+          <label for="email"></label>
+          <input type="email" name="email" id="email" v-model="email" required placeholder="Email (*)">
           <small style="color:red" v-if="!this.validMail && this.validMail != null">Inserisci un indirizzo mail valido</small>
+        </div>
 
-          <!-- indirizzo -->
-          <label for="address">Indirizzo di spedizione: (*)</label>
-          <input type="text" name="address" id="address" v-model="address" required placeholder="Inserisci il tuo indirizzo">
-          <small style="color:red" v-if="!this.validAddress && this.validAddress != null">L'indirizzo deve avere almeno 4 caratteri</small>
+        <!-- indirizzo -->
+        <div class="form-item">
+          <label for="address"></label>
+          <input type="text" name="address" id="address" v-model="address" required placeholder="Indirizzo di spedizione (*)">
+          <small style="color:red" v-if="!this.validAddress && this.validAddress != null">L'indirizzo deve avere almeno 4 caratteri</small>          
+        </div>
 
-          <!-- numero di telefono -->
-          <label for="phone_number">Numero di telefono: (*)</label>
-          <input type="text" name="phone_number" id="phone_number" v-model="phone_number" required placeholder="Inserisci il tuo numero di telefono">
+        <!-- numero di telefono -->
+        <div class="form-item">
+          <label for="phone_number"></label>
+          <input type="text" name="phone_number" id="phone_number" v-model="phone_number" required placeholder="Numero di telefono (*)">
           <small style="color:red" v-if="!this.validNumber && this.validNumber != null">Inserisci un numero di telefono valido</small>
-
+        </div>
       </div>
-
 
     </div>
     <div class="card">
@@ -442,14 +451,27 @@
         font-weight: 500;
 
       }
-      input{
-        width: calc((100% / 2) - 10px);
-        font-size: 17px;
-        padding: 10px;
-        margin: 10px 5px;
-        border: 0;
-        border-radius: 5px;
-        outline: none;
+      .form-item{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        input{
+          width: 100%;
+          font-size: 17px;
+          padding: 10px;
+          margin: 10px 5px;
+          border: 0;
+          border-radius: 5px;
+          outline: none;
+        }
+        small{
+          width: 100%;
+          margin: 10px 5px;
+          transform: translate(0, 85%);
+          padding: 10px;
+          position: absolute;
+        }
       }
     }
   }
@@ -488,6 +510,93 @@
 
 }
 
+@media screen and (max-width: 1024px){
+  .container-payment{
+
+    .container-text{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      .info{
+        text-align: center;
+        width: 100%;
+
+        table{
+          margin: 0 auto;
+        }
+      }
+
+      .form{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        h4{
+          width: 100%;
+        }
+        .form-item{
+          width: 48%;
+        }
+      }
+    }
+    .card{
+      width: 100%;
+    }
+  }
+}  
+
+
+// MOBILE
+@media screen and (max-width:  576px){
+  .container-payment{
+
+    .container-text{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      .info{
+        text-align: center;
+        width: 100%;
+
+        table{
+          margin: 0 auto;
+        }
+      }
+
+      .form{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        h4{
+          width: 100%;
+        }
+        .form-item{
+          width: 100%;
+        }
+      }
+    }
+    .card{
+      width: 100%;
+    }
+    
+    .buttons{
+      margin-top: 10px;
+      margin-left: 30%;
+      width: 80%;
+      div{
+      }
+    }
+  }
+}
 </style>
   
 
