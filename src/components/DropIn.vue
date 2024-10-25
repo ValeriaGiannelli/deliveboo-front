@@ -1,10 +1,16 @@
 <script>
   import dropin from 'braintree-web-drop-in';
   import axios from 'axios';
+  import Loader from './partials/loader.vue';
   
   export default {
+    name: 'DropIn',
+    components:{
+      Loader,
+    },
     data() {
       return {
+        loading: false,
         instance: null,
         paid : false,
         full_name : '',
@@ -214,6 +220,7 @@
                 console.error("Errore nella richiesta del metodo di pagamento:", err);
                 return;
               } else {
+                this.loading = true;
                 this.initialize = true;
                 // Invia il `payload.nonce` al server per processare il pagamento
                 fetch("http://127.0.0.1:8000/api/orders/make/payment", {
@@ -259,6 +266,7 @@
                       localStorage.clear();
                       this.cart_product = [];
                       console.log(this.cart_product);
+                      this.loading = false;
                       this.initialize = false;
                       
                     })
@@ -290,6 +298,7 @@
                   // PAID FALSE 
                   } else {
                     this.failed = true;
+                    this.loading = false;
                     this.initialize = false;
                   }
 
@@ -374,9 +383,19 @@
 
   <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
 
-  <p v-else-if="initialize">Pagamento in corso</p>
+  <div class="container-payment" v-else-if="initialize">
+    <div class="my-loader" >
+      <Loader />
+    </div>
+  </div>
 
-  <p v-else-if="!initialize">Pagamento effettuato con successo</p>
+  <div v-else-if="!initialize">
+    <div class="completed-box" >
+      <img src="../../public/" alt="">
+      <h1>Grazie per aver ordinato con DeliveBoo!</h1>
+    </div>
+    
+  </div>
 
 
 </template>
@@ -507,7 +526,25 @@
       }
     }
   }
+}
 
+
+.my-loader,
+.completed-box{
+
+  margin: 0 auto;
+
+  // flex
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $yellow;
+  width: 80%;
+  padding: 30px;
+  
+
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 1024px){
