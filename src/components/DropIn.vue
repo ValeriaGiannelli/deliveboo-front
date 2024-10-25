@@ -134,11 +134,15 @@
             }
           },
           sendForm(){
+                let products = 'Riepilogo prodotti: ' + this.cart_product.map(product => {
+                  return `Nome: ${product.name}, prezzo: ${product.price}, quantità: ${product.quantity}`;
+                }).join("; ") + ".";
+                console.log('test array stringa', products);
             const data = {
                 name: this.full_name,
                 email: this.email,
                 cart: this.cart_product,
-                message:'Cambio testo',
+                message: products,
             }
 
             //chiamo con axios api store
