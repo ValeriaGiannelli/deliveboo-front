@@ -174,17 +174,26 @@
             }
           },
           sendForm(){
+                // const cart = [];
+                // this.cart_product.forEach(product => {
+                //   cart.push(product.name);
+                //   cart.push(product.price);
+                // });
                 const data = {
-                    name: this.full_name,
-                    email: this.email,
-                    cart: this.cart_product,
-                    message:'Ordine inviato correttamente',
+                  name: this.full_name,
+                  email: this.email,
+                  cart: this.cart_product,
+                  message: 'ciao bello'
                 }
+
+                console.log('il data della mail', data);
+                
+                
 
                 //chiamo con axios api store
                 axios.post('http://127.0.0.1:8000/api/send-email', data)
                     .then(res=>{
-                      //console.log(res.data);
+                      console.log(res.data);
                       // if(!res.data.success){
                       //       this.errors = res.data.errors;
                       //   }else{
