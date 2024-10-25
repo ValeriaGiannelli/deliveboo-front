@@ -23,6 +23,7 @@ export default {
             cartproduct: [],
             totalPrice: 0,
             showPopupDelete : false,
+            showConflictPopup: false, // Aggiungi questa proprietà
         };
     },
     methods: {
@@ -76,18 +77,25 @@ export default {
 
         updateCart(product) {
             const existingProduct = this.cartproduct.find(item => item.id === product.id);
-            if (existingProduct) {
-                existingProduct.quantity++; // Incrementa la quantità
+            
+            // Controlla se il carrello contiene un ristorante diverso
+            const currentRestaurantSlug = this.restaurant.slug; // Presupponendo che tu abbia uno slug unico per il ristorante
+            const cartHasDifferentRestaurant = this.cartproduct.length > 0 && this.cartproduct[0].restaurantSlug !== currentRestaurantSlug;
+
+            if (cartHasDifferentRestaurant) {
+                this.showConflictPopup = true; // Mostra il popup di conflitto
             } else {
-                this.cartproduct.push({ ...product, quantity: 1 }); // Aggiungi il prodotto con quantità iniziale
+                if (existingProduct) {
+                    existingProduct.quantity++;
+                } else {
+                    this.cartproduct.push({ ...product, quantity: 1, restaurantSlug: currentRestaurantSlug }); // Aggiungi lo slug del ristorante
+                }
+
+                product.quantity = existingProduct ? existingProduct.quantity : 1;
+                this.totalPrice += parseFloat(product.price);
+                this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
+                this.saveCartToLocalStorage();
             }
-
-            // Incrementa la quantità del prodotto nella lista originale
-            product.quantity = existingProduct ? existingProduct.quantity : 1;
-
-            this.totalPrice += parseFloat(product.price);
-            this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
-            this.saveCartToLocalStorage();
         },
 
         saveCartToLocalStorage() {
@@ -121,7 +129,14 @@ export default {
         closePopup(){
             this.showPopupDelete= false;
             document.body.style.overflow = '';
-        }
+        },
+        closeConflictPopup() {
+        this.showConflictPopup = false;
+        },
+        deleteCartAndAdd(product) {
+        this.deleteCart(); // Svuota il carrello
+        this.showConflictPopup = false; // Chiudi il popup
+    },
     },
     mounted() {
         const slug = this.$route.params.slug;
@@ -129,21 +144,21 @@ export default {
         this.getProducts(slug);
         this.loadCartFromLocalStorage(); // Load cart data on mount
     },
-    beforeRouteLeave(to, from, next) {
-        const excludedRoute = 'checkout';
-        if (to.name === excludedRoute) {
-        // Se si sta navigando verso la route esclusa, procedi senza svuotare il carrello
-            next();
-        } else {
-            const confirmLeave = window.confirm('Sei sicuro di voler uscire? Il carrello verrà svuotato.');
-            if (confirmLeave) {
-                this.deleteCart(); // Clear the cart if leaving
-                next(); // Proceed to the new route
-            } else {
-                next(false); // Stay on the current route
-            }
-        }
-    },
+    // beforeRouteLeave(to, from, next) {
+    //     const excludedRoute = 'checkout';
+    //     if (to.name === excludedRoute) {
+    //     // Se si sta navigando verso la route esclusa, procedi senza svuotare il carrello
+    //         next();
+    //     } else {
+    //         const confirmLeave = window.confirm('Sei sicuro di voler uscire? Il carrello verrà svuotato.');
+    //         if (confirmLeave) {
+    //             this.deleteCart(); // Clear the cart if leaving
+    //             next(); // Proceed to the new route
+    //         } else {
+    //             next(false); // Stay on the current route
+    //         }
+    //     }
+    // },
 
 }
 </script>
@@ -249,6 +264,21 @@ export default {
         </div>
      </div>
 
+    <!-- popup conflitto carrello -->
+    <div v-if="showConflictPopup" class="container-fs">
+        <div class="popup">
+            <div class="top-buttons">
+                <button @click="closeConflictPopup"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="mid">
+                <h2>Hai già piatti di un altro ristorante nel carrello. Vuoi svuotarlo?</h2>
+            </div>
+            <div class="bottom-buttons">
+                <button class="cancel" @click="closeConflictPopup">Annulla</button>
+                <button class="delete" @click="deleteCartAndAdd(product)">Svuota</button>
+            </div>
+        </div>
+    </div>
 
 
 </template>
