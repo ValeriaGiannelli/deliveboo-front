@@ -7,13 +7,41 @@ export default {
     },
     data(){
         return{
-
+            cartProducts : [],
+        }
+    },
+    watch : {
+        updateCart(){
+            this.cartProducts;
         }
     },
     methods: {
         goBack() {
             window.history.back(); // Torna alla pagina precedente
+        },
+        loadCartFromLocalStorage() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                const cartData = JSON.parse(savedCart);
+                this.cartProducts = cartData.cartproduct || [];
+                //this.totalPrice = cartData.totalPrice || 0;
+                console.log('CARRELLO HEADER',this.cartProducts);
+                
+            }
+        },
+        handleStorageChange(event) {
+            if (event.key === 'cart') {
+                // Reload cart when 'cart' in localStorage changes
+                this.loadCartFromLocalStorage();
+                console.log('VAI');
+                
+            }
         }
+        
+    },
+    mounted(){
+        this.loadCartFromLocalStorage();
+        window.addEventListener('storage', this.handleStorageChange);
     }
 }
 </script>
@@ -32,27 +60,16 @@ export default {
                         <p>3</p>
                     </div>
                 </div>
+                <!-- DROPDOWN CARRELLo -->
+
                 <div class="cart">
-
-                    <!-- elementi all'interno del carrello -->
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">Pasta x con cose x e pomodori x con cose y e olio x evo prodotto da x</div>
-                        <div class="price">12.00€</div>
+                    <div v-for="(item, i) in this.cartProducts" :key="i" class="cart-item">
+                        <div class="amount">{{ item.quantity }}</div>   
+                        <div class="name">{{ item.name }}</div>         
+                        <div class="price">{{ item.price }}€</div>      
                     </div>
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">mario mario mario </div>
-                        <div class="price">12.00€</div>
-                    </div>
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">mario mario mario mario mario mario mario mario mario mario mario mario</div>
-                        <div class="price">12.00€</div>
-                    </div>
-
-
                 </div>
+                
             </div>
 
 
