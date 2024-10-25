@@ -73,6 +73,7 @@ export default {
             this.totalPrice -= parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
             this.saveCartToLocalStorage();
+            localStorage.setItem('cartTimestamp', Date.now());
         },
 
         updateCart(product) {
@@ -95,6 +96,7 @@ export default {
                 this.totalPrice += parseFloat(product.price);
                 this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
                 this.saveCartToLocalStorage();
+                localStorage.setItem('cartTimestamp', Date.now());
             }
         },
 
@@ -104,6 +106,8 @@ export default {
                 totalPrice: this.totalPrice
             };
             localStorage.setItem('cart', JSON.stringify(cartData));
+             // Aggiorna una chiave secondaria per far scattare l'evento 'storage'
+            localStorage.setItem('cartTimestamp', Date.now());
         },
 
         loadCartFromLocalStorage() {

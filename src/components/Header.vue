@@ -1,19 +1,15 @@
 <script>
 import CartDishCard from './partials/CartDishCard.vue';
+
 export default {
     name: 'Header',
-    components:{
+    components: {
         CartDishCard,
     },
-    data(){
-        return{
-            cartProducts : [],
-        }
-    },
-    watch : {
-        updateCart(){
-            this.cartProducts;
-        }
+    data() {
+        return {
+            cartProducts: [],
+        };
     },
     methods: {
         goBack() {
@@ -24,27 +20,26 @@ export default {
             if (savedCart) {
                 const cartData = JSON.parse(savedCart);
                 this.cartProducts = cartData.cartproduct || [];
-                //this.totalPrice = cartData.totalPrice || 0;
-                console.log('CARRELLO HEADER',this.cartProducts);
-                
+                console.log('CARRELLO HEADER', this.cartProducts);
             }
         },
         handleStorageChange(event) {
-            if (event.key === 'cart') {
-                // Reload cart when 'cart' in localStorage changes
+            if (event.key === 'cartTimestamp') { // Verifica 'cartTimestamp' per trigger su stesso tab
                 this.loadCartFromLocalStorage();
-                console.log('VAI');
-                
+                console.log('Aggiornamento del carrello da Header!');
             }
         }
-        
     },
-    mounted(){
-        this.loadCartFromLocalStorage();
-        window.addEventListener('storage', this.handleStorageChange);
+    mounted() {
+        this.loadCartFromLocalStorage(); // Carica i dati del carrello al montaggio
+        window.addEventListener('storage', this.handleStorageChange); // Ascolta l'evento 'storage' per aggiornare
+    },
+    beforeDestroy() {
+        window.removeEventListener('storage', this.handleStorageChange); // Rimuovi listener
     }
-}
+};
 </script>
+
 
 <template>
     <div class="container">
