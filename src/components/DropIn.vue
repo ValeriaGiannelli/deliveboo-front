@@ -391,7 +391,7 @@
 
   <div v-else-if="!initialize">
     <div class="completed-box" >
-      <img src="../../public/" alt="">
+      <img src="../../public/text-hamburger.svg" alt="">
       <h1>Grazie per aver ordinato con DeliveBoo!</h1>
     </div>
     
@@ -545,6 +545,17 @@
   
 
   border-radius: 10px;
+}
+
+
+.completed-box{
+  position: relative;
+  h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 @media screen and (max-width: 1024px){
