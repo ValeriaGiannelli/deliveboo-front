@@ -380,8 +380,9 @@
     </div>
 
   </div>
-
-  <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
+  <div class="my-loader" v-else-if="cart_product.length === 0 && !paid && !initialize">
+    <h1>Non hai ancora riempito il tuo carrello!</h1>
+  </div>
 
   <div class="container-payment" v-else-if="initialize">
     <div class="my-loader" >
