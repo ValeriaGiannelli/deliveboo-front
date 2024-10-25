@@ -221,6 +221,7 @@
     dropin.create({
             authorization: clientToken, // Usa solo la stringa del token
             container: '#dropin-container',
+            locale: 'it_IT', // Imposta la lingua in italiano
         }, (err, instance) => {
         if (err) {
         console.error("Errore nella creazione del Drop-in:", err);
