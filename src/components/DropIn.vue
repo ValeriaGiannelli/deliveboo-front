@@ -14,12 +14,15 @@
         total_price : '',
         cart_product : [],
         initialize : false,
-        failed : false
+        failed : false,
+        restaurant_name : '',
       };
     },
     mounted() {
       this.initializeBraintree();
       this.loadCartFromLocalStorage();
+      const id = this.cart_product[0].restaurant_id;
+      this.getRestaurantName(id);
     },
     methods: {
       loadCartFromLocalStorage() {
@@ -64,6 +67,17 @@
                     })
               
             },
+          getRestaurantName(id){
+            axios.get('http://127.0.0.1:8000/api/restaurant/' + id + '/name')
+            .then(res=>{
+              console.log('IL NOME DEL RISTORANTE E',res.data.restaurant[0].restaurant_name);
+              this.restaurant_name = res.data.restaurant[0].restaurant_name;
+
+            })
+            .catch( er =>{
+              console.log(er); 
+            })
+          },
         async initializeBraintree() {
   try {
     const response = await fetch("http://127.0.0.1:8000/api/orders/generate"); // Cambia con l'URL corretto del tuo backend
@@ -197,7 +211,7 @@
       <div class="info">
         <h2>Il totale del tuo ordine ammonta a: </h2> 
         <h1>{{ (total_price).toFixed(2) }}€</h1>
-        <h3>Il tuo ordine da "NOME RISTORANTE":</h3>
+        <h3>Il tuo ordine da "{{ restaurant_name }}":</h3>
         <table>
           
           <tr v-for="product in cart_product">
