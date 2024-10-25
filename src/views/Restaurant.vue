@@ -135,7 +135,6 @@ export default {
         },
         deleteCartAndAdd(product) {
         this.deleteCart(); // Svuota il carrello
-        this.updateCart(product); // Aggiungi il nuovo prodotto
         this.showConflictPopup = false; // Chiudi il popup
     },
     },
@@ -276,7 +275,7 @@ export default {
             </div>
             <div class="bottom-buttons">
                 <button class="cancel" @click="closeConflictPopup">Annulla</button>
-                <button class="delete" @click="deleteCartAndAdd(product)">Svuota e aggiungi</button>
+                <button class="delete" @click="deleteCartAndAdd(product)">Svuota</button>
             </div>
         </div>
     </div>
