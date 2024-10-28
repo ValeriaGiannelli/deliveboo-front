@@ -292,6 +292,7 @@ export default {
     @include no-select;
     background-color: $yellow;
     padding: 20px;
+    overflow: hidden;
 
     display: flex;
     justify-content: space-between;
@@ -311,7 +312,6 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 10px;
 
         h1{
             font-size: 50px;
@@ -338,12 +338,17 @@ export default {
         }
     }
 }
+
+// "titolo sezione"
 .menu-title{
     font-size: 30px;
     font-weight: 700;
     padding: 20px;
     @include no-select;
 }
+
+
+// contenitore card cibo + carrello laterale
 .container.food{
     width: 100%;
     margin: 0 auto;
@@ -359,7 +364,7 @@ export default {
 
     .food-list{
         margin: auto;
-        width:66%;
+        width: calc((100% / 3) * 2);
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
@@ -381,11 +386,15 @@ export default {
             }
         }
     }
+
+    // carrello
     .cart{
         width: calc(100% / 3);
         height: 100vh;
         position: sticky;
         top:0;
+        overflow: hidden;
+        padding-right: 10px;
 
         .top-cart{
             color:  $yellow;
@@ -436,10 +445,12 @@ export default {
                     bottom:0;
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: flex-start;
 
+
+                    // logo nella sezione pagamento
                     .spacer{
-                        width: 10%;
+                        max-width: 10%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -448,15 +459,16 @@ export default {
 
                     .text{
                         padding-left: 10px;
-                        width: 75%;
+                        width: 40%;
                         font-size: 20px;
                         font-weight: 700;
                     }
                     .total-price{
                         font-weight: 700;
-                        width: 15%;
+                        width: 50%;
                         font-size: 20px;
                         color: $red;
+                        text-align: right;
                     }
 
                 }
@@ -501,6 +513,7 @@ export default {
 
 }
 
+// popup
 .container-fs{
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -619,5 +632,120 @@ export default {
 
 // MOBILE
 @media screen and (max-width:  576px){
+
+// barra identificativa ristorante
+.container.top{
+
+    .image{
+        
+        img{
+        }
+    }
+    .text{
+
+        h1{
+        }
+    }
+
+    .tags{
+
+        h3{
+        }
+    }
+}
+
+// "titolo sezione"
+.menu-title{
+}
+
+
+// contenitore card cibo + carrello laterale
+.container.food{
+    .food-list.loading{
+    }
+
+    .food-list{
+        .no-products{
+            i{
+            }
+        }
+    }
+    .cart{
+
+        .top-cart{
+
+            a>h3>i{
+            }
+        }
+
+        .products{
+
+            .full-cart {
+
+                .spacer-cart{
+                }
+
+                .price-bar{
+
+                    .spacer{
+                    }
+
+                    .text{
+                    }
+                    .total-price{
+                    }
+
+                }
+            }
+
+            .empty-cart{
+                img{
+                }
+            }
+        }
+
+        .buy{
+
+            .buy-button{
+            }
+        }
+
+    }
+}
+
+// popup
+.container-fs{
+
+    .popup{
+        .top-buttons,
+        .mid,
+        .bottom-buttons{
+
+            button{
+            }
+        }
+
+        .top-buttons{
+            button{
+                i{
+                }
+            }
+        }
+
+        .mid{
+        }
+
+        .bottom-buttons{
+            button{
+            }
+
+            .cancel{
+            }
+
+            .delete{
+            }
+        }
+    }
+}
 }
 </style>
