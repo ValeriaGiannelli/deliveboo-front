@@ -53,18 +53,26 @@ export default {
             this.totalPrice = 0;
             this.products.forEach(product => product.quantity = 0);
             localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
+            store.Hcart = [];
             this.showPopupDelete= false;
             document.body.style.overflow = '';
         },
 
         deleteCartItem(product) {
             const cartItem = this.cartproduct.find(item => item.id === product.id);
+            const existingProductCart = store.Hcart.find(item => item.id === product.id);
             if (cartItem) {
                 cartItem.quantity--; // Decrementa la quantità
-                if (cartItem.quantity <= 0) {
+                existingProductCart.quantity--;
+                if (cartItem.quantity <= 0 && existingProductCart.quantity <= 0) {
                     const index = this.cartproduct.indexOf(cartItem);
                     this.cartproduct.splice(index, 1); // Rimuovi il prodotto se la quantità è zero
+                    //Rimozione elemento da store
+                    const storeindex = store.Hcart.indexOf(existingProductCart);
+                    store.Hcart.splice(storeindex, 1);
                 }
+                console.log('Cart delete',store.Hcart);
+                
             }
 
             // Aggiorna la quantità del prodotto originale
@@ -78,6 +86,7 @@ export default {
 
         updateCart(product) {
             const existingProduct = this.cartproduct.find(item => item.id === product.id);
+            const existingProductCart = store.Hcart.find(item => item.id === product.id);
             
             // Controlla se il carrello contiene un ristorante diverso
             const currentRestaurantSlug = this.restaurant.slug; // Presupponendo che tu abbia uno slug unico per il ristorante
@@ -86,16 +95,21 @@ export default {
             if (cartHasDifferentRestaurant) {
                 this.showConflictPopup = true; // Mostra il popup di conflitto
             } else {
-                if (existingProduct) {
+                if (existingProduct && existingProductCart) {
                     existingProduct.quantity++;
+                    existingProductCart.quantity++;
                 } else {
                     this.cartproduct.push({ ...product, quantity: 1, restaurantSlug: currentRestaurantSlug }); // Aggiungi lo slug del ristorante
+                    store.Hcart.push({ ...product, quantity : 1});
                 }
 
                 product.quantity = existingProduct ? existingProduct.quantity : 1;
                 this.totalPrice += parseFloat(product.price);
                 this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
                 this.saveCartToLocalStorage();
+            
+                
+                console.log('PUSHING',store.Hcart);
                 localStorage.setItem('cartTimestamp', Date.now());
             }
         },

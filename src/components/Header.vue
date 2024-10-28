@@ -1,42 +1,24 @@
 <script>
-import CartDishCard from './partials/CartDishCard.vue';
+import { store } from '../store';
 
 export default {
     name: 'Header',
-    components: {
-        CartDishCard,
-    },
     data() {
         return {
-            cartProducts: [],
+            store,
         };
     },
     methods: {
         goBack() {
             window.history.back(); // Torna alla pagina precedente
         },
-        loadCartFromLocalStorage() {
-            const savedCart = localStorage.getItem('cart');
-            if (savedCart) {
-                const cartData = JSON.parse(savedCart);
-                this.cartProducts = cartData.cartproduct || [];
-                console.log('CARRELLO HEADER', this.cartProducts);
-            }
+        countCart() {
+            return store.Hcart.reduce((total, item) => total + (item.quantity || 1), 0);
         },
-        handleStorageChange(event) {
-            if (event.key === 'cartTimestamp') { // Verifica 'cartTimestamp' per trigger su stesso tab
-                this.loadCartFromLocalStorage();
-                console.log('Aggiornamento del carrello da Header!');
-            }
+        countCartPrice(){
+            return store.Hcart.reduce((total, item) => total + (parseFloat(item.price * item.quantity) || 0), 0).toFixed(2);
         }
     },
-    mounted() {
-        this.loadCartFromLocalStorage(); // Carica i dati del carrello al montaggio
-        window.addEventListener('storage', this.handleStorageChange); // Ascolta l'evento 'storage' per aggiornare
-    },
-    beforeDestroy() {
-        window.removeEventListener('storage', this.handleStorageChange); // Rimuovi listener
-    }
 };
 </script>
 
@@ -51,19 +33,25 @@ export default {
             <div class="cart-box">
                 <div class="icon-box">
                     <i class="fa-solid fa-cart-shopping icon"></i>
-                    <div class="item-amount-dot">
-                        <p>3</p>
+                    <div v-if="countCart() != 0" class="item-amount-dot">
+                        <p>{{ countCart() }}</p>
                     </div>
                 </div>
                 <!-- DROPDOWN CARRELLo -->
 
                 <div class="cart">
-                    <div v-for="(item, i) in this.cartProducts" :key="i" class="cart-item">
+                    <div v-for="(item, i) in store.Hcart" :key="i" class="cart-item">
                         <div class="amount">{{ item.quantity }}</div>   
                         <div class="name">{{ item.name }}</div>         
-                        <div class="price">{{ item.price }}€</div>      
+                        <div class="price">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>      
+                    </div>
+                    <!-- Bottone pagamento -->
+                    <div class="buy">
+                        <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
+                        <div class="price">{{ countCartPrice() }}&euro;</div>
                     </div>
                 </div>
+                
                 
             </div>
 
@@ -148,6 +136,40 @@ export default {
                 transform: translate();
                 z-index: 100;
                 transition: 500ms;
+
+                .buy{
+                    height: 50px;
+                    border-bottom: 3px solid $shadow;
+                    transition: 500ms;
+                    padding: 5px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    margin: 5px;
+                    border-radius: 10px;
+                    // flex
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .price{
+                        width: 20%;
+                        border-top-right-radius: 20px;
+                        border-bottom-right-radius: 20px;
+                        color: $red;
+                        border-left: 3px solid rgba($color: #000000, $alpha: 0.02);
+                    }
+                    .buy-button{
+                        padding: 10px 30px;
+                        font-size: 20px;
+                        background-color: $yellow;
+                        border-radius: 10px;
+                        transition: 500ms;
+                        color: $text-color !important;
+                        &:hover{
+                            background-color:$red;
+                            scale: 1.05;
+                        }
+                    }
+                }
 
 
                 .cart-item{
