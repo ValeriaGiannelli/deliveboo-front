@@ -46,7 +46,7 @@ export default {
                         <div class="price">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>      
                     </div>
                     <!-- Bottone pagamento -->
-                    <div class="buy">
+                    <div v-if="store.Hcart.length > 0" class="buy">
                         <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
                         <div class="price">{{ countCartPrice() }}&euro;</div>
                     </div>
