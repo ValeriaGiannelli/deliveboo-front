@@ -612,4 +612,12 @@ export default {
         }
     }
 }
+
+// TABLET
+@media screen and (max-width: 1024px){ 
+}
+
+// MOBILE
+@media screen and (max-width:  576px){
+}
 </style>
