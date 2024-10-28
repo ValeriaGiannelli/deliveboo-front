@@ -1,22 +1,27 @@
 <script>
-import CartDishCard from './partials/CartDishCard.vue';
+import { store } from '../store';
+
 export default {
     name: 'Header',
-    components:{
-        CartDishCard,
-    },
-    data(){
-        return{
-
-        }
+    data() {
+        return {
+            store,
+        };
     },
     methods: {
         goBack() {
             window.history.back(); // Torna alla pagina precedente
+        },
+        countCart() {
+            return store.Hcart.reduce((total, item) => total + (item.quantity || 1), 0);
+        },
+        countCartPrice(){
+            return store.Hcart.reduce((total, item) => total + (parseFloat(item.price * item.quantity) || 0), 0).toFixed(2);
         }
-    }
-}
+    },
+};
 </script>
+
 
 <template>
     <div class="container">
@@ -28,31 +33,26 @@ export default {
             <div class="cart-box">
                 <div class="icon-box">
                     <i class="fa-solid fa-cart-shopping icon"></i>
-                    <div class="item-amount-dot">
-                        <p>3</p>
+                    <div v-if="countCart() != 0" class="item-amount-dot">
+                        <p>{{ countCart() }}</p>
                     </div>
                 </div>
+                <!-- DROPDOWN CARRELLo -->
+
                 <div class="cart">
-
-                    <!-- elementi all'interno del carrello -->
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">Pasta x con cose x e pomodori x con cose y e olio x evo prodotto da x</div>
-                        <div class="price">12.00€</div>
+                    <div v-for="(item, i) in store.Hcart" :key="i" class="cart-item">
+                        <div class="amount">{{ item.quantity }}</div>   
+                        <div class="name">{{ item.name }}</div>         
+                        <div class="price">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>      
                     </div>
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">mario mario mario </div>
-                        <div class="price">12.00€</div>
+                    <!-- Bottone pagamento -->
+                    <div v-if="store.Hcart.length > 0" class="buy">
+                        <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
+                        <div class="price">{{ countCartPrice() }}&euro;</div>
                     </div>
-                    <div class="cart-item">
-                        <div class="amount">1x</div>
-                        <div class="name">mario mario mario mario mario mario mario mario mario mario mario mario</div>
-                        <div class="price">12.00€</div>
-                    </div>
-
-
                 </div>
+                
+                
             </div>
 
 
@@ -136,6 +136,40 @@ export default {
                 transform: translate();
                 z-index: 100;
                 transition: 500ms;
+
+                .buy{
+                    height: 50px;
+                    border-bottom: 3px solid $shadow;
+                    transition: 500ms;
+                    padding: 5px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    margin: 5px;
+                    border-radius: 10px;
+                    // flex
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .price{
+                        width: 20%;
+                        border-top-right-radius: 20px;
+                        border-bottom-right-radius: 20px;
+                        color: $red;
+                        border-left: 3px solid rgba($color: #000000, $alpha: 0.02);
+                    }
+                    .buy-button{
+                        padding: 10px 30px;
+                        font-size: 20px;
+                        background-color: $yellow;
+                        border-radius: 10px;
+                        transition: 500ms;
+                        color: $text-color !important;
+                        &:hover{
+                            background-color:$red;
+                            scale: 1.05;
+                        }
+                    }
+                }
 
 
                 .cart-item{

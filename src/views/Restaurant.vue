@@ -53,18 +53,26 @@ export default {
             this.totalPrice = 0;
             this.products.forEach(product => product.quantity = 0);
             localStorage.removeItem('cart'); // Rimuove il carrello dal localStorage
+            store.Hcart = [];
             this.showPopupDelete= false;
             document.body.style.overflow = '';
         },
 
         deleteCartItem(product) {
             const cartItem = this.cartproduct.find(item => item.id === product.id);
+            const existingProductCart = store.Hcart.find(item => item.id === product.id);
             if (cartItem) {
                 cartItem.quantity--; // Decrementa la quantità
-                if (cartItem.quantity <= 0) {
+                existingProductCart.quantity--;
+                if (cartItem.quantity <= 0 && existingProductCart.quantity <= 0) {
                     const index = this.cartproduct.indexOf(cartItem);
                     this.cartproduct.splice(index, 1); // Rimuovi il prodotto se la quantità è zero
+                    //Rimozione elemento da store
+                    const storeindex = store.Hcart.indexOf(existingProductCart);
+                    store.Hcart.splice(storeindex, 1);
                 }
+                //console.log('Cart delete',store.Hcart);
+                
             }
 
             // Aggiorna la quantità del prodotto originale
@@ -73,10 +81,12 @@ export default {
             this.totalPrice -= parseFloat(product.price);
             this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
             this.saveCartToLocalStorage();
+            localStorage.setItem('cartTimestamp', Date.now());
         },
 
         updateCart(product) {
             const existingProduct = this.cartproduct.find(item => item.id === product.id);
+            const existingProductCart = store.Hcart.find(item => item.id === product.id);
             
             // Controlla se il carrello contiene un ristorante diverso
             const currentRestaurantSlug = this.restaurant.slug; // Presupponendo che tu abbia uno slug unico per il ristorante
@@ -85,16 +95,22 @@ export default {
             if (cartHasDifferentRestaurant) {
                 this.showConflictPopup = true; // Mostra il popup di conflitto
             } else {
-                if (existingProduct) {
+                if (existingProduct && existingProductCart) {
                     existingProduct.quantity++;
+                    existingProductCart.quantity++;
                 } else {
                     this.cartproduct.push({ ...product, quantity: 1, restaurantSlug: currentRestaurantSlug }); // Aggiungi lo slug del ristorante
+                    store.Hcart.push({ ...product, quantity : 1});
                 }
 
                 product.quantity = existingProduct ? existingProduct.quantity : 1;
                 this.totalPrice += parseFloat(product.price);
                 this.totalPrice = parseFloat(this.totalPrice.toFixed(2));
                 this.saveCartToLocalStorage();
+            
+                
+                //console.log('PUSHING',store.Hcart);
+                localStorage.setItem('cartTimestamp', Date.now());
             }
         },
 
@@ -104,6 +120,8 @@ export default {
                 totalPrice: this.totalPrice
             };
             localStorage.setItem('cart', JSON.stringify(cartData));
+             // Aggiorna una chiave secondaria per far scattare l'evento 'storage'
+            localStorage.setItem('cartTimestamp', Date.now());
         },
 
         loadCartFromLocalStorage() {
@@ -292,7 +310,6 @@ export default {
     @include no-select;
     background-color: $yellow;
     padding: 20px;
-    overflow: hidden;
 
     display: flex;
     justify-content: space-between;
@@ -312,6 +329,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        gap: 10px;
 
         h1{
             font-size: 50px;
@@ -338,17 +356,12 @@ export default {
         }
     }
 }
-
-// "titolo sezione"
 .menu-title{
     font-size: 30px;
     font-weight: 700;
     padding: 20px;
     @include no-select;
 }
-
-
-// contenitore card cibo + carrello laterale
 .container.food{
     width: 100%;
     margin: 0 auto;
@@ -364,7 +377,7 @@ export default {
 
     .food-list{
         margin: auto;
-        width: calc((100% / 3) * 2);
+        width:66%;
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
@@ -386,15 +399,11 @@ export default {
             }
         }
     }
-
-    // carrello
     .cart{
         width: calc(100% / 3);
         height: 100vh;
         position: sticky;
         top:0;
-        overflow: hidden;
-        padding-right: 10px;
 
         .top-cart{
             color:  $yellow;
@@ -445,12 +454,10 @@ export default {
                     bottom:0;
                     display: flex;
                     align-items: center;
-                    justify-content: flex-start;
+                    justify-content: space-between;
 
-
-                    // logo nella sezione pagamento
                     .spacer{
-                        max-width: 10%;
+                        width: 10%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -459,16 +466,15 @@ export default {
 
                     .text{
                         padding-left: 10px;
-                        width: 40%;
+                        width: 75%;
                         font-size: 20px;
                         font-weight: 700;
                     }
                     .total-price{
                         font-weight: 700;
-                        width: 50%;
+                        width: 15%;
                         font-size: 20px;
                         color: $red;
-                        text-align: right;
                     }
 
                 }
@@ -513,7 +519,6 @@ export default {
 
 }
 
-// popup
 .container-fs{
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -624,128 +629,5 @@ export default {
             }
         }
     }
-}
-
-// TABLET
-@media screen and (max-width: 1024px){ 
-}
-
-// MOBILE
-@media screen and (max-width:  576px){
-
-// barra identificativa ristorante
-.container.top{
-
-    .image{
-        
-        img{
-        }
-    }
-    .text{
-
-        h1{
-        }
-    }
-
-    .tags{
-
-        h3{
-        }
-    }
-}
-
-// "titolo sezione"
-.menu-title{
-}
-
-
-// contenitore card cibo + carrello laterale
-.container.food{
-    .food-list.loading{
-    }
-
-    .food-list{
-        .no-products{
-            i{
-            }
-        }
-    }
-    .cart{
-
-        .top-cart{
-
-            a>h3>i{
-            }
-        }
-
-        .products{
-
-            .full-cart {
-
-                .spacer-cart{
-                }
-
-                .price-bar{
-
-                    .spacer{
-                    }
-
-                    .text{
-                    }
-                    .total-price{
-                    }
-
-                }
-            }
-
-            .empty-cart{
-                img{
-                }
-            }
-        }
-
-        .buy{
-
-            .buy-button{
-            }
-        }
-
-    }
-}
-
-// popup
-.container-fs{
-
-    .popup{
-        .top-buttons,
-        .mid,
-        .bottom-buttons{
-
-            button{
-            }
-        }
-
-        .top-buttons{
-            button{
-                i{
-                }
-            }
-        }
-
-        .mid{
-        }
-
-        .bottom-buttons{
-            button{
-            }
-
-            .cancel{
-            }
-
-            .delete{
-            }
-        }
-    }
-}
 }
 </style>

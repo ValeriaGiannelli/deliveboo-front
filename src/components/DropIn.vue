@@ -135,15 +135,15 @@
 
                 
 
-                console.log('info prodotti', this.cart_product);
-                console.log('totale prezzo', this.total_price);
+                //console.log('info prodotti', this.cart_product);
+                //console.log('totale prezzo', this.total_price);
             }
           },
           sendForm(){
                 let products = 'Riepilogo prodotti: ' + this.cart_product.map(product => {
                   return `Nome: ${product.name}, prezzo: ${product.price}, quantità: ${product.quantity}`;
                 }).join("; ") + ".";
-                console.log('test array stringa', products);
+                //console.log('test array stringa', products);
             const data = {
                 name: this.full_name,
                 email: this.email,
@@ -176,7 +176,7 @@
           getRestaurantName(id){
             axios.get('http://127.0.0.1:8000/api/restaurant/' + id + '/name')
             .then(res=>{
-              console.log('IL NOME DEL RISTORANTE E',res.data.restaurant[0].restaurant_name);
+              //console.log('IL NOME DEL RISTORANTE E',res.data.restaurant[0].restaurant_name);
               this.restaurant_name = res.data.restaurant[0].restaurant_name;
 
             })
@@ -380,8 +380,9 @@
     </div>
 
   </div>
-
-  <p v-else-if="cart_product.length === 0 && !paid && !initialize">Non hai ancora riempito il tuo carrello!</p>
+  <div class="my-loader" v-else-if="cart_product.length === 0 && !paid && !initialize">
+    <h1>Non hai ancora riempito il tuo carrello!</h1>
+  </div>
 
   <div class="container-payment" v-else-if="initialize">
     <div class="my-loader" >

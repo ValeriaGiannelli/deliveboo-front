@@ -19,7 +19,14 @@ export default{
     }
   },
   methods:{
-
+    TopWhenLoad(){
+      window.onload = function() {
+        window.scrollTo(0, 0);
+      };
+    }
+  },
+  mounted(){
+    window.scrollTo(0, 0);
   }
 }
 </script>
