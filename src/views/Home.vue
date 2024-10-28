@@ -34,10 +34,10 @@ export default{
                         'active' : false,
                     })
                 });
-                console.log('filtro nomi dei tipi', this.typesFilter);
+                //console.log('filtro nomi dei tipi', this.typesFilter);
             })
             .catch(err => {
-                console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
+                //console.log('Errore nel recupero dei dati:', err); // LOG ERRORE
             });
         },
         getRestaurants(){
@@ -46,8 +46,8 @@ export default{
                 this.restaurants = res.data; // A BUON FINE
                 // ferma il loading
                 this.loading = false;
-                console.log('RESTAURANTS DATA:', res.data); // LOG
-                console.log('restaurants',this.restaurants);
+                //console.log('RESTAURANTS DATA:', res.data); // LOG
+                //console.log('restaurants',this.restaurants);
             })
             .catch(err => {
                 console.log('Errore nel recupero dei dati:', err); // LOG ERRORE

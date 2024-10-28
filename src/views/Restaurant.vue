@@ -71,7 +71,7 @@ export default {
                     const storeindex = store.Hcart.indexOf(existingProductCart);
                     store.Hcart.splice(storeindex, 1);
                 }
-                console.log('Cart delete',store.Hcart);
+                //console.log('Cart delete',store.Hcart);
                 
             }
 
@@ -109,7 +109,7 @@ export default {
                 this.saveCartToLocalStorage();
             
                 
-                console.log('PUSHING',store.Hcart);
+                //console.log('PUSHING',store.Hcart);
                 localStorage.setItem('cartTimestamp', Date.now());
             }
         },
