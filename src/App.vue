@@ -5,30 +5,31 @@ import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import Loading from './components/Loading.vue';
 
-export default{
-  name : 'App',
-  components : {
+export default {
+  name: 'App',
+  components: {
     Home,
     Header,
     Footer,
     Loading,
   },
-  data(){
-    return{
+  data() {
+    return {
       store,
-    }
+    };
   },
-  methods:{
-    TopWhenLoad(){
-      window.onload = function() {
+  beforeRouteEnter(to, from, next) {
+      next(() => {
         window.scrollTo(0, 0);
-      };
+      });
+    },
+  beforeRouteUpdate(to, from, next) {
+      window.scrollTo(0, 0);
+      next();
     }
-  },
-  mounted(){
-    window.scrollTo(0, 0);
-  }
-}
+
+};
+
 </script>
 
 <template>
