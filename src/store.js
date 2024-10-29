@@ -2,10 +2,10 @@ import { reactive, watch } from 'vue';
 
 function loadCartFromLocalStorage() {
     const cartData = localStorage.getItem('HEcart');
-    if (!cartData || cartData === "undefined") { 
+    if (!cartData || cartData === "undefined") {
         return []; // Ritorna un array vuoto se cartData è null o "undefined"
     }
-    
+
     try {
         return JSON.parse(cartData);
     } catch (error) {
@@ -17,6 +17,7 @@ function loadCartFromLocalStorage() {
 
 export const store = reactive({
     apiURL: 'http://127.0.0.1:8000/api/',
+    isCartOpen: false,
     Hcart: loadCartFromLocalStorage(), // Carica il carrello usando la funzione di controllo
 
     /* addToCart(product) {
@@ -27,12 +28,12 @@ export const store = reactive({
     removeFromCart(productId) {
         this.Hcart = this.Hcart.filter(item => item.id !== productId);
         this.saveCart();
-    },
+    },*/
 
     clearCart() {
         this.Hcart = [];
         this.saveCart();
-    }, */
+    },
 
     saveCart() {
         localStorage.setItem('HEcart', JSON.stringify(this.Hcart));

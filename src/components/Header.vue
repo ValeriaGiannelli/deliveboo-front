@@ -17,6 +17,10 @@ export default {
         },
         countCartPrice(){
             return store.Hcart.reduce((total, item) => total + (parseFloat(item.price * item.quantity) || 0), 0).toFixed(2);
+        },
+        changeCartView(){
+            store.isCartOpen = !store.isCartOpen;
+            console.log(store.isCartOpen);
         }
     },
 };
@@ -33,6 +37,7 @@ export default {
             <div class="cart-box">
                 <div class="icon-box">
                     <i class="fa-solid fa-cart-shopping icon"></i>
+                    <i @click="changeCartView" class="fa-solid fa-cart-shopping mobile-button"></i>
                     <div v-if="countCart() != 0" class="item-amount-dot">
                         <p>{{ countCart() }}</p>
                     </div>
@@ -46,10 +51,11 @@ export default {
                         <div class="price">{{ (item.price * item.quantity).toFixed(2) }}&euro;</div>      
                     </div>
                     <!-- Bottone pagamento -->
-                    <div v-if="store.Hcart.length > 0" class="buy">
+                    <!-- <div v-if="store.Hcart.length > 0" class="buy">
                         <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
+                        <div @click="store.clearCart" class="delete"><i class="fa-solid fa-trash-can"></i></div>
                         <div class="price">{{ countCartPrice() }}&euro;</div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 
@@ -98,11 +104,15 @@ export default {
             // box icona
             .icon-box{
                 // icona carrello
-                .icon{
+                .icon,
+                .mobile-button{
                 font-size: 20px;
                 padding: 1rem;
                 color: $yellow; 
                 transition: 500ms;
+                }
+                .mobile-button{
+                    display: none;
                 }
 
                 // contatore icona
@@ -150,6 +160,20 @@ export default {
                     justify-content: space-between;
                     align-items: center;
 
+                    .delete{
+                        padding: 10px 30px;
+                        font-size: 20px;
+                        background-color: $yellow;
+                        border-radius: 10px;
+                        transition: 500ms;
+                        color: $text-color;
+                        &:hover{
+                            background-color:$red;
+                            scale: 1.05;
+                        }
+
+                    }
+
                     .price{
                         width: 20%;
                         border-top-right-radius: 20px;
@@ -163,7 +187,7 @@ export default {
                         background-color: $yellow;
                         border-radius: 10px;
                         transition: 500ms;
-                        color: $text-color !important;
+                        color: $text-color;
                         &:hover{
                             background-color:$red;
                             scale: 1.05;
@@ -263,12 +287,17 @@ export default {
         .buttons{
 
             .cart-box{
+                .icon-box{
+                    .icon{
+                        display: none;
+                    }
+                    .mobile-button{
+                        display: block;
+                    }
+                }
 
                 .cart{
-
-                    .buy{
-                        display: flex;
-                    }
+                    display: none
                 }
             }
 
