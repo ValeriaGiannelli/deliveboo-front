@@ -325,6 +325,7 @@ export default {
     }
     .text{
         width: 55%;
+        padding-left: 20px;
 
         display: flex;
         flex-direction: column;
@@ -332,12 +333,16 @@ export default {
         gap: 10px;
 
         h1{
+            overflow: hidden;
+            text-overflow: ellipsis;
             font-size: 50px;
+            white-space: nowrap;
+            max-width: 100%;
         }
     }
 
     .tags{
-        width: 10%;
+        width: 15%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -356,12 +361,15 @@ export default {
         }
     }
 }
+// titolo menu
 .menu-title{
     font-size: 30px;
     font-weight: 700;
     padding: 20px;
     @include no-select;
 }
+
+// container cibo+ carrello
 .container.food{
     width: 100%;
     margin: 0 auto;
@@ -377,7 +385,7 @@ export default {
 
     .food-list{
         margin: auto;
-        width:66%;
+        width: calc((100% / 3) * 2);
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
@@ -404,6 +412,7 @@ export default {
         height: 100vh;
         position: sticky;
         top:0;
+        padding-right: 10px;
 
         .top-cart{
             color:  $yellow;
@@ -466,13 +475,14 @@ export default {
 
                     .text{
                         padding-left: 10px;
-                        width: 75%;
+                        width: 40%;
                         font-size: 20px;
                         font-weight: 700;
                     }
                     .total-price{
                         font-weight: 700;
-                        width: 15%;
+                        width: 50%;
+                        text-align: right;
                         font-size: 20px;
                         color: $red;
                     }
@@ -519,6 +529,7 @@ export default {
 
 }
 
+// popup
 .container-fs{
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -629,5 +640,42 @@ export default {
             }
         }
     }
+}
+
+
+// TABLET
+@media screen and (max-width: 1024px){ 
+}
+
+// MOBILE
+@media screen and (max-width:  576px){
+
+    .container.top{
+        justify-content: center;
+        .image{
+            width: 40%;
+        }
+        .text{
+            width: 50%;
+        }
+        .tags{
+            display: none;
+        }
+    }
+
+    
+// container cibo+ carrello
+.container.food{
+
+    .food-list{
+        width: 100%;
+    }
+    .cart{
+        display: none;
+    }
+
+
+
+}
 }
 </style>

@@ -34,13 +34,15 @@ export default {
     align-items: center;
     padding: 5px;
 
-    &>div{
+    .amount,
+    .price{
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         background:  #F7F5E8;
         font-weight: 600;
+        overflow: hidden;
     }
 
     .amount{
@@ -51,10 +53,15 @@ export default {
 
     }
     .name{
+        background:  #F7F5E8;
+        font-weight: 600;
         width: 75%;
-        justify-content: flex-start;
-        align-items: center;
         padding-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        line-height: 70px;
 
     }
     .price{
@@ -66,5 +73,14 @@ export default {
 
     }
 }
+
+// TABLET
+@media screen and (max-width: 1024px){ 
+}
+
+// MOBILE
+@media screen and (max-width:  576px){
+}
+
 
 </style>
