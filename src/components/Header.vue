@@ -10,7 +10,7 @@ export default {
     },
     methods: {
         goBack() {
-            window.history.back(); // Torna alla pagina precedente
+            window.history.back();
         },
         countCart() {
             return store.Hcart.reduce((total, item) => total + (item.quantity || 1), 0);
@@ -30,7 +30,7 @@ export default {
 <template>
     <div class="container">
          <div class="logo">
-             <a href="#" @click.prevent="goBack"><img src="../../public/FULL_LOGO.svg" alt=""></a>
+             <a href="http://localhost:5174" ><img src="../../public/FULL_LOGO.svg" alt=""></a>
          </div>
          <div class="buttons">    
             <a href="http://127.0.0.1:8000/">Collabora con noi</a>
