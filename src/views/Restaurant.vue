@@ -325,6 +325,7 @@ export default {
     }
     .text{
         width: 55%;
+        padding-left: 20px;
 
         display: flex;
         flex-direction: column;
@@ -644,11 +645,6 @@ export default {
 
 // TABLET
 @media screen and (max-width: 1024px){ 
-    .container.top{
-        .text{
-            padding-left: 20px;
-        }
-    }
 }
 
 // MOBILE
