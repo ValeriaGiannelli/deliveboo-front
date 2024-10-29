@@ -220,7 +220,7 @@ export default {
 
         .card-content {
 
-            .title-add,{
+            .title-add{
                 .card-title,
                 .card-description {
                     padding-left: 10px;

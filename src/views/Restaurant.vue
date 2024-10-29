@@ -17,6 +17,7 @@ export default {
     },
     data() {
         return {
+            store,
             loading: true,
             restaurant: [],
             products: [],
@@ -135,6 +136,11 @@ export default {
                     product.quantity = cartItem ? cartItem.quantity : 0;
                 });
             }
+        },
+
+        // carrello mobile chiusura
+        closeCart(){
+            store.isCartOpen = false;
         },
 
         // POPUP
@@ -259,6 +265,49 @@ export default {
             
             
         </div>
+
+
+
+        <!-- CARRELLO MOBILE -->
+        <div v-if="store.isCartOpen"  class="cart cart-mobile">
+            <div class="close-cart">
+                <h2>Il tuo carrello:</h2>
+                <a @click="closeCart" ><i class="fa-solid fa-xmark"></i></a>
+
+            </div>
+            <div class="top-cart">
+                <h3>Il tuo ordine</h3>
+                <a @click="openPopup" ><i class="fa-solid fa-trash-can"></i></a>
+            </div>
+
+            <div class="products">
+
+                <div v-if="cartproduct.length > 0" class="full-cart">
+                    <CartDishCard :cartproduct="cartproduct"/>
+                    <div class="spacer-cart"></div>
+
+                    <div class="price-bar">
+                        <div class="spacer">
+                            <img src="../../public/LOGO.svg" alt="">
+                        </div>
+                        <div class="text">Totale:</div>
+                        <div class="total-price">{{this.totalPrice.toFixed(2)}}€</div>
+                    </div>
+                </div>
+
+                <div v-else class="empty-cart">
+                    <img src="../../public/LOGO.svg" alt="">
+                    <h2>Il carrello è vuoto</h2>
+                </div>
+            </div>
+
+            <div class="buy">
+                <RouterLink :to="{name: 'checkout'}" class="buy-button" >Vai al pagamento</RouterLink>
+            </div>
+        </div>
+
+
+
     </div>
 
 
@@ -407,28 +456,43 @@ export default {
             }
         }
     }
-    .cart{
+    .cart,
+    .cart-mobile{
         width: calc(100% / 3);
         height: 100vh;
         position: sticky;
         top:0;
         padding-right: 10px;
 
-        .top-cart{
+        
+        .top-cart,
+        .close-cart{
             color:  $yellow;
-            height: 10%;
+            height: 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
 
-            a>h3>i{
+            a>i{
                 color: $text_color;
                 transition: 500ms;
                 &:hover{
                     color: $red;
                     scale: 1.05;
                 }
+            }
+        }
+
+        .close-cart{
+            padding: 0 20px ;
+            background-color: #F7F5E8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            h2{
+                
+            }
+            a>i{
+                font-size: 1.8rem;
             }
         }
 
@@ -523,6 +587,13 @@ export default {
             }
         }
 
+    }
+    .cart-mobile{
+        padding: 0;
+        display: none;
+        .products{
+            height: calc(75% - 80px);
+        }
     }
 
 
@@ -672,6 +743,15 @@ export default {
         }
         .cart{
             display: none;
+        }
+        .cart.cart-mobile{
+            height: 100%;
+            width: 100%;
+            background-color: $background_color;
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0
         }
 
 
