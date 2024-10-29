@@ -653,10 +653,10 @@ export default {
     .container.top{
         justify-content: center;
         .image{
-            width: 40%;
+            display: none;
         }
         .text{
-            width: 50%;
+            width: 100%;
         }
         .tags{
             display: none;
