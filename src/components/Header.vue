@@ -146,7 +146,7 @@ export default {
                     margin: 5px;
                     border-radius: 10px;
                     // flex
-                    display: flex;
+                    display: none;
                     justify-content: space-between;
                     align-items: center;
 
@@ -258,6 +258,22 @@ export default {
 
 // MOBILE
 @media screen and (max-width:  576px){
+    .container{
+
+        .buttons{
+
+            .cart-box{
+
+                .cart{
+
+                    .buy{
+                        display: flex;
+                    }
+                }
+            }
+
+        }
+    }
 }
 
 
