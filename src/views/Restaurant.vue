@@ -440,6 +440,7 @@ export default {
         flex-wrap: wrap;
         gap: 10px;
         padding:0 20px;
+        align-content: flex-start;
 
         .no-products{
             width: 100%;
