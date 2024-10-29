@@ -121,7 +121,7 @@ export default{
         margin:10px 0 20px;
 
         .checkbox-btn{
-            padding: 1rem;
+            padding: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -213,6 +213,22 @@ export default{
 }
 }
 
+@media screen and (max-width: 700px){
+.container-card{
+    .container-types{
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+
+        .checkbox-btn{
+            width: calc(100% / 3);
+        }
+    }  
+}
+}
+
 
 // MOBILE
 @media screen and (max-width: 576px){
@@ -222,7 +238,23 @@ export default{
             width: 100%;
 
             .checkbox-btn{
-                width: calc(100% / 5);
+                width: calc(100% / 3);
+            }
+        }
+        .container-restaurants{
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 400px){
+
+    .container-card{
+        .container-types{
+            width: 100%;
+
+            .checkbox-btn{
+                width: calc(100% / 2);
             }
         }
         .container-restaurants{
