@@ -69,7 +69,7 @@ export default {
             </div>
             <div class="card-content">
                 <div class="title-add">
-                    <h2 class="card-title">{{product.name}}</h2>
+                    <h2 class="card-title">{{ product.name }}</h2>
                     <p class="card-description">{{product.ingredients_descriptions}}</p>
                    
                 </div>
@@ -142,6 +142,23 @@ export default {
             flex-direction: column;
             justify-content: center;
             gap: 10px;
+
+            
+
+            .card-title {
+                font-size: 1.3em;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 80%;
+            }
+
+            
+            .card-description {
+                transition: 800ms;
+                font-size: 1em;
+                color: #555;
+            }
         }
 
         .icone-incr-decr{
@@ -150,14 +167,11 @@ export default {
             align-items: center;
             justify-content: space-between;
             gap: 0.1rem;
-
-            .card-title {
-                font-size: 1.3em;
-            }
+            overflow: hidden;
             .quantity-box {
                 color: $red;
                 display: inline-block;
-                width: 30px;
+                width: 20%;
                 aspect-ratio: 1/1;
                 font-weight: 700;
                 margin: 0px;
@@ -187,14 +201,6 @@ export default {
             align-items: center;
             padding: 1rem;
             gap: 0.5rem;
-            
-            
-
-            .card-description {
-                transition: 800ms;
-                font-size: 1em;
-                color: #555;
-            }
 
             .card-price {
                 font-size: 20px;
@@ -203,5 +209,24 @@ export default {
             }
         }
     }
+}
+
+// MOBILE
+@media screen and (max-width:  576px){
+    .card{
+        .card-image{
+            display: none;
+        }
+
+        .card-content {
+
+            .title-add,{
+                .card-title,
+                .card-description {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }   
 }
 </style>

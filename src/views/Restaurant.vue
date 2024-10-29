@@ -384,7 +384,7 @@ export default {
     }
 
     .food-list{
-        margin: auto;
+        margin: 0 auto;
         width: calc((100% / 3) * 2);
         display: flex;
         justify-content: flex-start;
@@ -664,18 +664,18 @@ export default {
     }
 
     
-// container cibo+ carrello
-.container.food{
+    // container cibo+ carrello
+    .container.food{
 
-    .food-list{
-        width: 100%;
+        .food-list{
+            width: 100%;
+        }
+        .cart{
+            display: none;
+        }
+
+
+
     }
-    .cart{
-        display: none;
-    }
-
-
-
-}
 }
 </style>

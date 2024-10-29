@@ -47,6 +47,7 @@ export default {
 
     .amount{
         width: 10%;
+        min-width: 30px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         border-right: 3px solid $shadow;
@@ -66,6 +67,7 @@ export default {
     }
     .price{
         width: 15%;
+        min-width: 70px;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
         color: $red;
