@@ -435,10 +435,7 @@ export default {
     .food-list{
         margin: 0 auto;
         width: calc((100% / 3) * 2);
-        display: flex;
-        justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 10px;
         padding:0 20px;
 
         .no-products{

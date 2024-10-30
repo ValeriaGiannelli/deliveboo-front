@@ -107,6 +107,7 @@ export default {
     //flex
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 
     &:hover>div>img{
         scale: 1.05;
