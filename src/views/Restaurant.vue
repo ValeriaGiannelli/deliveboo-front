@@ -435,7 +435,6 @@ export default {
     .food-list{
         margin: 0 auto;
         width: calc((100% / 3) * 2);
-        flex-wrap: wrap;
         padding:0 20px;
 
         .no-products{
@@ -737,6 +736,7 @@ export default {
 
         .food-list{
             width: 100%;
+            
         }
         .cart{
             display: none;
