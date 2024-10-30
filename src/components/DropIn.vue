@@ -355,28 +355,28 @@
         <!-- Nome e cognome -->
         <div class="form-item">
           <label for="full_name"></label>
-          <input type="text" name="full_name" id="full_name" v-model="full_name" required placeholder="Nome e Cognome (*)">
+          <input type="text" name="full_name" id="full_name" v-model="full_name" required placeholder="Nome e Cognome (*)" autocomplete="off">
           <small style="color:red" v-if="!this.validName && this.validName != null">Il nome è obbligatorio e deve avere almeno 2 caratteri</small>
         </div>
 
         <!-- Mail -->
         <div class="form-item">
           <label for="email"></label>
-          <input type="email" name="email" id="email" v-model="email" required placeholder="Email (*)">
+          <input type="email" name="email" id="email" v-model="email" required placeholder="Email (*)" autocomplete="off">
           <small style="color:red" v-if="!this.validMail && this.validMail != null">Inserisci un indirizzo mail valido</small>
         </div>
 
         <!-- indirizzo -->
         <div class="form-item">
           <label for="address"></label>
-          <input type="text" name="address" id="address" v-model="address" required placeholder="Indirizzo di spedizione (*)">
+          <input type="text" name="address" id="address" v-model="address" required placeholder="Indirizzo di spedizione (*)" autocomplete="off">
           <small style="color:red" v-if="!this.validAddress && this.validAddress != null">L'indirizzo deve avere almeno 4 caratteri</small>          
         </div>
 
         <!-- numero di telefono -->
         <div class="form-item">
           <label for="phone_number"></label>
-          <input type="text" name="phone_number" id="phone_number" v-model="phone_number" required placeholder="Numero di telefono (*)">
+          <input type="text" name="phone_number" id="phone_number" v-model="phone_number" required placeholder="Numero di telefono (*)" autocomplete="off">
           <small style="color:red" v-if="!this.validNumber && this.validNumber != null">Inserisci un numero di telefono valido</small>
         </div>
       </div>
