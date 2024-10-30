@@ -336,7 +336,7 @@
       <div class="info">
         <h2>Il totale del tuo ordine ammonta a: </h2> 
         <h1>{{ (total_price).toFixed(2) }}€</h1>
-        <h3>Il tuo ordine da "{{ restaurant_name }}":</h3>
+        <h3>Il tuo ordine da <h2>"{{ restaurant_name }}"</h2></h3>
         <table>
           
           <tr v-for="product in cart_product">
@@ -448,6 +448,9 @@
       }
       h3{
         padding-top: 10px;
+        h2{
+          color: $red;
+        }
       }
 
       table{
@@ -532,7 +535,7 @@
 
       &:hover{
         background-color: $red;
-        color: $text-color ;
+        color: white;
         scale: 1.1;
       }
     }

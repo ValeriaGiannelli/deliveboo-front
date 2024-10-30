@@ -34,7 +34,7 @@ export default {
          </div>
          <div class="buttons">    
             <a href="http://127.0.0.1:8000/">Collabora con noi</a>
-            <div class="cart-box">
+            <div v-if="$route.name !== 'checkout'" class="cart-box">
                 <div class="icon-box">
                     <i class="fa-solid fa-cart-shopping icon"></i>
                     <i @click="changeCartView" class="fa-solid fa-cart-shopping mobile-button"></i>
@@ -120,15 +120,20 @@ export default {
                     position: absolute;
                     top: 50%;
                     right: 10%;
-                    width: 15px;
-                    height: 15px;
+                    width: 17px;
+                    height: 17px;
                     aspect-ratio: 1/1;
                     background-color: $red;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     border-radius: 50%;
-                    font-size: 10px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    p{
+                        color: $background_color;
+
+                    }
                 }
 
             }

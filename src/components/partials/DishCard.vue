@@ -62,7 +62,7 @@ export default {
 </script>
 
 <template>
-        <div class="card" v-for="(product, i) in products" :key="i" >
+        <div class="card" v-show="product.visible" v-for="(product, i) in products" :key="i" >
             <div class="card-image">
                 <img v-if="product.img !== 'http://127.0.0.1:8000/storage/0'" :src="product.img" :alt="product.name"/>
                 <img v-else src="../../../public/ristorante.jpg" :alt="product.name"/>
