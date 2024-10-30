@@ -140,10 +140,20 @@
             }
           },
           sendForm(){
-                let products = 'Riepilogo prodotti: ' + this.cart_product.map(product => {
-                  return `Nome: ${product.name}, prezzo: ${product.price}, quantità: ${product.quantity}`;
-                }).join("; ") + ".";
-                //console.log('test array stringa', products);
+                // let products = 'Riepilogo prodotti: ' + this.cart_product.map(product => {
+                //   return `Nome: ${product.name}, prezzo: ${product.price}, quantità: ${product.quantity}`;
+                // }).join("; ") + ".";
+                // //console.log('test array stringa', products);
+
+                let products = '<ul style="list-style: none; padding: 0; font-size: 16px; line-height: 1.6;">' +
+                this.cart_product.map(product => {
+                  return `<li style="margin-bottom: 5px;">
+                            <strong>Nome:</strong> ${product.name}, 
+                            <strong>Prezzo:</strong> €${product.price}, 
+                            <strong>Quantità:</strong> ${product.quantity}
+                          </li>`;
+                }).join("") + '</ul>';
+
             const data = {
                 name: this.full_name,
                 email: this.email,
