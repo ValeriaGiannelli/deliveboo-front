@@ -394,17 +394,22 @@
   <div class="my-loader" v-else-if="cart_product.length === 0 && !paid && !initialize">
     <h1>Non hai ancora riempito il tuo carrello!</h1>
   </div>
-
+  
   <div class="container-payment" v-else-if="initialize">
     <div class="my-loader" >
       <Loader />
     </div>
   </div>
-
+  
   <div v-else-if="!initialize">
     <div class="completed-box" >
       <img src="../../public/text-hamburger.svg" alt="">
-      <h1>Grazie per aver ordinato con DeliveBoo!</h1>
+      <div class="final-page">
+        <h1>Grazie per aver ordinato con DeliveBoo!</h1>
+        <div class="buy">
+            <RouterLink :to="{name: 'home'}" class="buy-button" >Hai ancora fame?</RouterLink>
+        </div>
+      </div>
     </div>
     
   </div>
@@ -565,11 +570,32 @@
 
 .completed-box{
   position: relative;
-  h1{
+  .final-page{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    .buy{
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:15px;
+  
+        .buy-button{
+            padding: 10px 30px;
+            font-size: 20px;
+            background-color: $red;
+            color: $background_color;
+            border-radius: 10px;
+            transition: 500ms;
+            &:hover{
+                background-color:$background_color;
+                color: $red;
+                scale: 1.05;
+            }
+        }
+    }
   }
 }
 
