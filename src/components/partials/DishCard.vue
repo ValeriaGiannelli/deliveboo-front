@@ -69,7 +69,7 @@ export default {
             </div>
             <div class="card-content">
                 <div class="title-add">
-                    <h2 class="card-title">Tagliatelle Fresche con Funghi Porcini e Crema al Parmigiano Reggiano</h2>
+                    <h2 class="card-title">{{product.name}}</h2>
                     <p class="card-description">{{product.ingredients_descriptions}}</p>
                    
                 </div>
