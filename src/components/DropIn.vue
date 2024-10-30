@@ -337,7 +337,8 @@
       <div class="info">
         <h2>Il totale del tuo ordine ammonta a: </h2> 
         <h1>{{ (total_price).toFixed(2) }}€</h1>
-        <h3>Il tuo ordine da <h2>"{{ restaurant_name }}"</h2></h3>
+        <h3>Il tuo ordine da:</h3> 
+        <h2 class="restaurant_name_checkout">"{{ restaurant_name }}"</h2>
         <table>
           
           <tr v-for="product in cart_product">
@@ -356,7 +357,7 @@
         <div class="form-item">
           <label for="full_name"></label>
           <input type="text" name="full_name" id="full_name" v-model="full_name" required placeholder="Nome e Cognome (*)" autocomplete="off">
-          <small style="color:red" v-if="!this.validName && this.validName != null">Il nome è obbligatorio e deve avere almeno 2 caratteri</small>
+          <small style="color:red" v-if="!this.validName && this.validName != null">Obbligatorio, minimo 2 caratteri.</small>
         </div>
 
         <!-- Mail -->
@@ -370,14 +371,14 @@
         <div class="form-item">
           <label for="address"></label>
           <input type="text" name="address" id="address" v-model="address" required placeholder="Indirizzo di spedizione (*)" autocomplete="off">
-          <small style="color:red" v-if="!this.validAddress && this.validAddress != null">L'indirizzo deve avere almeno 4 caratteri</small>          
+          <small style="color:red" v-if="!this.validAddress && this.validAddress != null">Obbligatorio, almeno 4 caratteri</small>          
         </div>
 
         <!-- numero di telefono -->
         <div class="form-item">
           <label for="phone_number"></label>
           <input type="text" name="phone_number" id="phone_number" v-model="phone_number" required placeholder="Numero di telefono (*)" autocomplete="off">
-          <small style="color:red" v-if="!this.validNumber && this.validNumber != null">Inserisci un numero di telefono valido</small>
+          <small style="color:red" v-if="!this.validNumber && this.validNumber != null">Inserisci un numero valido</small>
         </div>
       </div>
 
@@ -454,9 +455,9 @@
       }
       h3{
         padding-top: 10px;
-        h2{
+      }
+      .restaurant_name_checkout{
           color: $red;
-        }
       }
 
       table{
@@ -467,8 +468,7 @@
           font-weight: 300;
           
           td{
-            padding: 0 10px;
-            text-align: center;
+            padding-right: 10px;
 
             &:first-child {
               text-align: left;
@@ -682,6 +682,19 @@
       margin-left: 30%;
       width: 80%;
       div{
+      }
+    }
+  }
+  .completed-box{
+    .final-page{
+      h1{
+        font-size: 1.2em;
+      }
+      .buy{    
+          .buy-button{
+              padding: 5px 10px;
+              font-size: 0.9em;
+          }
       }
     }
   }
