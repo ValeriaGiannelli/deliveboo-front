@@ -120,15 +120,20 @@ export default {
                     position: absolute;
                     top: 50%;
                     right: 10%;
-                    width: 15px;
-                    height: 15px;
+                    width: 17px;
+                    height: 17px;
                     aspect-ratio: 1/1;
                     background-color: $red;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     border-radius: 50%;
-                    font-size: 10px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    p{
+                        color: $background_color;
+
+                    }
                 }
 
             }
