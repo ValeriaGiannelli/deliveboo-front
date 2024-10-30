@@ -30,7 +30,8 @@ export default {
 <template>
     <div class="container">
          <div class="logo">
-             <a href="http://localhost:5174" ><img src="../../public/FULL_LOGO.svg" alt=""></a>
+             <a href="http://localhost:5174" ><img src="../../public/FULL_LOGO.svg" alt="" class="logo-big"></a>
+             <a href="http://localhost:5174" ><img src="../../public/LOGO.svg" alt="" class="logo-small"></a>
          </div>
          <div class="buttons">    
             <a href="http://127.0.0.1:8000/">Collabora con noi</a>
@@ -80,6 +81,12 @@ export default {
     padding: 10px 20px;
     .logo{
         width: 200px;
+        .logo-big{
+            display: block;
+        }
+        .logo-small{
+                display: none;
+        }
     }
 
     .buttons{
@@ -288,6 +295,16 @@ export default {
 // MOBILE
 @media screen and (max-width:  576px){
     .container{
+        .logo{
+            width: 50px;
+            .logo-big{
+                display: none;
+            }
+            .logo-small{
+                display: block;
+                max-height: 46px;
+            }
+        }
 
         .buttons{
 
