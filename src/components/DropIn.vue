@@ -148,9 +148,9 @@
                 let products = '<ul style="list-style: none; padding: 0; font-size: 16px; line-height: 1.6;">' +
                 this.cart_product.map(product => {
                   return `<li style="margin-bottom: 5px;">
-                            <strong>Nome:</strong> ${product.name}, 
+                            ${product.name}, 
                             <strong>Prezzo:</strong> €${product.price}, 
-                            <strong>Quantità:</strong> ${product.quantity}
+                            <strong>Quantità:</strong> ${product.quantity};
                           </li>`;
                 }).join("") + '</ul>';
 
