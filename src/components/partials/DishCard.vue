@@ -62,30 +62,37 @@ export default {
 </script>
 
 <template>
-        <div class="card" v-show="product.visible" v-for="(product, i) in products" :key="i" >
+        <div class="card" v-for="(product, i) in products" :key="i" >
             <div class="card-image">
                 <img v-if="product.img !== 'http://127.0.0.1:8000/storage/0'" :src="product.img" :alt="product.name"/>
                 <img v-else src="../../../public/ristorante.jpg" :alt="product.name"/>
             </div>
             <div class="card-content">
                 <div class="title-add">
-                    <h2 class="card-title">{{ product.name }}</h2>
+                    <h2 class="card-title">Tagliatelle Fresche con Funghi Porcini e Crema al Parmigiano Reggiano</h2>
                     <p class="card-description">{{product.ingredients_descriptions}}</p>
                    
                 </div>
                 <div class="desc-price">
                     <!-- aggiunta rimozione modifica quantità prodotto  -->
                     <div class="icone-incr-decr">
-                        <a @click="decreaseQuantity(product)">
+
+                        <div class="quantity-counter">
+                            <a @click="decreaseQuantity(product)">
                             <i class="fa-solid fa-circle-minus"></i>
-                        </a>
-                        <div class="quantity-box">{{ product.quantity + 'x' }}</div>
-                        <a @click="increaseQuantity(product)">
-                            <i class="fa-solid fa-circle-plus"></i>
-                        </a>
+                            </a>
+                            <div class="quantity-box">{{ product.quantity + 'x' }}</div>
+                            <a @click="increaseQuantity(product)">
+                                <i class="fa-solid fa-circle-plus"></i>
+                            </a>
+                            
+                        </div>
+                        
+                        <!-- prezzo del prodotto -->
+                        <span class="card-price">{{product.price}}€</span>
                     </div>
                     <!-- prezzo del prodotto -->
-                    <span class="card-price">{{product.price}}€</span>
+                    <!-- <span class="card-price">{{product.price}}€</span> -->
                 </div>
             </div>
         </div>
@@ -104,10 +111,11 @@ export default {
     width: 100%;
     overflow: hidden;
     height: 150px;
+    margin-bottom: 15px;
     //flex
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+
 
     &:hover>div>img{
         scale: 1.05;
@@ -115,8 +123,8 @@ export default {
     }
 
     .card-image{
-        width: 30%;
         height: 100%;
+        aspect-ratio: 1/1;
         overflow: hidden;
         img {
         width: 100%;
@@ -131,18 +139,20 @@ export default {
 
 
     .card-content {
-        width: 100%;
+        width: calc(100% - 150px);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         padding: 0 5px 0;
+        position: relative;
 
         .title-add{
-            width: 55%;
+            width: calc(100% - 100px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 10px;
+            margin-right:  100px;
 
             
 
@@ -151,11 +161,13 @@ export default {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                width: 80%;
+                max-width: 1200px;
+                width: 100%;
             }
 
             
             .card-description {
+                width: 100%;
                 transition: 800ms;
                 font-size: 1em;
                 color: #555;
@@ -163,36 +175,51 @@ export default {
         }
 
         .icone-incr-decr{
+            position: absolute;
+            height: calc(100% - 20px);
+            width: 100px;
+            background-color: #F7F5E8;
+            top: 10px;
+            right: 0;
             margin: auto;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
+            flex-direction: column;
             gap: 0.1rem;
             overflow: hidden;
-            .quantity-box {
-                color: $red;
-                display: inline-block;
-                width: 20%;
-                aspect-ratio: 1/1;
-                font-weight: 700;
-                margin: 0px;
-                font-size: 23px;
-                margin: 0 10px;
 
+            .quantity-counter{
                 display: flex;
-                justify-content: center;
                 align-items: center;
-            }
-
-            i{
-                font-size: 20px;
-                color: $yellow;
-                transition: 500ms;
-                &:hover{
+                justify-content: space-between;
+                flex-direction: row;
+                .quantity-box {
                     color: $red;
-                    scale: 1.1;
+                    display: inline-block;
+                    width: 20%;
+                    aspect-ratio: 1/1;
+                    font-weight: 700;
+                    margin: 0px;
+                    font-size: 23px;
+                    margin: 0 10px;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                i{
+                    font-size: 20px;
+                    color: $yellow;
+                    transition: 500ms;
+                    &:hover{
+                        color: $red;
+                        scale: 1.1;
+                    }
                 }
             }
+            
         }
 
         .desc-price{
@@ -212,6 +239,26 @@ export default {
     }
 }
 
+// CUSTOM
+@media screen and (max-width:  800px){
+    .card{
+        .card-image{
+            display: none;
+        }
+
+        .card-content {
+            width: 100%;
+
+            .title-add{
+                .card-title,
+                .card-description {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }   
+}
+
 // MOBILE
 @media screen and (max-width:  576px){
     .card{
@@ -220,6 +267,7 @@ export default {
         }
 
         .card-content {
+            width: 100%;
 
             .title-add{
                 .card-title,
