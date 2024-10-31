@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Restaurant from '../views/Restaurant.vue';
 import Checkout from '../views/Checkout.vue';
 import NotFound from '../components/NotFound.vue';
+import About from '../views/About.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -21,6 +22,11 @@ const router = createRouter({
             path: '/checkout',
             name: 'checkout',
             component: Checkout,
+        },
+        {
+            path: '/chi-siamo',
+            name: 'about',
+            component: About,
         },
         {
             path: '/:pathMatch(.*)*',

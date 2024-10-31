@@ -25,8 +25,9 @@ export default{
             <div class="box">
                 <h3>Link Utili</h3>
                 <ul>
-                    <li><a href="#">
-                        Chi siamo</a></li>
+                    <li> 
+                        <RouterLink :to="{name: 'about'}" class="buy-button" >Chi siamo</RouterLink>
+                    </li>
                     <li><a href="#">
                         Termini e condizioni</a></li>
                     <li><a href="#">
