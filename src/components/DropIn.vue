@@ -424,15 +424,17 @@
 .container-payment{
 
   margin: 0 auto;
+  margin-bottom: 40px;
 
   // flex
   display: flex; 
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: $yellow;
+  background-color: #f3ecbe;
   width: 80%;
   padding: 30px;
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
 
   border-radius: 10px;
 
