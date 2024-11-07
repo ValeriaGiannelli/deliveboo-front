@@ -33,14 +33,21 @@ export default {
 </script>
 
 <template>
-  <!-- <Loading/> -->
+  <div class="wrapper">
+    <!-- <Loading/> -->
   <Header/>
   <router-view></router-view>
   <Footer/>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @use './styles/general.scss' as *;
 @use './styles/partials/variables' as *;
 @use './styles/partials/mixins' as *;
+
+.wrapper{
+  max-width: 2120px;
+  margin: 0 auto;
+}
 </style>
