@@ -188,6 +188,7 @@ export default {
 </script>
 
 <template>
+    
     <!-- jumbo ristorante -->
     <div class="container top">
         <div class="image">
@@ -204,11 +205,6 @@ export default {
         </div>
     </div>
 
-    <!-- titolo menù -->
-    <div class="menu-title">
-        Menù:
-    </div>
-
     <!-- visualizzazione piatti + carrello-->
      <div class="container food">
 
@@ -220,7 +216,10 @@ export default {
         </div>
         
         <div class="food-list" v-else>
-
+            <!-- titolo menù -->
+            <div class="menu-title">
+                Menù:
+            </div>
             <!-- card dei prodotti -->
             <DishCard :products="products" :cartProducts="cartproduct" @add-to-cart="updateCart" @delete-item="deleteCartItem" v-if="products.length > 0"/>
             
@@ -455,7 +454,8 @@ export default {
     .cart,
     .cart-mobile{
         width: calc(100% / 3);
-        height: 100vh;
+        height: 75vh;
+        max-height: 800px;
         position: sticky;
         top:0;
         padding-right: 10px;
