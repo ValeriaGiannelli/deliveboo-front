@@ -431,10 +431,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: #f3ecbe;
+  background-color: #F7F5E8;
   width: 80%;
   padding: 30px;
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   border-radius: 10px;
 
@@ -467,7 +467,7 @@
         text-align: left;
 
         tr{
-          font-weight: 300;
+          font-weight: 400;
           
           td{
             padding-right: 10px;
@@ -536,14 +536,14 @@
       border-radius: 10px;
       transition: 500ms;
       border:none;
-      color: $red;
+      color: $text_color;
       font-weight: 600;
       font-size: 19px;
-      background-color: white;
+      background-color: $yellow;
 
       &:hover{
         background-color: $red;
-        color: white;
+        color: $text_color;
         scale: 1.1;
       }
     }
