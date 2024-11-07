@@ -2,6 +2,7 @@
   import dropin from 'braintree-web-drop-in';
   import axios from 'axios';
   import Loader from './partials/loader.vue';
+  import { store } from '../store';
   
   export default {
     name: 'DropIn',
@@ -279,7 +280,7 @@
                       console.log(this.cart_product);
                       this.loading = false;
                       this.initialize = false;
-                      
+                      store.Hcart = [];
                     })
                     .catch(error => {
                       console.error("Errore durante la registrazione dell'ordine", error);
