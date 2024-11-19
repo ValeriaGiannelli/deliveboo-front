@@ -100,26 +100,28 @@ Il progetto è organizzato in due repository separati:
    composer install
 3. Configura il file .env:
    cp .env.example .env
-Configura le seguenti variabili:
-•	Database: MySQL
-•	Braintree: Crea un account e importa le tue credenziali API per i pagamenti e inseriscile nel file env:
-BRAINTREE_ENVIRONMENT=sandbox
-BRAINTREE_MERCHANT_ID=il_tuo_merchant_id
-BRAINTREE_PUBLIC_KEY=la_tua_public_key
-BRAINTREE_PRIVATE_KEY=la_tua_private_key
-•	Mailtrap: Crea un account su Mailtrap e prendi le credenziali SMTP dalla tua inbox di Mailtrap. Aggiungi queste configurazioni nel file .env:
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=il_tuo_username
-MAIL_PASSWORD=la_tua_password
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=info@deliveboo.com
-MAIL_FROM_NAME="Deliveboo"
-4. Genera a chiave dell’applicazione e prepara il database:
+   Configura le seguenti variabili:
+   •	Database: MySQL
+   •	Braintree: Crea un account e importa le tue credenziali API per i pagamenti e inseriscile nel file env:
+   ```bash
+   BRAINTREE_ENVIRONMENT=sandbox
+   BRAINTREE_MERCHANT_ID=il_tuo_merchant_id
+   BRAINTREE_PUBLIC_KEY=la_tua_public_key
+   BRAINTREE_PRIVATE_KEY=la_tua_private_key
+   •	Mailtrap: Crea un account su Mailtrap e prendi le credenziali SMTP dalla tua inbox di Mailtrap. Aggiungi queste configurazioni nel file .env:
+   ```bash
+   MAIL_MAILER=smtp
+   MAIL_HOST=smtp.mailtrap.io
+   MAIL_PORT=2525
+   MAIL_USERNAME=il_tuo_username
+   MAIL_PASSWORD=la_tua_password
+   MAIL_ENCRYPTION=null
+   MAIL_FROM_ADDRESS=info@deliveboo.com
+   MAIL_FROM_NAME="Deliveboo"
+5. Genera a chiave dell’applicazione e prepara il database:
    php artisan key:generate 
    php artisan migrate –seed
-5. Avvia il server di sviluppo:
+6. Avvia il server di sviluppo:
    php artisan serve
 
 ### Frontend (Vue.js)
