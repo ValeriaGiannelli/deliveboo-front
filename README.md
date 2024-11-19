@@ -111,15 +111,15 @@ Il progetto è organizzato in due repository separati:
       BRAINTREE_PRIVATE_KEY=la_tua_private_key
    
    - Mailtrap: Crea un account su Mailtrap e prendi le credenziali SMTP dalla tua inbox di Mailtrap. Aggiungi queste configurazioni nel file .env:
-   ```bash
-   MAIL_MAILER=smtp
-   MAIL_HOST=smtp.mailtrap.io
-   MAIL_PORT=2525
-   MAIL_USERNAME=il_tuo_username
-   MAIL_PASSWORD=la_tua_password
-   MAIL_ENCRYPTION=null
-   MAIL_FROM_ADDRESS=info@deliveboo.com
-   MAIL_FROM_NAME="Deliveboo"
+      ```bash
+      MAIL_MAILER=smtp
+      MAIL_HOST=smtp.mailtrap.io
+      MAIL_PORT=2525
+      MAIL_USERNAME=il_tuo_username
+      MAIL_PASSWORD=la_tua_password
+      MAIL_ENCRYPTION=null
+      MAIL_FROM_ADDRESS=info@deliveboo.com
+      MAIL_FROM_NAME="Deliveboo"
 5. Genera a chiave dell’applicazione e prepara il database:
    php artisan key:generate 
    php artisan migrate –seed
@@ -144,24 +144,24 @@ Il progetto è organizzato in due repository separati:
 ## Utilizzo
 
 ### Backend (Laravel)
-•	Accedi all'area amministrativa per gestire ristoranti, piatti e statistiche.
+-	Accedi all'area amministrativa per gestire ristoranti, piatti e statistiche.
 
 ### Frontend (Vue.js)
-•	Usa l'interfaccia cliente per esplorare i ristoranti, aggiungere piatti al carrello e completare gli acquisti con Braintree.
-•	Visualizza le email inviate tramite Mailtrap.
+-	Usa l'interfaccia cliente per esplorare i ristoranti, aggiungere piatti al carrello e completare gli acquisti con Braintree.
+-	Visualizza le email inviate tramite Mailtrap.
 
 ## Tecnologie usate
 
 ### Backend (Laravel)
-•	Laravel 10.x
-•	Braintree SDK
-•	Guzzle
-•	Sanctum
-•	Chart.js
-•	Mailtrap
+-	Laravel 10.x
+-	Braintree SDK
+-	Guzzle
+-	Sanctum
+-	Chart.js
+-	Mailtrap
 ### Frontend (Vue.js)
-•	Vue 3.x
-•	Vue Router
-•	Axios
-•	Braintree Drop-In
-•	Sass
+-	Vue 3.x
+-	Vue Router
+-	Axios
+-	Braintree Drop-In
+-	Sass
