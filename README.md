@@ -15,7 +15,6 @@ Deliveboo è un'applicazione ispirata a Deliveroo, progettata per semplificare l
    - [Frontend (Vue.js)](#frontend-vuejs)
 5. [Utilizzo](#utilizzo)
 6. [Tecnologie Usate](#tecnologie-usate)
-7. [Licenza](#licenza)
 
 ---
 
