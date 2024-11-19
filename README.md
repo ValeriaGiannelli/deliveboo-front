@@ -104,11 +104,11 @@ Il progetto è organizzato in due repository separati:
    Configura le seguenti variabili:
    - Database: MySQL
    - Braintree: Crea un account e importa le tue credenziali API per i pagamenti e inseriscile nel file env:
-   ```bash
-   BRAINTREE_ENVIRONMENT=sandbox
-   BRAINTREE_MERCHANT_ID=il_tuo_merchant_id
-   BRAINTREE_PUBLIC_KEY=la_tua_public_key
-   BRAINTREE_PRIVATE_KEY=la_tua_private_key
+      ```bash
+      BRAINTREE_ENVIRONMENT=sandbox
+      BRAINTREE_MERCHANT_ID=il_tuo_merchant_id
+      BRAINTREE_PUBLIC_KEY=la_tua_public_key
+      BRAINTREE_PRIVATE_KEY=la_tua_private_key
    
    - Mailtrap: Crea un account su Mailtrap e prendi le credenziali SMTP dalla tua inbox di Mailtrap. Aggiungi queste configurazioni nel file .env:
    ```bash
